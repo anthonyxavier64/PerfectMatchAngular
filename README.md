@@ -42,7 +42,7 @@ Instructions to run application
 
 Code styling
 1. Use tab spaces
-2. To auto-format in NetBeans, use alt-shift-f
+2. To auto-format in VScode, use alt-shift-f
 3. Leave an empty line between methods
 4. Camel case for variable and method names
 
