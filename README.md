@@ -60,6 +60,7 @@ Code styling
 1. Create local branch: git branch *name*/*branch name*
 2. Checkout to newly create branch: git checkout *name*/*branch name*
 3. Push local branch to github and set local branch to track remote branch: git push --set-upstream origin *name*/*branch name*
+4. To switch to a remote branch that is non-existent on your local machine: git checkout -t origin/*branch name*
 
 **WHEN PUSHING TO GITHUB**
 1. Make sure you are pushing to the correct branch
