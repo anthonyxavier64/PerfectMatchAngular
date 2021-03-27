@@ -1,0 +1,28 @@
+<!-- <form style="position: fixed; right: 2%;">
+  <input placeholder="Email" pInputText />&nbsp;
+  <input placeholder="Password" type="password" pInputText />&nbsp;
+  <button mat-raised-button type="submit">Login</button>
+</form> -->
+
+<div style="position: fixed; right: 2%;">
+  <div *ngIf="sessionService.getIsLogin() == false">
+    <label for="email">Email </label>
+    <input type="text" [(ngModel)]="email" size="16" required maxlength="32" />
+    &nbsp;
+    <label for="password">Password </label>
+    <input type="password" [(ngModel)]="password" size="16" required maxlength="32" />
+    &nbsp;
+    <input type="reset" value="Clear" />
+    &nbsp;
+    <input type="button" (click)="studentLogin()" value="Login" />
+  </div>
+
+  <div *ngIf="loginError == true" style="text-align: right; color: red;">
+    Invalid login credential: Email does not exist or invalid password!
+  </div>
+
+  <div *ngIf="sessionService.getIsLogin() == true">
+    You are login as {{sessionService.getCurrentStudent().name}}
+    <input mat-raised-button type="button" (click)="studentLogout()" value="Logout" />
+  </div>
+</div>

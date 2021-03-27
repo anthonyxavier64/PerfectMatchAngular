@@ -17,12 +17,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { RegisterComponent } from './register/register.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { MainmenuComponent } from './mainmenu/mainmenu.component';
+import { LoginformComponent } from './loginform/loginform.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     RegisterComponent,
+    MainmenuComponent,
+    LoginformComponent,
   ],
   imports: [
     BrowserModule,
