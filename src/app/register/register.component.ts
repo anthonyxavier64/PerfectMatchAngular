@@ -30,16 +30,16 @@ export class RegisterComponent implements OnInit {
   // courseOfStudy: string | undefined;
   // yearOfStudy: number | undefined;
   // projectedGraduationYear: Date | undefined;
-   relevantSkills: string[];
-  // startDate: Date | undefined;
-  // endDate: Date | undefined;
+  relevantSkills: string[];
+  startDate: Date | undefined;
+  endDate: Date | undefined;
   // availabilityPeriod: Date[] | undefined;
 
   newSkill: string | undefined;
 
   resultSuccess: boolean;
-	resultError: boolean;
-	message: string | undefined;
+  resultError: boolean;
+  message: string | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -57,16 +57,15 @@ export class RegisterComponent implements OnInit {
     this.relevantSkills = new Array();
 
     this.resultSuccess = false;
-		this.resultError = false;
+    this.resultError = false;
   }
 
   ngOnInit() { }
 
-  clear()
-	{
-		this.submitted = false;
-		this.newStudent = new Student();
-	}
+  clear() {
+    this.submitted = false;
+    this.newStudent = new Student();
+  }
 
   addSkill() {
     if (this.newSkill != null && this.newStudent != null && this.newStudent.relevantSkills != null) {
@@ -74,27 +73,25 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  create(createStudentForm: NgForm)
-	{	
-		this.submitted = true;
-		
-		if (createStudentForm.valid) 
-		{
-			this.studentService.createNewStudent(this.newStudent).subscribe(
-				response => {
-					let newStudentId: number = response;
-					this.resultSuccess = true;
-					this.resultError = false;
-					this.message = "New account of ID " + newStudentId + " created successfully";
-				},
-				error => {
-					this.resultError = true;
-					this.resultSuccess = false;
-					this.message = "An error has occurred while creating the new account: " + error;
-					
-					console.log('********** CreateNewStudentComponent.ts: ' + error);
-				}
-			);
-		}
-	}
+  create(createStudentForm: NgForm) {
+    this.submitted = true;
+
+    if (createStudentForm.valid) {
+      this.studentService.createNewStudent(this.newStudent).subscribe(
+        response => {
+          let newStudentId: number = response;
+          this.resultSuccess = true;
+          this.resultError = false;
+          this.message = "New account of ID " + newStudentId + " created successfully";
+        },
+        error => {
+          this.resultError = true;
+          this.resultSuccess = false;
+          this.message = "An error has occurred while creating the new account: " + error;
+
+          console.log('********** CreateNewStudentComponent.ts: ' + error);
+        }
+      );
+    }
+  }
 }

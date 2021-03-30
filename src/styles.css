@@ -6,3 +6,34 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.errorText {
+    color: red;
+}
+
+.infoTexts {
+    list-style-type: none;
+    margin-left: 20px;
+    color: blue;
+}
+
+.errorTexts {
+    list-style-type: none;
+    margin-left: 20px;
+    color: red;
+}
+
+.errorTextsNoMarginLeft {
+    list-style-type: none;
+    color: red;
+}
+
+.infoTextsWithBullet {
+    margin-left: 20px;
+    color: blue;
+}
+
+.errorTextsWithBullet {
+    margin-left: 20px;
+    color: red;
+}
