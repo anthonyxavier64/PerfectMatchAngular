@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { SessionService } from '../services/session.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -8,6 +10,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
+
 export class IndexComponent {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -16,6 +19,6 @@ export class IndexComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(public sessionService: SessionService, private breakpointObserver: BreakpointObserver) {}
 
 }

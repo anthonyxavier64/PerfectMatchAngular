@@ -1,59 +1,69 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { Student } from '../models/student';
+import { CreateStudentReq } from '../models/create-student-req';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  students: Student[];
-  currentStudent: Student | null;
+  baseUrl: string = "/api/Student";
 
-  constructor(private sessionService: SessionService) {
-    this.currentStudent = sessionService.getCurrentStudent();
-    // Need to retrieve list of students from database
-    this.students = new Array();
-    if (this.students == null) {
-      let student: Student;
-      student = new Student();
-      this.students = new Array();
+  constructor(private httpClient: HttpClient,
+    private sessionService: SessionService) { }
+
+  studentLogin(email: string | undefined, password: string | undefined): Observable<Student> {
+    return this.httpClient.get<Student>(this.baseUrl + "/studentLogin?email=" + email + "&password=" + password).pipe
+      (
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage: string = "";
+
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = "An unknown error has occurred: " + error.error;
     }
-  }
-
-  getStudents() {
-    return this.students;
-  }
-
-  createNewStudent(newStudent: Student) {
-    if (this.students != null) {
-      let s: Student = new Student();
-      s.availabilityPeriod = newStudent.availabilityPeriod;
-      s.biography = newStudent.biography;
-      s.courseOfStudy = newStudent.courseOfStudy;
-      s.educationalInstitute = newStudent.educationalInstitute;
-      s.email = newStudent.email;
-      s.password = newStudent.password;
-      s.name = newStudent.name;
-      s.projectedGraduationYear = newStudent.projectedGraduationYear;
-      s.relevantSkills = newStudent.relevantSkills;
-      s.studentId = newStudent.studentId;
-      s.yearOfStudy = newStudent.yearOfStudy;
-
-      this.students.push(s);
+    else {
+      errorMessage = "A HTTP error has occurred: " + `HTTP ${error.status}: ${error.error}`;
     }
+
+    console.error(errorMessage);
+
+    return throwError(errorMessage);
   }
 
-    studentLogin(email: string | undefined, password: string | undefined): Student | null {
-      for (let student of this.getStudents()) {
-        if (student.email == email && student.password == password) {
-          this.currentStudent = student;
-          this.sessionService.setCurrentStudent(student);
-          this.sessionService.setIsLogin(true);
-          return student;
-        }
-      }
-      return null;
-    }
+  createNewStudent(newStudent: Student): Observable<number> {
+    let createStudentReq: CreateStudentReq = new CreateStudentReq(this.sessionService.getEmail(), this.sessionService.getPassword(), newStudent);
+
+    return this.httpClient.put<number>(this.baseUrl, createStudentReq, httpOptions).pipe
+      (
+        catchError(this.handleError)
+      );
   }
+
+  // createNewStudent(newStudent: Student) {
+  //   let s: Student = new Student();
+  //   s.availabilityPeriod = newStudent.availabilityPeriod;
+  //   s.biography = newStudent.biography;
+  //   s.courseOfStudy = newStudent.courseOfStudy;
+  //   s.educationalInstitute = newStudent.educationalInstitute;
+  //   s.email = newStudent.email;
+  //   s.password = newStudent.password;
+  //   s.name = newStudent.name;
+  //   s.projectedGraduationYear = newStudent.projectedGraduationYear;
+  //   s.relevantSkills = newStudent.relevantSkills;
+  //   s.studentId = newStudent.studentId;
+  //   s.yearOfStudy = newStudent.yearOfStudy;
+  // }
+}

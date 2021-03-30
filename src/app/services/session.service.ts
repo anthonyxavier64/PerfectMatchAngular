@@ -3,37 +3,48 @@ import { Injectable } from '@angular/core';
 import { Student } from '../models/student'
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class SessionService {
 
-  constructor() { 
-    this.setIsLogin(false);
-  }
+	constructor() {
 
-  getCurrentStudent(): Student
-	{
+	}
+
+	getCurrentStudent(): Student {
 		return JSON.parse(sessionStorage.currentStudent);
 	}
 
-  setCurrentStudent(student: Student | null): void {
-    sessionStorage.students = JSON.stringify(student);
-  }
+	setCurrentStudent(student: Student | null): void {
+		sessionStorage.students = JSON.stringify(student);
+	}
 
-  getIsLogin(): boolean
-	{
-		if(sessionStorage.isLogin == "true")
-		{
+	getEmail(): string {
+		return sessionStorage.email;
+	}
+
+	setEmail(email: string | undefined): void {
+		sessionStorage.email = email;
+	}
+
+	getPassword(): string {
+		return sessionStorage.password;
+	}
+
+	setPassword(password: string | undefined): void {
+		sessionStorage.password = password;
+	}
+
+	getIsLogin(): boolean {
+		if (sessionStorage.isLogin == "true") {
 			return true;
 		}
-		else
-		{
+		else {
 			return false;
 		}
 	}
 
-	setIsLogin(isLogin: boolean): void
-	{
+	setIsLogin(isLogin: boolean): void {
 		sessionStorage.isLogin = isLogin;
 	}
 

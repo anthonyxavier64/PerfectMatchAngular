@@ -16,62 +16,91 @@
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <form style="margin-top: 30px; margin-left: 20px;">
+    <form form #createStudentForm="ngForm" (ngSubmit)="create(createStudentForm)" style="margin-top: 30px; margin-left: 20px;">
       <div style="width: 30%; float: left;">
         <br/> 
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText>
-          <label for="float-input">Name</label>
+          <input id="name" name="name" #name="ngModel" [(ngModel)]="newStudent.name" required="true" type="text" pInputText>
+          <label for="name">Name</label>
+          <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
+						<div *ngIf="name.errors != null && name.errors.required">
+							Name is required.
+						</div>
+					</div>
         </span>
         <br/> <br/>
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText>
-          <label for="float-input">Email</label>
+          <input id="email" name="email" #email="ngModel" [(ngModel)]="newStudent.email" required="true" type="email" pInputText>
+          <label for="email">Email</label>
+          <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
+						<div *ngIf="email.errors != null && email.errors.required">
+							Email is required.
+						</div>
+					</div>
         </span>
         <br/> <br/>
         <span class="p-float-label">
-          <input id="float-input" type="password" pInputText>
-          <label for="float-input">Password</label>
+          <input id="password" name="password" #password="ngModel" [(ngModel)]="newStudent.password" required="true" type="password" pInputText>
+          <label for="password">Password</label>
+          <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
+						<div *ngIf="password.errors != null && password.errors.required">
+							Password is required.
+						</div>
+					</div>
         </span>
         <br/> <br/>
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText>
-          <label for="float-input">Educational Institute</label>
+          <input id="educationalInstitute" name="educationalInstitute" #educationalInstitute="ngModel" [(ngModel)]="newStudent.educationalInstitute" required="true" type="text" pInputText>
+          <label for="educationalInstitute">Educational Institute</label>
+          <div *ngIf="educationalInstitute.invalid && (educationalInstitute.dirty || educationalInstitute.touched || submitted)" class="errorText">
+						<div *ngIf="educationalInstitute.errors != null && educationalInstitute.errors.required">
+							Educational institute is required.
+						</div>
+					</div>
         </span>
         <br/> <br/>
         <span class="p-float-label">
-          <input id="float-input" type="text" pInputText>
-          <label for="float-input">Course of Study</label>
+          <input id="courseOfStudy" name="courseOfStudy" #courseOfStudy="ngModel" [(ngModel)]="newStudent.courseOfStudy" required="true" type="text" pInputText>
+          <label for="courseOfStudy">Course of Study</label>
+          <div *ngIf="courseOfStudy.invalid && (courseOfStudy.dirty || courseOfStudy.touched || submitted)" class="errorText">
+						<div *ngIf="courseOfStudy.errors != null && courseOfStudy.errors.required">
+							Course of study is required.
+						</div>
+					</div>
         </span>
         <br/> <br/>
         <span class="p-float-label">
-          <input id="float-input" type="number" pInputText>
-          <label for="float-input">Year of Study</label>
+          <input id="yearOfStudy" name="yearOfStudy" #yearOfStudy="ngModel" [(ngModel)]="newStudent.yearOfStudy" required="true" type="number" pInputText>
+          <label for="yearOfStudy">Year of Study</label>
+          <div *ngIf="yearOfStudy.invalid && (yearOfStudy.dirty || yearOfStudy.touched || submitted)" class="errorText">
+						<div *ngIf="yearOfStudy.errors != null && yearOfStudy.errors.required">
+							Year of study is required.
+						</div>
+					</div>
         </span>
       </div>
       
       <div style="width: 30%; float: left;"> 
-        <label for="gradYear">Projected Graduation Year</label>
+        <label for="projectedGraduationYear">Projected Graduation Year</label>
         <br/>
-        <input id="gradYear" type="date" pInputText>
+        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduationYear="ngModel" [(ngModel)]="newStudent.projectedGraduationYear" required="true" type="date" pInputText>
+        <div *ngIf="projectedGraduationYear.invalid && (projectedGraduationYear.dirty || projectedGraduationYear.touched || submitted)" class="errorText">
+          <div *ngIf="projectedGraduationYear.errors != null && projectedGraduationYear.errors.required">
+            Projected graduation year is required.
+          </div>
+        </div>
+    
         <br/><br/>
         <label for="startDate">Start Date</label>
         <br/>
-        <input id="startDate" type="date" pInputText>
+        <input id="startDate" name="startDate" #startDate="ngModel" [(ngModel)]="newStudent.availabilityPeriod[0]" required="true" type="date" pInputText>
+        
+        
         <br/><br/>
         <label for="endDate">End Date</label>
         <br/>
         <input id="endDate" type="date" pInputText>
         <br/><br/>
-      </div>
-
-      <div style="width: 30%; float: left;"> 
-        <br/>
-        <span class="p-float-label">
-          <textarea id="float-input" [rows]="7" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
-          <label for="float-input">Biography</label>
-        </span>
-        <br/>
         <label for="skills">Skills</label>
         <br/>
         <input type="skill" id="skill" name="skill"  class="form-control" [(ngModel)]="newSkill" pInputText>
@@ -82,6 +111,16 @@
           </li>
         </ul>
       </div>
+
+      <div style="width: 30%; float: left;"> 
+        <br/>
+        <span>
+          <label>Biography</label>
+          <textarea id="float-input" [rows]="7" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+        </span>
+        <br/> 
+        <button mat-raised-button type="submit">Register</button>
+      </div>      
     </form>
 
     <!-- 

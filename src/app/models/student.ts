@@ -8,7 +8,7 @@ export class Student {
     courseOfStudy: string | undefined;
     yearOfStudy: number | undefined;
     projectedGraduationYear: Date | undefined;
-    relevantSkills: string[] | undefined;
+    relevantSkills: string[];
     availabilityPeriod: Date[] | undefined;
 
     constructor(studentId?: number, name?: string,
