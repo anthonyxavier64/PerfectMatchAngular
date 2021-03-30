@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,12 +18,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { RegisterComponent } from './register/register.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { MainmenuComponent } from './mainmenu/mainmenu.component';
+import { LoginformComponent } from './loginform/loginform.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     RegisterComponent,
+    MainmenuComponent,
+    LoginformComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { InputTextModule } from 'primeng/inputtext';
     LayoutModule,
     MatToolbarModule,
     MatListModule,
-    InputTextModule
+    InputTextModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

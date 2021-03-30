@@ -1,11 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/index">Home</a>
-      <a mat-list-item>Register</a>
-    </mat-nav-list>
+    <app-mainmenu></app-mainmenu>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -19,11 +16,125 @@
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <form style="margin-top: 30px; margin-left: 20px;">
-      <span class="p-float-label">
-        <input id="float-input" type="text" pInputText>
-        <label for="float-input">Email</label>
-      </span>
+    <form form #createStudentForm="ngForm" (ngSubmit)="create(createStudentForm)" style="margin-top: 30px; margin-left: 20px;">
+      <div style="width: 30%; float: left;">
+        <br/> 
+        <span class="p-float-label">
+          <input id="name" name="name" #name="ngModel" [(ngModel)]="newStudent.name" required="true" type="text" pInputText>
+          <label for="name">Name</label>
+          <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
+						<div *ngIf="name.errors != null && name.errors.required">
+							Name is required.
+						</div>
+					</div>
+        </span>
+        <br/> <br/>
+        <span class="p-float-label">
+          <input id="email" name="email" #email="ngModel" [(ngModel)]="newStudent.email" required="true" type="email" pInputText>
+          <label for="email">Email</label>
+          <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
+						<div *ngIf="email.errors != null && email.errors.required">
+							Email is required.
+						</div>
+					</div>
+        </span>
+        <br/> <br/>
+        <span class="p-float-label">
+          <input id="password" name="password" #password="ngModel" [(ngModel)]="newStudent.password" required="true" type="password" pInputText>
+          <label for="password">Password</label>
+          <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
+						<div *ngIf="password.errors != null && password.errors.required">
+							Password is required.
+						</div>
+					</div>
+        </span>
+        <br/> <br/>
+        <span class="p-float-label">
+          <input id="educationalInstitute" name="educationalInstitute" #educationalInstitute="ngModel" [(ngModel)]="newStudent.educationalInstitute" required="true" type="text" pInputText>
+          <label for="educationalInstitute">Educational Institute</label>
+          <div *ngIf="educationalInstitute.invalid && (educationalInstitute.dirty || educationalInstitute.touched || submitted)" class="errorText">
+						<div *ngIf="educationalInstitute.errors != null && educationalInstitute.errors.required">
+							Educational institute is required.
+						</div>
+					</div>
+        </span>
+        <br/> <br/>
+        <span class="p-float-label">
+          <input id="courseOfStudy" name="courseOfStudy" #courseOfStudy="ngModel" [(ngModel)]="newStudent.courseOfStudy" required="true" type="text" pInputText>
+          <label for="courseOfStudy">Course of Study</label>
+          <div *ngIf="courseOfStudy.invalid && (courseOfStudy.dirty || courseOfStudy.touched || submitted)" class="errorText">
+						<div *ngIf="courseOfStudy.errors != null && courseOfStudy.errors.required">
+							Course of study is required.
+						</div>
+					</div>
+        </span>
+        <br/> <br/>
+        <span class="p-float-label">
+          <input id="yearOfStudy" name="yearOfStudy" #yearOfStudy="ngModel" [(ngModel)]="newStudent.yearOfStudy" required="true" type="number" pInputText>
+          <label for="yearOfStudy">Year of Study</label>
+          <div *ngIf="yearOfStudy.invalid && (yearOfStudy.dirty || yearOfStudy.touched || submitted)" class="errorText">
+						<div *ngIf="yearOfStudy.errors != null && yearOfStudy.errors.required">
+							Year of study is required.
+						</div>
+					</div>
+        </span>
+      </div>
+      
+      <div style="width: 30%; float: left;"> 
+        <label for="projectedGraduationYear">Projected Graduation Year</label>
+        <br/>
+        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduationYear="ngModel" [(ngModel)]="newStudent.projectedGraduationYear" required="true" type="date" pInputText>
+        <div *ngIf="projectedGraduationYear.invalid && (projectedGraduationYear.dirty || projectedGraduationYear.touched || submitted)" class="errorText">
+          <div *ngIf="projectedGraduationYear.errors != null && projectedGraduationYear.errors.required">
+            Projected graduation year is required.
+          </div>
+        </div>
+    
+        <br/><br/>
+        <label for="start_Date">Start Date</label>
+        <br/>
+        <input id="start_Date" name="start_Date" #start_Date="ngModel" [(ngModel)]="startDate" required="true" type="date" pInputText>
+        <div *ngIf="start_Date.invalid && (start_Date.dirty || start_Date.touched || submitted)" class="errorText">
+          <div *ngIf="start_Date.errors != null && start_Date.errors.required">
+            Start date is required.
+          </div>
+        </div>
+        
+        <br/><br/>
+        <label for="end_Date">End Date</label>
+        <br/>
+        <input id="end_Date" name="end_Date" #end_Date="ngModel" [(ngModel)]="endDate" required="true" type="date" pInputText>
+        <div *ngIf="end_Date.invalid && (end_Date.dirty || end_Date.touched || submitted)" class="errorText">
+          <div *ngIf="end_Date.errors != null && end_Date.errors.required">
+            End date is required.
+          </div>
+        </div>
+        
+        <br/><br/>
+        <label for="skills">Skills</label>
+        <br/>
+        <input id="skill" name="skill" name="skill" #skill="ngModel" [(ngModel)]="newSkill" class="form-control" pInputText>
+        <button mat-raised-button (click)="addSkill()">Add</button>
+        <ul>
+          <li *ngFor="let skill of relevantSkills">
+            {{skill}}
+          </li>
+        </ul>
+      </div>
+
+      <div style="width: 30%; float: left;"> 
+        <br/>
+        <span>
+          <label>Biography</label>
+          <br/>
+          <textarea id="float-input" name="biography" #biography="ngModel" [(ngModel)]="newStudent.biography" [rows]="7" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+        </span>
+        <br/> <br/>
+        <button mat-raised-button type="submit">Register</button>
+      </div>      
     </form>
+
+    <!-- 
+    relevantSkills: string[] | undefined; -->
   </mat-sidenav-content>
 </mat-sidenav-container>

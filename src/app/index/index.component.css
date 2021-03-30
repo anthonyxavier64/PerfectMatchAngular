@@ -19,3 +19,15 @@ mat-grid-tile {
   top: 0;
   z-index: 1;
 }
+
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.signin-content {
+  padding: 60px 1rem;
+}
+.full-width-input {
+  width: 100%;
+}
