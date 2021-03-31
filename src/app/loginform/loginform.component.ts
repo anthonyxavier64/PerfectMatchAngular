@@ -4,7 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { SessionService } from '../services/session.service';
 import { StudentService } from '../services/student.service';
-import { Student } from '../models/student';
+import { StudentWrapper } from '../models/student-wrapper';
 
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -45,13 +45,10 @@ export class LoginformComponent implements OnInit {
 
 
   studentLogin(): void {
-    this.sessionService.setEmail(this.email);
-    this.sessionService.setPassword(this.password);
-
     this.studentService.studentLogin(this.email, this.password).subscribe(
 
       response => {
-        let student: Student = response;
+        let student: StudentWrapper = response;
         if (student != null) {
           this.sessionService.setIsLogin(true);
           this.sessionService.setCurrentStudent(student);

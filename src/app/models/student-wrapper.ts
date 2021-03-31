@@ -2,7 +2,7 @@ import { Application } from "./application";
 import { Offer } from "./offer";
 import { Payment } from "./payment";
 
-export class Student {
+export class StudentWrapper {
     studentId: number | undefined;
     name: string | undefined;
     biography: string | undefined;
@@ -11,9 +11,9 @@ export class Student {
     educationalInstitute: string | undefined;
     courseOfStudy: string | undefined;
     yearOfStudy: number | undefined;
-    projectedGraduationYear: Date | undefined;
+    projectedGraduationYear: String | undefined;
     relevantSkills: string[] | undefined;
-    availabilityPeriod: Date[] | undefined;
+    availabilityPeriod: string[] | undefined;
     applications: Application[] | undefined;
     payments: Payment[] | undefined;
     offers: Offer[] | undefined;
@@ -21,8 +21,8 @@ export class Student {
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,
         educationalInstitute?: string, courseOfStudy?: string,
-        yearOfStudy?: number, projectedGraduationYear?: Date,
-        relevantSkills?: string[], availabilityPeriod?: Date[]) {
+        yearOfStudy?: number, projectedGraduationYear?: string, 
+        relevantSkills?: string[], availabilityPeriod?: string[]) {
             this.studentId = studentId;
             this.name = name;
             this.biography = biography;

@@ -16,8 +16,7 @@
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <form form #createStudentForm="ngForm" (ngSubmit)="create(createStudentForm)"
-      style="margin-top: 30px; margin-left: 20px;">
+    <form form #createStudentForm="ngForm" style="margin-top: 30px; margin-left: 20px;">
       <div style="width: 30%; float: left;">
         <br />
         <span class="p-float-label">
@@ -89,16 +88,13 @@
           </div>
         </span>
       </div>
-
-      <div style="width: 30%; float: left;">
-        <label for="projectedGraduationYear">Projected Graduation Year</label>
-        <br />
-        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduationYear="ngModel"
-          [(ngModel)]="newStudent.projectedGraduationYear" required="true" type="date" pInputText>
-        <div
-          *ngIf="projectedGraduationYear.invalid && (projectedGraduationYear.dirty || projectedGraduationYear.touched || submitted)"
-          class="errorText">
-          <div *ngIf="projectedGraduationYear.errors != null && projectedGraduationYear.errors.required">
+      
+      <div style="width: 30%; float: left;"> 
+        <label for="projectedGraduationYear">Projected Graduation Date</label>
+        <br/>
+        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduation_Year="ngModel" [(ngModel)]="projectedGraduationYear" required="true" type="date" pInputText>
+        <div *ngIf="projectedGraduation_Year.invalid && (projectedGraduation_Year.dirty || projectedGraduation_Year.touched || submitted)" class="errorText">
+          <div *ngIf="projectedGraduation_Year.errors != null && projectedGraduation_Year.errors.required">
             Projected graduation year is required.
           </div>
         </div>
@@ -150,11 +146,9 @@
         <span style="margin-right: 10px;">
           <button mat-raised-button (click)="clear()">Clear</button>
         </span>
-        <span>
-          <button mat-raised-button type="submit">Register</button>
-        </span>
-
-      </div>
+        <br/> <br/>
+        <button mat-raised-button type="submit" (click)="create(createStudentForm)">Register</button>
+      </div>      
     </form>
 
     <!-- 

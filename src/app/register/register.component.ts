@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 
 import { SessionService } from '../services/session.service';
 import { StudentService } from '../services/student.service';
-import { Student } from '../models/student';
+import { StudentWrapper } from '../models/student-wrapper';
 
 @Component({
   selector: 'app-register',
@@ -19,21 +19,11 @@ import { Student } from '../models/student';
 export class RegisterComponent implements OnInit {
 
   submitted: boolean;
-  newStudent: Student;
-
-  // studentId: number | undefined;
-  // name: string | undefined;
-  // biography: string | undefined;
-  // email: string | undefined;
-  // password: string | undefined;
-  // educationalInstitute: string | undefined;
-  // courseOfStudy: string | undefined;
-  // yearOfStudy: number | undefined;
-  // projectedGraduationYear: Date | undefined;
+  newStudent: StudentWrapper;
   relevantSkills: string[];
   startDate: Date | undefined;
   endDate: Date | undefined;
-  //availabilityPeriod: Date[] | undefined;
+  projectedGraduationYear: Date | undefined;
 
   newSkill: string | undefined;
   
@@ -53,7 +43,7 @@ export class RegisterComponent implements OnInit {
     public sessionService: SessionService,
     private studentService: StudentService) {
     this.submitted = false;
-    this.newStudent = new Student();
+    this.newStudent = new StudentWrapper();
     this.relevantSkills = new Array();
 
     this.resultSuccess = false;
@@ -64,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
   clear() {
     this.submitted = false;
-    this.newStudent = new Student();
+    this.newStudent = new StudentWrapper();
     this.startDate = undefined;
     this.endDate = undefined;
     this.relevantSkills = new Array();
@@ -79,15 +69,21 @@ export class RegisterComponent implements OnInit {
 
   create(createStudentForm: NgForm) {
     this.submitted = true;
+
+    let convertGraduationYear = this.projectedGraduationYear?.toString();
+    this.newStudent.projectedGraduationYear = convertGraduationYear;
+
     if (this.startDate != null && this.endDate != null && this.newStudent.availabilityPeriod != null) {
-        this.newStudent.availabilityPeriod[0] = this.startDate;
-        this.newStudent.availabilityPeriod[1] = this.endDate;
-      }
+      let convertStartDate = this.startDate?.toString();
+      let convertEndDate = this.endDate?.toString();
+      this.newStudent.availabilityPeriod[0] = convertStartDate;
+      this.newStudent.availabilityPeriod[1] = convertEndDate;
+    }
 
     if (createStudentForm.valid) {
       this.studentService.createNewStudent(this.newStudent).subscribe(
         response => {
-          let newStudentId: number = response;
+          let newStudentId: StudentWrapper = response;
           this.resultSuccess = true;
           this.resultError = false;
           this.message = "New account of ID " + newStudentId + " created successfully";
