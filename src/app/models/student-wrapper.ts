@@ -1,3 +1,7 @@
+import { Application } from "./application";
+import { Offer } from "./offer";
+import { Payment } from "./payment";
+
 export class StudentWrapper {
     studentId: number | undefined;
     name: string | undefined;
@@ -8,13 +12,17 @@ export class StudentWrapper {
     courseOfStudy: string | undefined;
     yearOfStudy: number | undefined;
     projectedGraduationYear: String | undefined;
-    relevantSkills: string[];
-    availabilityPeriod: string[];
+    relevantSkills: string[] | undefined;
+    availabilityPeriod: string[] | undefined;
+    applications: Application[] | undefined;
+    payments: Payment[] | undefined;
+    offers: Offer[] | undefined;
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,
         educationalInstitute?: string, courseOfStudy?: string,
-        yearOfStudy?: number, projectedGraduationYear?: string) {
+        yearOfStudy?: number, projectedGraduationYear?: string, 
+        relevantSkills?: string[], availabilityPeriod?: string[]) {
             this.studentId = studentId;
             this.name = name;
             this.biography = biography;
@@ -24,7 +32,7 @@ export class StudentWrapper {
             this.courseOfStudy = courseOfStudy;
             this.yearOfStudy = yearOfStudy;
             this.projectedGraduationYear = projectedGraduationYear;
-            this.relevantSkills = new Array();
-            this.availabilityPeriod = new Array();
+            this.relevantSkills = relevantSkills;
+            this.availabilityPeriod = availabilityPeriod;
     }
 }

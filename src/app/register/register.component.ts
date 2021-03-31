@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   projectedGraduationYear: Date | undefined;
 
   newSkill: string | undefined;
-
+  
   resultSuccess: boolean;
   resultError: boolean;
   message: string | undefined;
@@ -55,11 +55,15 @@ export class RegisterComponent implements OnInit {
   clear() {
     this.submitted = false;
     this.newStudent = new StudentWrapper();
+    this.startDate = undefined;
+    this.endDate = undefined;
+    this.relevantSkills = new Array();
   }
 
   addSkill() {
-    if (this.newSkill != null && this.newStudent != null && this.newStudent.relevantSkills != null) {
+    if (this.newSkill != null) {
       this.relevantSkills.push(this.newSkill);
+      this.newSkill = undefined;
     }
   }
 
@@ -88,8 +92,6 @@ export class RegisterComponent implements OnInit {
           this.resultError = true;
           this.resultSuccess = false;
           this.message = "An error has occurred while creating the new account: " + error;
-
-          console.log('********** CreateNewStudentComponent.ts: ' + error);
         }
       );
     }
