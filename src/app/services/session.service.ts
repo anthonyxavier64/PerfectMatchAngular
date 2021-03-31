@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Student } from '../models/student'
+import { StudentWrapper } from '../models/student-wrapper'
 
 @Injectable({
 	providedIn: 'root'
@@ -11,28 +11,12 @@ export class SessionService {
 
 	}
 
-	getCurrentStudent(): Student {
+	getCurrentStudent(): StudentWrapper {
 		return JSON.parse(sessionStorage.currentStudent);
 	}
 
-	setCurrentStudent(student: Student | null): void {
+	setCurrentStudent(student: StudentWrapper | null): void {
 		sessionStorage.students = JSON.stringify(student);
-	}
-
-	getEmail(): string {
-		return sessionStorage.email;
-	}
-
-	setEmail(email: string | undefined): void {
-		sessionStorage.email = email;
-	}
-
-	getPassword(): string {
-		return sessionStorage.password;
-	}
-
-	setPassword(password: string | undefined): void {
-		sessionStorage.password = password;
 	}
 
 	getIsLogin(): boolean {

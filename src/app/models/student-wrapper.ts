@@ -1,4 +1,4 @@
-export class Student {
+export class StudentWrapper {
     studentId: number | undefined;
     name: string | undefined;
     biography: string | undefined;
@@ -7,14 +7,14 @@ export class Student {
     educationalInstitute: string | undefined;
     courseOfStudy: string | undefined;
     yearOfStudy: number | undefined;
-    projectedGraduationYear: Date | undefined;
+    projectedGraduationYear: String | undefined;
     relevantSkills: string[];
-    availabilityPeriod: Date[];
+    availabilityPeriod: string[];
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,
         educationalInstitute?: string, courseOfStudy?: string,
-        yearOfStudy?: number, projectedGraduationYear?: Date) {
+        yearOfStudy?: number, projectedGraduationYear?: string) {
             this.studentId = studentId;
             this.name = name;
             this.biography = biography;
