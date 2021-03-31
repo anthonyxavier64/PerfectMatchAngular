@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { Student } from '../models/student';
-import { CreateStudentReq } from '../models/create-student-req';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -44,26 +43,10 @@ export class StudentService {
   }
 
   createNewStudent(newStudent: Student): Observable<number> {
-    let createStudentReq: CreateStudentReq = new CreateStudentReq(this.sessionService.getEmail(), this.sessionService.getPassword(), newStudent);
 
-    return this.httpClient.put<number>(this.baseUrl, createStudentReq, httpOptions).pipe
+    return this.httpClient.put<number>(this.baseUrl, newStudent, httpOptions).pipe
       (
         catchError(this.handleError)
       );
   }
-
-  // createNewStudent(newStudent: Student) {
-  //   let s: Student = new Student();
-  //   s.availabilityPeriod = newStudent.availabilityPeriod;
-  //   s.biography = newStudent.biography;
-  //   s.courseOfStudy = newStudent.courseOfStudy;
-  //   s.educationalInstitute = newStudent.educationalInstitute;
-  //   s.email = newStudent.email;
-  //   s.password = newStudent.password;
-  //   s.name = newStudent.name;
-  //   s.projectedGraduationYear = newStudent.projectedGraduationYear;
-  //   s.relevantSkills = newStudent.relevantSkills;
-  //   s.studentId = newStudent.studentId;
-  //   s.yearOfStudy = newStudent.yearOfStudy;
-  // }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -33,10 +33,10 @@ export class RegisterComponent implements OnInit {
   relevantSkills: string[];
   startDate: Date | undefined;
   endDate: Date | undefined;
-  // availabilityPeriod: Date[] | undefined;
+  //availabilityPeriod: Date[] | undefined;
 
   newSkill: string | undefined;
-
+  
   resultSuccess: boolean;
   resultError: boolean;
   message: string | undefined;
@@ -65,16 +65,24 @@ export class RegisterComponent implements OnInit {
   clear() {
     this.submitted = false;
     this.newStudent = new Student();
+    this.startDate = undefined;
+    this.endDate = undefined;
+    this.relevantSkills = new Array();
   }
 
   addSkill() {
-    if (this.newSkill != null && this.newStudent != null && this.newStudent.relevantSkills != null) {
+    if (this.newSkill != null) {
       this.relevantSkills.push(this.newSkill);
+      this.newSkill = undefined;
     }
   }
 
   create(createStudentForm: NgForm) {
     this.submitted = true;
+    if (this.startDate != null && this.endDate != null && this.newStudent.availabilityPeriod != null) {
+        this.newStudent.availabilityPeriod[0] = this.startDate;
+        this.newStudent.availabilityPeriod[1] = this.endDate;
+      }
 
     if (createStudentForm.valid) {
       this.studentService.createNewStudent(this.newStudent).subscribe(
@@ -88,8 +96,6 @@ export class RegisterComponent implements OnInit {
           this.resultError = true;
           this.resultSuccess = false;
           this.message = "An error has occurred while creating the new account: " + error;
-
-          console.log('********** CreateNewStudentComponent.ts: ' + error);
         }
       );
     }
