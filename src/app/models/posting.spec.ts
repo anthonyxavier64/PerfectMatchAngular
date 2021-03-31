@@ -1,7 +1,7 @@
-import { Posting } from './posting';
+// import { Posting } from './posting';
 
-describe('Posting', () => {
-  it('should create an instance', () => {
-    expect(new Posting()).toBeTruthy();
-  });
-});
+// describe('Posting', () => {
+//   it('should create an instance', () => {
+//     expect(new Posting()).toBeTruthy();
+//   });
+// });
