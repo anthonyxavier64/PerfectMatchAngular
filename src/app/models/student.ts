@@ -1,3 +1,7 @@
+import { Application } from "./application";
+import { Offer } from "./offer";
+import { Payment } from "./payment";
+
 export class Student {
     studentId: number | undefined;
     name: string | undefined;
@@ -10,6 +14,9 @@ export class Student {
     projectedGraduationYear: Date | undefined;
     relevantSkills: string[] | undefined;
     availabilityPeriod: Date[] | undefined;
+    applications: Application[] | undefined;
+    payments: Payment[] | undefined;
+    offers: Offer[] | undefined;
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,
