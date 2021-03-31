@@ -21,6 +21,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MainmenuComponent } from './mainmenu/mainmenu.component';
 import { LoginformComponent } from './loginform/loginform.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
