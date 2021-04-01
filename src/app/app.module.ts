@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { MainmenuComponent } from './mainmenu/mainmenu.component';
 import { LoginformComponent } from './loginform/loginform.component';
+import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { LoginformComponent } from './loginform/loginform.component';
     RegisterComponent,
     MainmenuComponent,
     LoginformComponent,
+    ViewAllJobsComponent,
   ],
   imports: [
     BrowserModule,
