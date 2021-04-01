@@ -23,6 +23,8 @@ import { LoginformComponent } from './loginform/loginform.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
+
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import {ToastModule} from 'primeng/toast';
     RegisterComponent,
     MainmenuComponent,
     LoginformComponent,
+    ViewAllJobsComponent,
   ],
   imports: [
     BrowserModule,
