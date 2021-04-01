@@ -1,19 +1,15 @@
-  
-<aside *ngIf="sessionService.getIsLogin() == false" style="position: fixed; right: 2%;">
-  <input type="text" [(ngModel)]="email" size="16" required maxlength="32" placeholder="email" pInputText/>
-  &nbsp;
-  <input type="password" [(ngModel)]="password" size="16" required maxlength="32" placeholder="password" pInputText/>
-  &nbsp;
-  <button mat-raised-button type="reset">Clear</button>
-  &nbsp;
-  <button mat-raised-button (click)="studentLogin()">Login</button>
-</aside>
+  <p-toast></p-toast>
+  <aside *ngIf="sessionService.getIsLogin() == false" style="position: fixed; right: 2%;">
+    <input type="text" [(ngModel)]="email" size="16" required maxlength="32" placeholder="email" pInputText />
+    &nbsp;
+    <input type="password" [(ngModel)]="password" size="16" required maxlength="32" placeholder="password" pInputText />
+    &nbsp;
+    <button mat-raised-button type="reset">Clear</button>
+    &nbsp;
+    <button mat-raised-button (click)="studentLogin()">Login</button>
+  </aside>
 
-<aside *ngIf="loginError == true" style="text-align: right; color: red;">
-  {{errorMessage}}
-</aside>
-
-<aside *ngIf="sessionService.getIsLogin() == true">
-  You are logged in as {{sessionService.getCurrentStudent().name}}
-  <input mat-raised-button type="button" (click)="studentLogout()" value="Logout" />
-</aside>
+  <aside *ngIf="sessionService.getIsLogin() == true" style="position: fixed; right: 2%;">
+    You are logged in as {{currentStudent?.name}}
+    <button mat-raised-button (click)="studentLogout()">Logout</button>
+  </aside>

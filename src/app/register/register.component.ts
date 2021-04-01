@@ -70,6 +70,8 @@ export class RegisterComponent implements OnInit {
   create(createStudentForm: NgForm) {
     this.submitted = true;
 
+    this.newStudent.relevantSkills = this.relevantSkills;
+
     let convertGraduationYear = this.projectedGraduationYear?.toString();
     this.newStudent.projectedGraduationYear = convertGraduationYear;
 
@@ -83,10 +85,11 @@ export class RegisterComponent implements OnInit {
     if (createStudentForm.valid) {
       this.studentService.createNewStudent(this.newStudent).subscribe(
         response => {
-          let newStudentId: StudentWrapper = response;
+          let newStudent: StudentWrapper = response;
+          console.log(response);
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "New account of ID " + newStudentId + " created successfully";
+          this.message = "New account of ID " + newStudent.studentId + " created successfully";
         },
         error => {
           this.resultError = true;

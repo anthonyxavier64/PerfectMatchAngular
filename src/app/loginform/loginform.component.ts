@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {MessageService} from 'primeng/api';
 
 import { SessionService } from '../services/session.service';
 import { StudentService } from '../services/student.service';
@@ -12,7 +13,8 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html',
-  styleUrls: ['./loginform.component.css']
+  styleUrls: ['./loginform.component.css'],
+  providers: [MessageService]
 })
 
 export class LoginformComponent implements OnInit {
@@ -29,14 +31,16 @@ export class LoginformComponent implements OnInit {
   email: string | undefined;
   password: string | undefined;
   loginError: boolean;
-  errorMessage: string | undefined;
+
+  currentStudent: StudentWrapper | undefined;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
-    private studentService: StudentService) {
+    private studentService: StudentService,
+    private messageService: MessageService) {
     this.loginError = false;
   }
 
@@ -46,15 +50,16 @@ export class LoginformComponent implements OnInit {
 
   studentLogin(): void {
     this.studentService.studentLogin(this.email, this.password).subscribe(
-
       response => {
-        let student: StudentWrapper = response;
-        if (student != null) {
+        this.currentStudent = response;
+        if (this.currentStudent != null) {
+          console.log(response);
           this.sessionService.setIsLogin(true);
-          this.sessionService.setCurrentStudent(student);
+          this.sessionService.setCurrentStudent(response);
           this.loginError = false;
 
           this.childEvent.emit();
+          this.messageService.add({severity:'success', summary:'Logged in successfully!'})
 
           this.router.navigate(["/index"]);
         }
@@ -64,7 +69,8 @@ export class LoginformComponent implements OnInit {
       },
       error => {
         this.loginError = true;
-        this.errorMessage = error
+        console.log(error);
+        this.messageService.add({severity:'error', summary:'Error', detail:'Account not found!'})
       }
     );
   }

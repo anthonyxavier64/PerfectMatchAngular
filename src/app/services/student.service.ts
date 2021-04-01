@@ -29,7 +29,7 @@ export class StudentService {
   ): Observable<StudentWrapper> {
     return this.httpClient
       .get<StudentWrapper>(
-        this.baseUrl + '/loginStudent?email=' + email + '&password=' + password
+        this.baseUrl + '/studentLogin?email=' + email + '&password=' + password
       )
       .pipe(catchError(this.handleError));
   }

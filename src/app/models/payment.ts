@@ -1,6 +1,6 @@
 import { Project } from "./project";
 import { Startup } from "./startup";
-import { Student } from "./student";
+import { StudentWrapper } from "./student-wrapper";
 
 export class Payment {
     paymentId: number | undefined;
@@ -9,7 +9,7 @@ export class Payment {
     dateOfTransaction: Date | undefined;
     project: Project | undefined;
     startup: Startup | undefined;
-    student: Student | undefined;
+    student: StudentWrapper | undefined;
 
     constructor(paymentId?: number, paymentAmount?: number,
         description?: string, dateOfTransaction?: Date) {
