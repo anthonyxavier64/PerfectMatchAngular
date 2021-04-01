@@ -20,7 +20,11 @@ import { RegisterComponent } from './register/register.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { MainmenuComponent } from './mainmenu/mainmenu.component';
 import { LoginformComponent } from './loginform/loginform.component';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
 import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
+
 
 
 @NgModule({
@@ -47,7 +51,10 @@ import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.compone
     MatToolbarModule,
     MatListModule,
     InputTextModule,
-    HttpClientModule
+    HttpClientModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

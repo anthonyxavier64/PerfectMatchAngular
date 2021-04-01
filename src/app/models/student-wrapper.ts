@@ -11,12 +11,9 @@ export class StudentWrapper {
     educationalInstitute: string | undefined;
     courseOfStudy: string | undefined;
     yearOfStudy: number | undefined;
-    projectedGraduationYear: String | undefined;
+    projectedGraduationYear: string | undefined;
     relevantSkills: string[] | undefined;
     availabilityPeriod: string[] | undefined;
-    applications: Application[] | undefined;
-    payments: Payment[] | undefined;
-    offers: Offer[] | undefined;
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,
@@ -32,7 +29,7 @@ export class StudentWrapper {
             this.courseOfStudy = courseOfStudy;
             this.yearOfStudy = yearOfStudy;
             this.projectedGraduationYear = projectedGraduationYear;
-            this.relevantSkills = relevantSkills;
-            this.availabilityPeriod = availabilityPeriod;
+            this.relevantSkills = new Array();
+            this.availabilityPeriod = new Array();
     }
 }
