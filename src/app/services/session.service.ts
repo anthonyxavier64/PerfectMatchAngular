@@ -16,11 +16,11 @@ export class SessionService {
 	}
 
 	setCurrentStudent(student: StudentWrapper | null): void {
-		sessionStorage.students = JSON.stringify(student);
+		sessionStorage.currentStudent = JSON.stringify(student);
 	}
 
 	getIsLogin(): boolean {
-		if (sessionStorage.isLogin == "true") {
+		if (sessionStorage.isLogin === "true") {
 			return true;
 		}
 		else {

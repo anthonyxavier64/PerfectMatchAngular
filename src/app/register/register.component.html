@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -138,8 +139,8 @@
         <span>
           <label>Biography</label>
           <br />
-          <textarea id="float-input" name="biography" #biography="ngModel" [(ngModel)]="newStudent.biography" [rows]="7"
-            [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+          <textarea id="biography" name="biography" #biography="ngModel" [(ngModel)]="newStudent.biography" [rows]="7"
+            [cols]="30" pInputTextarea autoResize="autoResize" maxlength="250" placeholder="Max 250 characters"></textarea>
         </span>
         <br /> <br />
 
@@ -148,7 +149,6 @@
         </span>
         <br/> <br/>
         <button mat-raised-button type="submit" (click)="create(createStudentForm)">Register</button>
-        <div *ngIf="resultSuccess">{{message}}</div>
       </div>      
     </form>
 

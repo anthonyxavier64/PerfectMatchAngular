@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <app-mainmenu></app-mainmenu>
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
     
   </mat-sidenav>
 
@@ -12,7 +12,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <app-loginform style="margin-bottom: 30px;" (childEvent)="setIsLogin($event)"></app-loginform>
       <span>PerfectMatch</span>
       
     </mat-toolbar>

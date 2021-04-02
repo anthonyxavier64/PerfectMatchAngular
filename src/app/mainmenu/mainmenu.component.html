@@ -1,6 +1,9 @@
 <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/index">Home</a>
-      <a mat-list-item routerLink="/register">Register</a>
-      <a mat-list-item routerLink="/viewAllJobs">Jobs</a>
-    </mat-nav-list>
+<mat-nav-list>
+  <a mat-list-item routerLink="/index">Home</a>
+  <a *ngIf="!isLogin" mat-list-item routerLink="/register">Register</a>
+  <div *ngIf="isLogin">
+    <a mat-list-item routerLink="/viewAllJobs">Jobs</a>
+    <a mat-list-item routerLink="/viewProfile">View profile</a>
+  </div>
+</mat-nav-list>

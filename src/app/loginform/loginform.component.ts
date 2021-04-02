@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {MessageService} from 'primeng/api';
 
@@ -26,7 +26,7 @@ export class LoginformComponent implements OnInit {
   );
 
   @Output() 
-  childEvent = new EventEmitter();
+  childEvent = new EventEmitter<boolean>();
   
   email: string | undefined;
   password: string | undefined;
@@ -37,7 +37,6 @@ export class LoginformComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
     private studentService: StudentService,
     private messageService: MessageService) {
@@ -53,12 +52,11 @@ export class LoginformComponent implements OnInit {
       response => {
         this.currentStudent = response;
         if (this.currentStudent != null) {
-          console.log(response);
           this.sessionService.setIsLogin(true);
           this.sessionService.setCurrentStudent(response);
           this.loginError = false;
 
-          this.childEvent.emit();
+          this.childEvent.emit(true);
           this.messageService.add({severity:'success', summary:'Logged in successfully!'})
 
           this.router.navigate(["/index"]);
@@ -78,6 +76,7 @@ export class LoginformComponent implements OnInit {
   studentLogout(): void {
     this.sessionService.setIsLogin(false);
     this.sessionService.setCurrentStudent(null);
+    this.childEvent.emit(false);
 
     this.router.navigate(["/index"]);
   }

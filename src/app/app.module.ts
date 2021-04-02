@@ -20,11 +20,14 @@ import { RegisterComponent } from './register/register.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { MainmenuComponent } from './mainmenu/mainmenu.component';
 import { LoginformComponent } from './loginform/loginform.component';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import {ToastModule} from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
 import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
-
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { FieldsetModule } from 'primeng/fieldset';
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -35,6 +38,7 @@ import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.compone
     MainmenuComponent,
     LoginformComponent,
     ViewAllJobsComponent,
+    ViewprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,10 @@ import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.compone
     HttpClientModule,
     MessagesModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    TabMenuModule,
+    FieldsetModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
