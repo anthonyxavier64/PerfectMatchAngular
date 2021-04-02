@@ -30,7 +30,8 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { CardModule } from 'primeng/card';
 import { EditprofileComponent } from './profile/editprofile/editprofile.component';
 import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.component';
-
+import { DataViewModule } from 'primeng/dataview';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -65,9 +66,11 @@ import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.comp
     ToastModule,
     TabMenuModule,
     FieldsetModule,
-    CardModule
+    CardModule,
+    DataViewModule,
+    DropdownModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
