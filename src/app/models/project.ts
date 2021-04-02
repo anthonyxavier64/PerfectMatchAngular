@@ -5,8 +5,8 @@ export class Project {
     projectTitle: string | undefined;
     projectDescription: string | undefined;
     compensation: number | undefined;
-    earliestStartDate: Date | undefined;
-    latestStartDate: Date | undefined;
+    earliestStartDate: string | undefined;
+    latestStartDate: string | undefined;
     industry: Industry | undefined;
     requiredSkills: string[] | undefined;
     projectSpecialisation: string | undefined;
@@ -14,7 +14,7 @@ export class Project {
 
     constructor(projectId?: number, projectTitle?: string,
         projectDescription?: string, compensation?: number, 
-        earliestStartDate?: Date, latestStartDate?: Date, 
+        earliestStartDate?: string, latestStartDate?: string, 
         industry?: Industry, requiredSkills?: string[], 
         projectSpecialisation?: string, isComplete?: boolean) {
             this.projectId = projectId;
