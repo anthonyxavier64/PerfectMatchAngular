@@ -10,7 +10,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>PerfectMatch-Student</span>
+      <span>PerfectMatch</span>
       <app-loginform style="margin-bottom: 30px;"></app-loginform>
     </mat-toolbar>
     <!-- Add Content Here -->
@@ -53,7 +53,7 @@
       </div>
       <div *ngIf="activeItem.label === 'Edit'">
         <br>
-        <app-editprofile [currentStudent]="currentStudent"></app-editprofile>
+        <app-editprofile [currentStudent]="currentStudent" (childEvent)="setCurrentStudent($event)"></app-editprofile>
       </div>
     </div>
   </mat-sidenav-content>

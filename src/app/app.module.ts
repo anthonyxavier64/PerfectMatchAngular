@@ -29,6 +29,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { FieldsetModule } from 'primeng/fieldset';
 import { CardModule } from 'primeng/card';
 import { EditprofileComponent } from './profile/editprofile/editprofile.component';
+import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { EditprofileComponent } from './profile/editprofile/editprofile.componen
     ViewAllJobsComponent,
     ViewprofileComponent,
     EditprofileComponent,
+    ViewprojectsComponent,
   ],
   imports: [
     BrowserModule,

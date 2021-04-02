@@ -11,7 +11,7 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./index.component.css'],
 })
 export class IndexComponent {
-  isLogin: boolean = false;
+  isLogin: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -24,6 +24,8 @@ export class IndexComponent {
     public sessionService: SessionService,
     private breakpointObserver: BreakpointObserver
   ) {
+    let currentStudent = this.sessionService.getCurrentStudent();
+    currentStudent ? this.isLogin = true : this.isLogin = false;
   }
 
   setIsLogin(isLogin: boolean) {

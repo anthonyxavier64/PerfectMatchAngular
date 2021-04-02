@@ -73,8 +73,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     this.newStudent.relevantSkills = this.relevantSkills;
-    console.log(this.newStudent.biography);
-    console.log(this.newStudent.relevantSkills[0]);
+
     let convertGraduationYear = this.projectedGraduationYear?.toString();
     this.newStudent.projectedGraduationYear = convertGraduationYear;
 
@@ -89,7 +88,7 @@ export class RegisterComponent implements OnInit {
       this.studentService.createNewStudent(this.newStudent).subscribe(
         response => {
           let newStudent: StudentWrapper = response;
-          console.log(response);
+          
           this.resultSuccess = true;
           this.resultError = false;
           this.messageService.add({

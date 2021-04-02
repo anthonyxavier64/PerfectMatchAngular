@@ -40,6 +40,12 @@ export class StudentService {
       .pipe(catchError(this.handleError));
   }
 
+  editStudentDetails(student: StudentWrapper): Observable<StudentWrapper> { 
+    return this.httpClient
+    .put<StudentWrapper>(this.baseUrl + "/editStudentDetails", student, httpOptions)
+    .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = '';
 
