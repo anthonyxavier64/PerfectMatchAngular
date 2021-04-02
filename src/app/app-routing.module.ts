@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
 import { RegisterComponent } from './register/register.component';
-import { ViewprofileComponent } from './viewprofile/viewprofile.component';
+import { ViewprofileComponent } from './profile/viewprofile/viewprofile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
