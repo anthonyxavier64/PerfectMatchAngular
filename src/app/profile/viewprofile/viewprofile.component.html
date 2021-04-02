@@ -1,0 +1,60 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>PerfectMatch-Student</span>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+      <p-tabMenu [model]="items" [activeItem]="activeItem">
+      </p-tabMenu>
+      <br>
+      <div *ngIf="activeItem.label === 'Profile'">
+        <p-fieldset legend={{currentStudent.name}}>
+          {{currentStudent.biography}}
+        </p-fieldset>
+        <br>
+        <div style='display: flex;'>
+          <p-card subheader='Skills' [style]="{'width': '25rem', 'height': '20rem'}">
+            <ul *ngFor="let skill of currentStudent.relevantSkills"
+              style="list-style-type: none; margin: 0; padding: 0;">
+              <li>{{skill}}</li>
+            </ul>
+          </p-card>&nbsp;
+          <p-card subheader='Information' [style]="{'width': '50rem', 'height': '20rem'}">
+            <ul style="list-style-type: none; margin: 0; padding: 0;">
+              <li *ngIf="currentStudent.availabilityPeriod !== undefined">
+                Availability Period: <strong>{{this.startDate | date: 'dd-MM-yyyy'}} to {{this.endDate | date: 'dd-MM-yyyy'}}</strong>
+              </li>
+              <li>
+                Projected Graduation Date: <strong>{{this.projectedGraduationYear | date: 'dd-MM-yyyy'}}</strong>
+              </li>
+              <li>
+                Educational Institute: <strong>{{this.currentStudent.educationalInstitute}}</strong>
+              </li>
+              <li>
+                Course of Study: <strong>{{this.currentStudent.courseOfStudy}}</strong>
+              </li>
+              <li>
+                Year of Study: Year <strong>{{this.currentStudent.yearOfStudy}}</strong>
+              </li>
+            </ul>
+          </p-card>
+        </div>
+      </div>
+      <div *ngIf="activeItem.label === 'Edit'">
+        <br>
+        <app-editprofile [currentStudent]="currentStudent"></app-editprofile>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

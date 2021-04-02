@@ -24,10 +24,11 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
-import { ViewprofileComponent } from './viewprofile/viewprofile.component';
+import { ViewprofileComponent } from './profile/viewprofile/viewprofile.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { FieldsetModule } from 'primeng/fieldset';
 import { CardModule } from 'primeng/card';
+import { EditprofileComponent } from './profile/editprofile/editprofile.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { CardModule } from 'primeng/card';
     LoginformComponent,
     ViewAllJobsComponent,
     ViewprofileComponent,
+    EditprofileComponent,
   ],
   imports: [
     BrowserModule,

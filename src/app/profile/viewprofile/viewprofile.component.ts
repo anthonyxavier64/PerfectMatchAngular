@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
-import { StudentWrapper } from '../models/student-wrapper';
-import { SessionService } from '../services/session.service';
+import { StudentWrapper } from '../../models/student-wrapper';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-viewprofile',
@@ -15,9 +14,12 @@ import { SessionService } from '../services/session.service';
 })
 export class ViewprofileComponent {
   items: MenuItem[];
-  activeItem: MenuItem | undefined;
-  activatedItem: string = 'profile';
+  activeItem: MenuItem;
   currentStudent: StudentWrapper;
+  isLogin: boolean = true;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  projectedGraduationYear: Date | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -28,31 +30,40 @@ export class ViewprofileComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private sessionService: SessionService,
-    private router: Router
+    private sessionService: SessionService
   ) {
     this.items = [];
-    this.currentStudent = sessionService.getCurrentStudent();
+    this.currentStudent = this.sessionService.getCurrentStudent();
+    this.activeItem = {};
   }
 
   ngOnInit() {
-    (this.items = [
+    if (this.currentStudent.availabilityPeriod !== undefined) {
+      this.startDate = new Date(this.currentStudent.availabilityPeriod[0]);
+      this.endDate = new Date(this.currentStudent.availabilityPeriod[1]);
+    }
+
+    if (this.currentStudent.projectedGraduationYear !== undefined) { 
+      this.projectedGraduationYear = new Date(this.currentStudent.projectedGraduationYear);
+    }
+
+    this.items = [
       {
         label: 'Profile',
         icon: 'pi pi-user',
         command: (event: any) => {
-          this.activatedItem = event.item.label;
+          this.activeItem = this.items[0];
         },
       },
       {
         label: 'Edit',
         icon: 'pi pi-pencil',
         command: (event: any) => {
-          this.activatedItem = event.item.label;
+          this.activeItem = this.items[1];
         },
       },
-    ]),
-      (this.activeItem = this.items[0]);
-  }
+    ];
 
+    this.activeItem = this.items[0];
+  }
 }
