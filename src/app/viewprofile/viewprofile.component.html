@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu></app-mainmenu>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>PerfectMatch-Student</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+      <p-tabMenu [model]="items" [activeItem]="items[0]">
+      </p-tabMenu>
+      <br>
+      <div *ngIf="activatedItem === 'profile'">
+        <p-fieldset legend={{currentStudent.name}}>
+          {{currentStudent.biography}}
+        </p-fieldset>
+        <br>
+        <div style='display: flex;'>
+          <p-card subheader='Skills' [style]="{'width': '25rem', 'height': '20rem'}">
+
+          </p-card>&nbsp;
+          <p-card subheader='Information' [style]="{'width': '50rem', 'height': '20rem'}">
+
+          </p-card>
+        </div>
+      </div>
+      <div *ngIf="activatedItem === 'edit'">
+        <p-fieldset legend={{currentStudent.name}}>
+          {{currentStudent.biography}}
+        </p-fieldset>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

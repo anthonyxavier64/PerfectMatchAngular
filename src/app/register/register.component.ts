@@ -2,6 +2,7 @@ import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import {MessageService} from 'primeng/api';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -13,7 +14,8 @@ import { StudentWrapper } from '../models/student-wrapper';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [MessageService]
 })
 
 export class RegisterComponent implements OnInit {
@@ -29,7 +31,6 @@ export class RegisterComponent implements OnInit {
   
   resultSuccess: boolean;
   resultError: boolean;
-  message: string | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -41,7 +42,8 @@ export class RegisterComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     public sessionService: SessionService,
-    private studentService: StudentService) {
+    private studentService: StudentService,
+    private messageService: MessageService) {
     this.submitted = false;
     this.newStudent = new StudentWrapper();
     this.relevantSkills = new Array();
@@ -71,7 +73,8 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     this.newStudent.relevantSkills = this.relevantSkills;
-
+    console.log(this.newStudent.biography);
+    console.log(this.newStudent.relevantSkills[0]);
     let convertGraduationYear = this.projectedGraduationYear?.toString();
     this.newStudent.projectedGraduationYear = convertGraduationYear;
 
@@ -89,12 +92,17 @@ export class RegisterComponent implements OnInit {
           console.log(response);
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "New account of ID " + newStudent.studentId + " created successfully";
+          this.messageService.add({
+            severity:'success', summary:"New account with ID " + newStudent.studentId + " created successfully"
+          });
+          this.router.navigate(["/index"]);
         },
         error => {
           this.resultError = true;
           this.resultSuccess = false;
-          this.message = "An error has occurred while creating the new account: " + error;
+          this.messageService.add({
+            severity:'error', summary:"Error", detail:'Unable to create account, please try again with different credentials.'
+          })
         }
       );
     }
