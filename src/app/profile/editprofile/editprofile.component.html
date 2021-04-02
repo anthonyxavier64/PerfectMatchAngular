@@ -1,81 +1,70 @@
+<p-toast></p-toast>
 <form #editStudentForm="ngForm">
-    <div style="width: 30%; float: left;">
-        <br />
-        <span class="p-float-label">
-          <input id="name" name="name" #name="ngModel" [(ngModel)]="currentStudent.name" required="true" type="text"
-            pInputText>
-          <label for="name">Name</label>
-        </span>
-        <br /> <br />
-        <span class="p-float-label">
-          <input id="email" name="email" #email="ngModel" [(ngModel)]="currentStudent.email" required="true" type="email"
-            pInputText>
-          <label for="email">Email</label>
-        </span>
-        <br /> <br />
-        <span class="p-float-label">
-          <input id="password" name="password" #password="ngModel" [(ngModel)]="currentStudent.password" required="true"
-            type="password" pInputText>
-          <label for="password">Password</label>
-        </span>
-        <br /> <br />
-        <span class="p-float-label">
-          <input id="educationalInstitute" name="educationalInstitute" #educationalInstitute="ngModel"
-            [(ngModel)]="currentStudent.educationalInstitute" required="true" type="text" pInputText>
-          <label for="educationalInstitute">Educational Institute</label>
-        </span>
-        <br /> <br />
-        <span class="p-float-label">
-          <input id="courseOfStudy" name="courseOfStudy" #courseOfStudy="ngModel" [(ngModel)]="currentStudent.courseOfStudy"
-            required="true" type="text" pInputText>
-          <label for="courseOfStudy">Course of Study</label>
-        </span>
-        <br /> <br />
-        <span class="p-float-label">
-          <input id="yearOfStudy" name="yearOfStudy" #yearOfStudy="ngModel" [(ngModel)]="currentStudent.yearOfStudy"
-            required="true" type="number" pInputText>
-          <label for="yearOfStudy">Year of Study</label>
-        </span>
-      </div>
-      
-      <div style="width: 30%; float: left;"> 
-        <label for="projectedGraduationYear">Projected Graduation Date</label>
-        <br/>
-        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduation_Year="ngModel" [(ngModel)]="currentStudent.projectedGraduationYear" required="true" type="date" pInputText>
+  <div style="width: 30%; float: left;">
+    <br />
+    <span class="p-float-label">
+      <input id="name" name="name" [(ngModel)]="editStudent.name" required="true" type="text" pInputText>
+      <label for="name">Name</label>
+    </span>
+    <br /> <br />
+    <span class="p-float-label">
+      <input id="educationalInstitute" name="educationalInstitute" [(ngModel)]="editStudent.educationalInstitute"
+        required="true" type="text" pInputText>
+      <label for="educationalInstitute">Educational Institute</label>
+    </span>
+    <br /> <br />
+    <span class="p-float-label">
+      <input id="courseOfStudy" name="courseOfStudy" [(ngModel)]="editStudent.courseOfStudy" required="true"
+        type="text" pInputText>
+      <label for="courseOfStudy">Course of Study</label>
+    </span>
+    <br /> <br />
+    <span class="p-float-label">
+      <input id="yearOfStudy" name="yearOfStudy" [(ngModel)]="editStudent.yearOfStudy" required="true" type="number"
+        pInputText>
+      <label for="yearOfStudy">Year of Study</label>
+    </span>
+  </div>
 
-        <br /><br />
-        <label for="start_Date">Start Date</label>
-        <br />
-        <input id="start_Date" name="start_Date" #start_Date="ngModel" [(ngModel)]="startDate" required="true"
-          type="date" pInputText>
+  <div style="width: 30%; float: left;">
+    <label for="projectedGraduationYear">Projected Graduation Date</label>
+    <br />
+    <input id="projectedGraduationYear" name="projectedGraduationYear"
+      [(ngModel)]="editStudent.projectedGraduationYear" required="true" type="date" pInputText>
 
-        <br /><br />
-        <label for="end_Date">End Date</label>
-        <br />
-        <input id="end_Date" name="end_Date" #end_Date="ngModel" [(ngModel)]="endDate" required="true" type="date"
-          pInputText>
+    <br /><br />
+    <label for="start_Date">Start Date</label>
+    <br />
+    <input id="start_Date" name="start_Date" [(ngModel)]="startDate" required="true" type="date"
+      pInputText>
 
-        <br /><br />
-        <label for="skills">Skills</label>
-        <br />
-        <input id="skills" name="skills" #skills="ngModel" [(ngModel)]="newSkill" class="form-control" pInputText>
-        <button mat-raised-button (click)="addSkill()">Add</button>
-        <ul>
-          <li *ngFor="let skill of relevantSkills">
-            {{skill}}
-          </li>
-        </ul>
-      </div>
+    <br /><br />
+    <label for="end_Date">End Date</label>
+    <br />
+    <input id="end_Date" name="end_Date" [(ngModel)]="endDate" required="true" type="date"
+      pInputText>
 
-      <div style="width: 30%; float: left;">
-        <br />
-        <span>
-          <label>Biography</label>
-          <br />
-          <textarea id="biography" name="biography" #biography="ngModel" [(ngModel)]="currentStudent.biography" [rows]="7"
-            [cols]="30" pInputTextarea autoResize="autoResize" maxlength="250" placeholder="Max 250 characters"></textarea>
-        </span>
-        <br/><br/>
-        <button mat-raised-button type="submit" (click)="edit(editStudentForm)">Confirm Edit</button>
-      </div>
+    <br /><br />
+    <label for="skills">Skills</label>
+    <br />
+    <input id="skills" name="skills" [(ngModel)]="newSkill" class="form-control" pInputText>
+    <button mat-raised-button (click)="addSkill()">Add</button>
+    <ul>
+      <li *ngFor="let skill of relevantSkills">
+        {{skill}}
+      </li>
+    </ul>
+  </div>
+
+  <div style="width: 30%; float: left;">
+    <br />
+    <span>
+      <label>Biography</label>
+      <br />
+      <textarea id="biography" name="biography" [(ngModel)]="editStudent.biography" [rows]="7"
+        [cols]="30" pInputTextarea autoResize="autoResize" maxlength="250" placeholder="Max 250 characters"></textarea>
+    </span>
+    <br /><br />
+    <button mat-raised-button type="submit" (click)="edit(editStudentForm)">Confirm Edit</button>
+  </div>
 </form>
