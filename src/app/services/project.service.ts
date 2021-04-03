@@ -26,6 +26,11 @@ export class ProjectService {
     .pipe(catchError(this.handleError));
   }
 
+  getProjectById(projectId: number): Observable<Project> {
+    return this.httpClient.get<Project>(this.baseUrl + "/retrieveProjectById/" + projectId)
+    .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = '';
 

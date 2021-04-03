@@ -18,13 +18,13 @@
       <p-tabMenu [model]="items" [activeItem]="activeItem">
       </p-tabMenu>
       <br>
-      <div *ngIf="activeItem.label === 'Profile'">
+      <div *ngIf="activeItem.label === 'Profile' && currentStudent">
         <p-fieldset legend={{currentStudent.name}}>
           {{currentStudent.biography}}
         </p-fieldset>
         <br>
         <div style='display: flex;'>
-          <p-card subheader='Skills' [style]="{'width': '25rem', 'height': '20rem'}">
+          <p-card [style]="{'width': '25rem', 'height': '20rem'}">
             <ul *ngFor="let skill of currentStudent.relevantSkills"
               style="list-style-type: none; margin: 0; padding: 0;">
               <li>{{skill}}</li>

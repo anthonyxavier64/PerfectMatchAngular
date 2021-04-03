@@ -22,7 +22,6 @@
     <!-- Add Content Here -->
     <p-dataView #dv [value]="displayedProjects" layout="grid" [loading]="isLoading" filterBy="projectTitle">
       <ng-template pTemplate="header">
-        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         <p-dropdown [options]="sortOptions" placeholder="Sort By Compensation" (onChange)="onSortChange($event)"
           styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
@@ -38,11 +37,6 @@
           <input type="search" pInputText placeholder="Search by Skills" (input)="searchSkillsEvent($event)">
         </span>
       </ng-template>
-      <!-- <ng-template let-project pTemplate="listItem">
-            <div>
-                {{project.projectTitle}}
-            </div>
-        </ng-template> -->
       <ng-template let-project pTemplate="gridItem"
         style="display: flex; justify-content: center; align-items: center;">
         <div class="p-col-2" style="margin: 10px 10px 10px 10px;">
@@ -69,7 +63,7 @@
               </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
-              <button mat-raised-button>Details</button>
+              <button mat-raised-button routerLink="viewProjectDetails/{{project.projectId}}">Details</button>
             </mat-card-actions>
           </mat-card>
         </div>
