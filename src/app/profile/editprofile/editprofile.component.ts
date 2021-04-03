@@ -11,11 +11,11 @@ import { StudentService } from 'src/app/services/student.service';
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
   styleUrls: ['./editprofile.component.css'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class EditprofileComponent implements OnInit {
-  @Input() currentStudent: StudentWrapper;
-  
+  @Input() currentStudent: StudentWrapper | undefined;
+
   @Output() childEvent = new EventEmitter<StudentWrapper>();
 
   editStudent: StudentWrapper;
@@ -39,23 +39,25 @@ export class EditprofileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.editStudent.name = this.currentStudent.name;
-    this.editStudent.availabilityPeriod = this.currentStudent.availabilityPeriod;
-    this.editStudent.biography = this.currentStudent.biography;
-    this.editStudent.courseOfStudy = this.currentStudent.courseOfStudy;
-    this.editStudent.educationalInstitute = this.currentStudent.educationalInstitute;
-    this.editStudent.email = this.currentStudent.email;
-    this.editStudent.password = this.currentStudent.password;
-    this.editStudent.projectedGraduationYear = this.currentStudent.projectedGraduationYear;
-    this.editStudent.relevantSkills = this.currentStudent.relevantSkills;
-    this.editStudent.studentId = this.currentStudent.studentId;
-    this.editStudent.yearOfStudy = this.currentStudent.yearOfStudy;
+    if (this.currentStudent) {
+      this.editStudent.name = this.currentStudent.name;
+      this.editStudent.availabilityPeriod = this.currentStudent.availabilityPeriod;
+      this.editStudent.biography = this.currentStudent.biography;
+      this.editStudent.courseOfStudy = this.currentStudent.courseOfStudy;
+      this.editStudent.educationalInstitute = this.currentStudent.educationalInstitute;
+      this.editStudent.email = this.currentStudent.email;
+      this.editStudent.password = this.currentStudent.password;
+      this.editStudent.projectedGraduationYear = this.currentStudent.projectedGraduationYear;
+      this.editStudent.relevantSkills = this.currentStudent.relevantSkills;
+      this.editStudent.studentId = this.currentStudent.studentId;
+      this.editStudent.yearOfStudy = this.currentStudent.yearOfStudy;
 
-    if (this.currentStudent.availabilityPeriod !== undefined) {
-      this.startDate = this.currentStudent.availabilityPeriod[0];
-      this.endDate = this.currentStudent.availabilityPeriod[1];
-      if (this.currentStudent.relevantSkills) {
-        this.relevantSkills = this.currentStudent.relevantSkills;
+      if (this.currentStudent.availabilityPeriod !== undefined) {
+        this.startDate = this.currentStudent.availabilityPeriod[0];
+        this.endDate = this.currentStudent.availabilityPeriod[1];
+        if (this.currentStudent.relevantSkills) {
+          this.relevantSkills = this.currentStudent.relevantSkills;
+        }
       }
     }
   }
@@ -74,14 +76,17 @@ export class EditprofileComponent implements OnInit {
       (response) => {
         this.sessionService.setCurrentStudent(response);
         this.messageService.add({
-          severity:'success', summary: 'Account edited succesfully!'
+          severity: 'success',
+          summary: 'Account edited succesfully!',
         });
         this.childEvent.emit(response);
-        this.router.navigate(["/viewProfile"]);
+        this.router.navigate(['/viewProfile']);
       },
       (error) => {
         this.messageService.add({
-          severity:'error', summary:"Error", detail:'Unable to edit account'
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Unable to edit account',
         });
       }
     );

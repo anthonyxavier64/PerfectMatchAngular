@@ -32,6 +32,7 @@ import { EditprofileComponent } from './profile/editprofile/editprofile.componen
 import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.component';
 import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProjectdetailsComponent } from './postings/projectdetails/projectdetails.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ViewprofileComponent,
     EditprofileComponent,
     ViewprojectsComponent,
+    ProjectdetailsComponent,
   ],
   imports: [
     BrowserModule,

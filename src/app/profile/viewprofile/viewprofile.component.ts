@@ -15,7 +15,7 @@ import { SessionService } from '../../services/session.service';
 export class ViewprofileComponent {
   items: MenuItem[];
   activeItem: MenuItem;
-  currentStudent: StudentWrapper;
+  currentStudent: StudentWrapper | undefined;
   isLogin: boolean = true;
   startDate: Date | undefined;
   endDate: Date | undefined;
@@ -38,13 +38,17 @@ export class ViewprofileComponent {
   }
 
   ngOnInit() {
-    if (this.currentStudent.availabilityPeriod !== undefined) {
-      this.startDate = new Date(this.currentStudent.availabilityPeriod[0]);
-      this.endDate = new Date(this.currentStudent.availabilityPeriod[1]);
-    }
+    if (this.currentStudent) {
+      if (this.currentStudent.availabilityPeriod !== undefined) {
+        this.startDate = new Date(this.currentStudent.availabilityPeriod[0]);
+        this.endDate = new Date(this.currentStudent.availabilityPeriod[1]);
+      }
 
-    if (this.currentStudent.projectedGraduationYear !== undefined) { 
-      this.projectedGraduationYear = new Date(this.currentStudent.projectedGraduationYear);
+      if (this.currentStudent.projectedGraduationYear !== undefined) {
+        this.projectedGraduationYear = new Date(
+          this.currentStudent.projectedGraduationYear
+        );
+      }
     }
 
     this.items = [
@@ -67,7 +71,7 @@ export class ViewprofileComponent {
     this.activeItem = this.items[0];
   }
 
-  setCurrentStudent(currentStudent: StudentWrapper) { 
+  setCurrentStudent(currentStudent: StudentWrapper) {
     this.currentStudent = currentStudent;
   }
 }

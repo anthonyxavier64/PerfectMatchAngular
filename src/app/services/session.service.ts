@@ -11,8 +11,11 @@ export class SessionService {
 
 	}
 
-	getCurrentStudent(): StudentWrapper {
-		return JSON.parse(sessionStorage.currentStudent);
+	getCurrentStudent(): StudentWrapper | undefined {
+		if (sessionStorage.currentStudent) { 
+			return JSON.parse(sessionStorage.currentStudent);
+		}
+		return undefined;
 	}
 
 	setCurrentStudent(student: StudentWrapper | null): void {

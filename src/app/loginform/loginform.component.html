@@ -10,6 +10,6 @@
   </aside>
 
   <aside *ngIf="sessionService.getIsLogin() == true" style="position: fixed; right: 2%;">
-    Hi {{sessionService.getCurrentStudent().name}}!&nbsp;
+    Hi {{sessionService.getCurrentStudent()?.name}}!&nbsp;
     <button mat-raised-button (click)="studentLogout()">Logout</button>
   </aside>

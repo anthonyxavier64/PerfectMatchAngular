@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -39,7 +39,6 @@ export class RegisterComponent implements OnInit {
     );
 
   constructor(private router: Router,
-    private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     public sessionService: SessionService,
     private studentService: StudentService,
