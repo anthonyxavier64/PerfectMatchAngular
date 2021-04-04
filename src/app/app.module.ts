@@ -23,7 +23,7 @@ import { LoginformComponent } from './loginform/loginform.component';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
-import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
+import { ViewAllJobsComponent } from './postings/view-all-jobs/view-all-jobs.component';
 import { ViewprofileComponent } from './profile/viewprofile/viewprofile.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -33,6 +33,7 @@ import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.comp
 import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProjectdetailsComponent } from './postings/projectdetails/projectdetails.component';
+import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-details.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ProjectdetailsComponent } from './postings/projectdetails/projectdetail
     EditprofileComponent,
     ViewprojectsComponent,
     ProjectdetailsComponent,
+    ViewJobDetailsComponent,
   ],
   imports: [
     BrowserModule,
