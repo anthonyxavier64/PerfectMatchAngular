@@ -13,8 +13,7 @@ export class Job {
     constructor(jobId?: number, jobTitle?: string,
         jobDescription?: string, monthlySalary?: number, 
         earliestStartDate?: Date, latestStartDate?: Date, 
-        industry?: Industry, requiredSkills?: string[], 
-        projectSpecialisation?: string, isComplete?: boolean) {
+        industry?: Industry, requiredSkills?: string[]) {
             this.jobId = jobId;
             this.jobTitle = jobTitle;
             this.jobDescription = jobDescription;
