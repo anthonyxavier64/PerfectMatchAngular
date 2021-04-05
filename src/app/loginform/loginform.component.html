@@ -4,7 +4,7 @@
     &nbsp;
     <input type="password" [(ngModel)]="password" size="16" required maxlength="32" placeholder="password" pInputText />
     &nbsp;
-    <button mat-raised-button type="reset">Clear</button>
+    <button mat-raised-button (click)="clear()">Clear</button>
     &nbsp;
     <button mat-raised-button (click)="studentLogin()">Login</button>
   </aside>
