@@ -110,9 +110,7 @@ export class ViewprojectsComponent implements OnInit {
         ))
       : (this.searchNameString += event.data.toLowerCase());
     this.projects.forEach((project) => {
-      if (
-        project.projectTitle.toLowerCase().includes(this.searchNameString)
-      ) {
+      if (project.projectTitle.toLowerCase().includes(this.searchNameString)) {
         this.displayedProjects.push(project);
       }
     });
@@ -146,10 +144,12 @@ export class ViewprojectsComponent implements OnInit {
     this.projects.forEach((project) => {
       let requiredSkills: string[] = project.requiredSkills;
 
-      for (let skill of requiredSkills) {
-        if (skill.toLowerCase().startsWith(this.searchSkillsString)) {
-          this.displayedProjects.push(project);
-          break;
+      if (requiredSkills !== undefined) {
+        for (let skill of requiredSkills) {
+          if (skill.toLowerCase().startsWith(this.searchSkillsString)) {
+            this.displayedProjects.push(project);
+            break;
+          }
         }
       }
     });
