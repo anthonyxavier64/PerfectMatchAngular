@@ -111,7 +111,7 @@ export class ViewprojectsComponent implements OnInit {
       : (this.searchNameString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       if (
-        project.projectTitle.toLowerCase().startsWith(this.searchNameString)
+        project.projectTitle.toLowerCase().includes(this.searchNameString)
       ) {
         this.displayedProjects.push(project);
       }

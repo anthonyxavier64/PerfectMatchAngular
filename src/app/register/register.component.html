@@ -44,12 +44,14 @@
         <br /> <br />
         <span class="p-float-label">
           <input id="password" name="password" #password="ngModel" [(ngModel)]="newStudent.password" required="true"
-            type="password" pInputText>
+            type="password" minlength="6" pInputText>
           <label for="password">Password</label>
           <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
             <div *ngIf="password.errors != null && password.errors.required">
               Password is required.
             </div>
+            <div *ngIf="password.errors != null && password.errors.minlength">
+              Minimum length of 6 is required.            </div>
           </div>
         </span>
         <br /> <br />
@@ -81,7 +83,7 @@
         <span class="p-float-label">
           <input id="yearOfStudy" name="yearOfStudy" #yearOfStudy="ngModel" [(ngModel)]="newStudent.yearOfStudy"
             required="true" type="number" pInputText>
-          <label for="yearOfStudy">Year of Study</label>
+          <label for="yearOfStudy">Current Year of Study</label>
           <div *ngIf="yearOfStudy.invalid && (yearOfStudy.dirty || yearOfStudy.touched || submitted)" class="errorText">
             <div *ngIf="yearOfStudy.errors != null && yearOfStudy.errors.required">
               Year of study is required.
@@ -101,7 +103,7 @@
         </div>
 
         <br /><br />
-        <label for="start_Date">Start Date</label>
+        <label for="start_Date">Availability: Start Date</label>
         <br />
         <input id="start_Date" name="start_Date" #start_Date="ngModel" [(ngModel)]="startDate" required="true"
           type="date" pInputText>
@@ -112,7 +114,7 @@
         </div>
 
         <br /><br />
-        <label for="end_Date">End Date</label>
+        <label for="end_Date">Availability: End Date</label>
         <br />
         <input id="end_Date" name="end_Date" #end_Date="ngModel" [(ngModel)]="endDate" required="true" type="date"
           pInputText>
