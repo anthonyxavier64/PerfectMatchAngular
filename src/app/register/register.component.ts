@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   projectedGraduationYear: Date | undefined;
 
   newSkill: string | undefined;
-  
+
   resultSuccess: boolean;
   resultError: boolean;
 
@@ -87,11 +87,11 @@ export class RegisterComponent implements OnInit {
       this.studentService.createNewStudent(this.newStudent).subscribe(
         response => {
           let newStudent: StudentWrapper = response;
-          
+
           this.resultSuccess = true;
           this.resultError = false;
           this.messageService.add({
-            severity:'success', summary:"New account with ID " + newStudent.studentId + " created successfully"
+            severity: 'success', summary: "New account with ID " + newStudent.studentId + " created successfully"
           });
           this.router.navigate(["/index"]);
         },
@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
           this.resultError = true;
           this.resultSuccess = false;
           this.messageService.add({
-            severity:'error', summary:"Error", detail:'Unable to create account, please try again with different credentials.'
+            severity: 'error', summary: "Error", detail: 'Unable to create account, please try again with different credentials.'
           })
         }
       );

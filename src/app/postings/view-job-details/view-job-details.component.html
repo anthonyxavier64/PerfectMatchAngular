@@ -2,28 +2,23 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
-    
+
   </mat-sidenav>
 
   <mat-sidenav-content>
-    
+
     <mat-toolbar color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <app-loginform style="margin-bottom: 30px;" (childEvent)="setIsLogin($event)"></app-loginform>
-      <span>PerfectMatch-Student</span>
-      
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span>PerfectMatch</span>
+
     </mat-toolbar>
-    
-    
+
+
     <!-- Add Content Here -->
-    <mat-grid-list cols="3" rowHeight="1.5:1" gutterSize="5px">
-      <mat-grid-tile colspan="2"><img src="../../assets/images/Internship.jpg" /></mat-grid-tile>
-      <mat-grid-tile><img src="../../assets/images/Learning.jpg" /></mat-grid-tile>
-      <mat-grid-tile>3</mat-grid-tile>
-      <mat-grid-tile colspan="2"><img src="../../assets/images/Rocketship.png" /></mat-grid-tile>
-    </mat-grid-list>
+   
   </mat-sidenav-content>
 </mat-sidenav-container>

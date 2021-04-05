@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IndexComponent } from './index/index.component';
-import { ViewAllJobsComponent } from './jobs/view-all-jobs/view-all-jobs.component';
+import { ViewAllJobsComponent } from './postings/view-all-jobs/view-all-jobs.component';
 import { RegisterComponent } from './register/register.component';
 import { ViewprofileComponent } from './profile/viewprofile/viewprofile.component';
 import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.component';
 import { ProjectdetailsComponent } from './postings/projectdetails/projectdetails.component';
+import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'viewAllJobs', component: ViewAllJobsComponent},
   { path: 'viewProfile', component: ViewprofileComponent},
   { path: 'viewProjects', component: ViewprojectsComponent},
-  { path: 'viewProjects/viewProjectDetails/:projectId', component: ProjectdetailsComponent}
+  { path: 'viewProjects/viewProjectDetails/:projectId', component: ProjectdetailsComponent},
+  { path: 'viewAllJobs/viewJobDetails/:jobId', component: ViewJobDetailsComponent}
 ];
 
 @NgModule({
