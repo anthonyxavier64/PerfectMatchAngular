@@ -20,7 +20,7 @@
 
 
     <!-- Add Content Here -->
-    <p-dataView #dv [value]="displayedProjects" layout="grid" [loading]="isLoading" filterBy="projectTitle">
+    <p-dataView [value]="displayedProjects" layout="grid" [loading]="isLoading" filterBy="projectTitle">
       <ng-template pTemplate="header">
         <p-dropdown [options]="sortOptions" placeholder="Sort By Compensation" (onChange)="onSortChange($event)"
           styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
@@ -47,8 +47,7 @@
             <img *ngIf="project.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
             <img *ngIf="project.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
             <img *ngIf="project.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
-            <img *ngIf="project.industry === 'SOFTWARE_DEV'" mat-card-image
-              src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="project.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
             <img *ngIf="project.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
             <img *ngIf="project.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
             <mat-card-content>
