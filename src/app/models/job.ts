@@ -1,7 +1,8 @@
 import { Industry } from "../enumeration/industry.enum";
+import { Posting } from "./posting";
 
-export class Job {
-    jobId: number | undefined;
+export class Job extends Posting {
+    postingId: number | undefined;
     jobTitle: string | undefined;
     jobDescription: string | undefined;
     monthlySalary: number | undefined;
@@ -10,11 +11,11 @@ export class Job {
     industry: Industry | undefined;
     requiredSkills: string[] | undefined;
     
-    constructor(jobId?: number, jobTitle?: string,
+    constructor(postingId?: number, jobTitle?: string,
         jobDescription?: string, monthlySalary?: number, 
         earliestStartDate?: Date, latestStartDate?: Date, 
         industry?: Industry, requiredSkills?: string[]) {
-            this.jobId = jobId;
+            super(postingId);
             this.jobTitle = jobTitle;
             this.jobDescription = jobDescription;
             this.monthlySalary = monthlySalary;
