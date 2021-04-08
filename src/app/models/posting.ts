@@ -7,4 +7,8 @@ export abstract class Posting {
     offers: Offer[] | undefined;
     applications: Application[] | undefined;
     startup: Startup | undefined;
+
+    constructor(postingId?: number) {
+        this.postingId = postingId;
+    }
 }
