@@ -17,7 +17,8 @@ import { MessageService } from 'primeng/api';
 export class ProjectdetailsComponent implements OnInit {
   isLogin: boolean = true;
   postingId: string | null;
-  project: Project;
+  projectToView: Project;
+  milestones: string[] | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -34,7 +35,7 @@ export class ProjectdetailsComponent implements OnInit {
     private router: Router
   ) {
     this.postingId = null;
-    this.project = new Project();
+    this.projectToView = new Project();
   }
 
   ngOnInit(): void {
@@ -42,8 +43,9 @@ export class ProjectdetailsComponent implements OnInit {
     if (this.postingId !== null) {
       this.projectService.getProjectById(parseInt(this.postingId)).subscribe(
         (response) => {
-          this.project = response;
-          console.log(this.project);
+          this.projectToView = response;
+          this.milestones = this.projectToView.milestones;
+          console.log(this.projectToView);
         },
         (error) => {
           this.messageService.add({

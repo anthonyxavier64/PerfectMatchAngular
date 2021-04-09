@@ -19,6 +19,7 @@ export class ViewJobDetailsComponent implements OnInit {
   postingId: string | null;
   jobToView: Job;
   retrieveJobError: boolean;
+  requiredSkills: string[] | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -45,6 +46,7 @@ export class ViewJobDetailsComponent implements OnInit {
       this.jobService.getJobById(parseInt(this.postingId)).subscribe(
         (response) => {
           this.jobToView = response;
+          this.requiredSkills = this.jobToView.requiredSkills;
           console.log(this.jobToView);
         },
         (error) => {

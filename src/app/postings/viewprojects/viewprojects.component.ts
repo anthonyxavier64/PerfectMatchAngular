@@ -62,9 +62,9 @@ export class ViewprojectsComponent implements OnInit {
           }
           let editedProject = {
             postingId: project.postingId,
-            projectTitle: project.projectTitle,
-            projectDescription: project.projectDescription,
-            compensation: project.compensation,
+            title: project.title,
+            description: project.description,
+            pay: project.pay,
             earliestStartDate: earliestStart,
             latestStartDate: latestStart,
             industry: project.industry,
@@ -92,11 +92,11 @@ export class ViewprojectsComponent implements OnInit {
 
     if (value.indexOf('H') === 0) {
       this.displayedProjects.sort((a, b) =>
-        a.compensation > b.compensation ? -1 : 1
+        a.pay > b.pay ? -1 : 1
       );
     } else {
       this.displayedProjects.sort((a, b) =>
-        a.compensation > b.compensation ? 1 : -1
+        a.pay > b.pay ? 1 : -1
       );
     }
   }

@@ -34,6 +34,9 @@ import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProjectdetailsComponent } from './postings/projectdetails/projectdetails.component';
 import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-details.component';
+import { ViewoffersComponent } from './offers/viewoffers/viewoffers.component';
+import {OrderListModule} from 'primeng/orderlist';
+// import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-de
     ViewprojectsComponent,
     ProjectdetailsComponent,
     ViewJobDetailsComponent,
+    ViewoffersComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,8 +77,10 @@ import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-de
     CardModule,
     DataViewModule,
     DropdownModule,
+    OrderListModule,
+    // TimelineModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
