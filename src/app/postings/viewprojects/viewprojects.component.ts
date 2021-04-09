@@ -61,7 +61,7 @@ export class ViewprojectsComponent implements OnInit {
             latestStart = new Date(project.latestStartDate);
           }
           let editedProject = {
-            projectId: project.projectId,
+            postingId: project.postingId,
             projectTitle: project.projectTitle,
             projectDescription: project.projectDescription,
             compensation: project.compensation,

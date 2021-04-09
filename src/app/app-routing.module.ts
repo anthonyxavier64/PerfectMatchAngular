@@ -16,7 +16,9 @@ const routes: Routes = [
   { path: 'viewAllJobs', component: ViewAllJobsComponent},
   { path: 'viewProfile', component: ViewprofileComponent},
   { path: 'viewProjects', component: ViewprojectsComponent},
+  { path: 'viewProjects/viewProjectDetails', component: ProjectdetailsComponent},
   { path: 'viewProjects/viewProjectDetails/:projectId', component: ProjectdetailsComponent},
+  { path: 'viewAllJobs/viewJobDetails', component: ViewJobDetailsComponent},
   { path: 'viewAllJobs/viewJobDetails/:jobId', component: ViewJobDetailsComponent}
 ];
 
