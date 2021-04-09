@@ -4,18 +4,9 @@
 
   <a *ngIf="!isLogin" mat-list-item routerLink="/register">Registration</a>
 
-  
-  <!-- For ease of navigation during development -->
-  <!-- <div>
-    <a mat-list-item routerLink="/viewAllJobs">Jobs</a>
-    <a mat-list-item routerLink="/viewProfile">Profile</a>
-    <a mat-list-item routerLink="/viewProjects">Projects</a>
-  </div> -->
-
-
   <div *ngIf="isLogin">
-    <a mat-list-item routerLink="/viewAllJobs">Jobs</a>
-    <a mat-list-item routerLink="/viewProfile">Profile</a>
-    <a mat-list-item routerLink="/viewProjects">Projects</a>
+    <a mat-list-item routerLink="/postings/viewAllJobs">Jobs</a>
+    <a mat-list-item routerLink="/profile/viewProfile">Profile</a>
+    <a mat-list-item routerLink="/postings/viewProjects">Projects</a>
   </div>
 </mat-nav-list>

@@ -62,7 +62,7 @@ export class ViewAllJobsComponent {
             latestStart = new Date(job.latestStartDate);
           }
           let editedJob = {
-            jobId: job.postingId,
+            postingId: job.postingId,
             jobTitle: job.jobTitle,
             jobDescription: job.jobDescription,
             monthlySalary: job.monthlySalary,

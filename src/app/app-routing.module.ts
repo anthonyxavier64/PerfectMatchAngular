@@ -13,13 +13,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'index', component: IndexComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'viewAllJobs', component: ViewAllJobsComponent},
-  { path: 'viewProfile', component: ViewprofileComponent},
-  { path: 'viewProjects', component: ViewprojectsComponent},
-  { path: 'viewProjects/viewProjectDetails', component: ProjectdetailsComponent},
-  { path: 'viewProjects/viewProjectDetails/:projectId', component: ProjectdetailsComponent},
-  { path: 'viewAllJobs/viewJobDetails', component: ViewJobDetailsComponent},
-  { path: 'viewAllJobs/viewJobDetails/:jobId', component: ViewJobDetailsComponent}
+  { path: 'postings/viewAllJobs', component: ViewAllJobsComponent},
+  { path: 'profile/viewProfile', component: ViewprofileComponent},
+  { path: 'postings/viewProjects', component: ViewprojectsComponent},
+  { path: 'postings/viewProjectDetails', component: ProjectdetailsComponent},
+  { path: 'postings/viewProjectDetails/:projectId', component: ProjectdetailsComponent},
+  { path: 'postings/viewJobDetails', component: ViewJobDetailsComponent},
+  { path: 'postings/viewJobDetails/:postingId', component: ViewJobDetailsComponent}
 ];
 
 @NgModule({
