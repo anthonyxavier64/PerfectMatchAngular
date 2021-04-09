@@ -1,20 +1,21 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ProjectdetailsComponent } from './projectdetails.component';
 
-describe('ProjectdetailsComponent', () => {
-  let component: ProjectdetailsComponent;
-  let fixture: ComponentFixture<ProjectdetailsComponent>;
+import { ViewoffersComponent } from './viewoffers.component';
+
+describe('ViewoffersComponent', () => {
+  let component: ViewoffersComponent;
+  let fixture: ComponentFixture<ViewoffersComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectdetailsComponent],
+      declarations: [ViewoffersComponent],
       imports: [
         NoopAnimationsModule,
         LayoutModule,
@@ -28,12 +29,12 @@ describe('ProjectdetailsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectdetailsComponent);
+    fixture = TestBed.createComponent(ViewoffersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should compile', () => {
     expect(component).toBeTruthy();
   });
 });

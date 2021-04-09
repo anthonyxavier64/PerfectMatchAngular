@@ -63,9 +63,9 @@ export class ViewAllJobsComponent {
           }
           let editedJob = {
             postingId: job.postingId,
-            jobTitle: job.jobTitle,
-            jobDescription: job.jobDescription,
-            monthlySalary: job.monthlySalary,
+            title: job.title,
+            description: job.description,
+            pay: job.pay,
             earliestStartDate: earliestStart,
             latestStartDate: latestStart,
             industry: job.industry,
@@ -91,11 +91,11 @@ export class ViewAllJobsComponent {
 
     if (value.indexOf('H') === 0) {
       this.displayedJobs.sort((a, b) =>
-        a.monthlySalary > b.monthlySalary ? -1 : 1
+        a.pay > b.pay ? -1 : 1
       );
     } else {
       this.displayedJobs.sort((a, b) =>
-        a.monthlySalary > b.monthlySalary ? 1 : -1
+        a.pay > b.pay ? 1 : -1
       );
     }
   }
