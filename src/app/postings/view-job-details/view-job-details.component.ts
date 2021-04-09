@@ -16,8 +16,9 @@ import { MessageService } from 'primeng/api';
 })
 export class ViewJobDetailsComponent implements OnInit {
   isLogin: boolean = true;
-  jobId: string | null;
-  job: Job;
+  postingId: string | null;
+  jobToView: Job;
+  retrieveJobError: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -33,25 +34,27 @@ export class ViewJobDetailsComponent implements OnInit {
     private messageService: MessageService,
     private router: Router
   ) {
-    this.jobId = '';
-    this.job = new Job();
+    this.postingId = null;
+    this.jobToView = new Job();
+    this.retrieveJobError = false;
   }
 
   ngOnInit(): void {
-    this.jobId = this.activatedRoute.snapshot.paramMap.get('jobId');
-    if (this.jobId !== null) {
-      this.jobService.getJobById(parseInt(this.jobId)).subscribe(
+    this.postingId = this.activatedRoute.snapshot.paramMap.get('postingId');
+    if (this.postingId !== null) {
+      this.jobService.getJobById(parseInt(this.postingId)).subscribe(
         (response) => {
-          this.job = response;
-          console.log(this.job);
+          this.jobToView = response;
+          console.log(this.jobToView);
         },
         (error) => {
+          this.retrieveJobError = true;
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
             detail: 'Unable to retrieve job.',
           });
-          this.router.navigate(['/viewAllJobs']);
+          this.router.navigate(['postings/viewAllJobs']);
         }
       );
     }

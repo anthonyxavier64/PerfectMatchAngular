@@ -16,7 +16,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ProjectdetailsComponent implements OnInit {
   isLogin: boolean = true;
-  projectId: string | null;
+  postingId: string | null;
   project: Project;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -33,14 +33,14 @@ export class ProjectdetailsComponent implements OnInit {
     private messageService: MessageService,
     private router: Router
   ) {
-    this.projectId = '';
+    this.postingId = null;
     this.project = new Project();
   }
 
   ngOnInit(): void {
-    this.projectId = this.activatedRoute.snapshot.paramMap.get('projectId');
-    if (this.projectId !== null) {
-      this.projectService.getProjectById(parseInt(this.projectId)).subscribe(
+    this.postingId = this.activatedRoute.snapshot.paramMap.get('postingId');
+    if (this.postingId !== null) {
+      this.projectService.getProjectById(parseInt(this.postingId)).subscribe(
         (response) => {
           this.project = response;
           console.log(this.project);
@@ -51,7 +51,7 @@ export class ProjectdetailsComponent implements OnInit {
             summary: 'Error',
             detail: 'Unable to retrieve project.',
           });
-          this.router.navigate(['/viewProjects']);
+          this.router.navigate(['/postings/viewProjects']);
         }
       );
     }
