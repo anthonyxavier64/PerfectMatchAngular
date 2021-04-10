@@ -47,8 +47,8 @@ export class StudentService {
     .pipe(catchError(this.handleError));
   }
 
-  getStudentOffers(student: StudentWrapper): Observable<Offer[]> {
-    return this.httpClient.get<Offer[]>(this.baseUrl + "/getStudentOffers" + student.studentId)
+  getStudentOffers(studentId: number): Observable<Offer[]> {
+    return this.httpClient.get<Offer[]>(this.baseUrl + "/getStudentOffers/" + studentId)
     .pipe(catchError(this.handleError));
   }
 
