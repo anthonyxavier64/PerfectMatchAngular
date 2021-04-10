@@ -81,6 +81,12 @@ export class ViewJobDetailsComponent implements OnInit {
     this.applicationService.createNewApplication(application).subscribe(
       response => {
         let newApplication: Application = response;
+        if (newApplication.applicationId == null) {
+          this.messageService.add({
+            severity: 'error', summary: "Application for this posting already exists"
+          });
+          return;
+        }
         this.childEvent.emit(true);
         this.messageService.add({
           severity: 'success', summary: "New application with ID " + newApplication.applicationId + " created successfully"
