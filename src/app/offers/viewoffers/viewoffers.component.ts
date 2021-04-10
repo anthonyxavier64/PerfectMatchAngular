@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Offer } from 'src/app/models/offer';
 import { Posting } from 'src/app/models/posting';
+import { StudentWrapper } from 'src/app/models/student-wrapper';
 import { OfferService } from 'src/app/services/offer.service';
 import { SessionService } from 'src/app/services/session.service';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-viewoffers',
@@ -19,9 +21,9 @@ export class ViewoffersComponent implements OnInit {
 
   isLogin: boolean = true;
   isLoading: boolean = true;
-  
+
   offers: Offer[];
-  posting: Posting | undefined;
+  student: StudentWrapper | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -33,34 +35,57 @@ export class ViewoffersComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
+    private studentService: StudentService,
     private offerService: OfferService,
     private messageService: MessageService) {
     this.offers = new Array();
   }
 
   ngOnInit(): void {
-    this.offerService.getOffers().subscribe(
-      (response) => {
-        let result: any[] = new Array();
+    this.student = this.sessionService.getCurrentStudent();
+    this.retrieveOffers();
+    for (var offer of this.offers) {
+      this.retrieveOfferPosting(offer);
+    }
+  }
 
-        response.forEach((offer) => {
-          let editedOffer = {
-            offerId: offer.offerId,
-            offerMessage: offer.offerMessage,
-            offerStatus: offer.offerStatus,
-            student: offer.student,
-            posting: offer.posting
-          };
-          this.offers.push(editedOffer);
-        });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Unable to retrieve jobs.',
-        });
-      }
-    );
+  retrieveOfferPosting(offer: Offer): void {
+    if (offer.offerId != null) {
+      this.offerService.getOfferPosting(offer.offerId).subscribe(
+        response => {
+          offer.posting = response;
+        },
+        error => {
+          console.log(error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Offer posting not found!' })
+        }
+      );;
+    }
+  }
+
+  retrieveOffers() {
+    if (this.student != null) {
+      this.studentService.getStudentOffers(this.student).subscribe(
+        (response) => {
+          response.forEach((offer) => {
+            let editedOffer = {
+              offerId: offer.offerId,
+              offerMessage: offer.offerMessage,
+              offerStatus: offer.offerStatus,
+              student: this.student,
+              posting: undefined
+            };
+            this.offers.push(editedOffer);
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Unable to retrieve offers.',
+          });
+        }
+      );
+    }
   }
 }

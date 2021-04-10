@@ -1,14 +1,15 @@
+import {
+  HttpClient,
+
+  HttpErrorResponse, HttpHeaders
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-} from '@angular/common/http';
-
 import { Offer } from '../models/offer';
 import { SessionService } from './session.service';
+
+import { Posting } from '../models/posting';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -33,6 +34,11 @@ export class OfferService {
 
   getOfferById(offerId: number): Observable<Offer> {
     return this.httpClient.get<Offer>(this.baseUrl + "/retrieveOfferById/" + offerId)
+    .pipe(catchError(this.handleError));
+  }
+
+  getOfferPosting(offerId: number): Observable<Posting> {
+    return this.httpClient.get<Posting>(this.baseUrl + "/getOfferPosting/" + offerId)
     .pipe(catchError(this.handleError));
   }
 
