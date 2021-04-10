@@ -39,10 +39,10 @@ export class ViewoffersComponent implements OnInit {
     private offerService: OfferService,
     private messageService: MessageService) {
     this.offers = new Array();
+    this.student = this.sessionService.getCurrentStudent();
   }
 
   ngOnInit(): void {
-    this.student = this.sessionService.getCurrentStudent();
     this.retrieveOffers();
     for (var offer of this.offers) {
       this.retrieveOfferPosting(offer);
@@ -64,8 +64,8 @@ export class ViewoffersComponent implements OnInit {
   }
 
   retrieveOffers() {
-    if (this.student != null) {
-      this.studentService.getStudentOffers(this.student).subscribe(
+    if (this.student != null && this.student.studentId != null) {
+      this.studentService.getStudentOffers(this.student.studentId).subscribe(
         (response) => {
           response.forEach((offer) => {
             let editedOffer = {
