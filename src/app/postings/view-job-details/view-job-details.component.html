@@ -33,6 +33,7 @@
         <img *ngIf="jobToView.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
         <img *ngIf="jobToView.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg"> -->
       </mat-card>
+      <button mat-raised-button color="primary" type="submit" (click)="apply()">Apply Now</button>
     </div>
 
     <p-fieldset class="p-col-6" style="display: inline-block" [toggleable]="true">
