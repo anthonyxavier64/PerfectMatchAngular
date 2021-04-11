@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { StudentWrapper } from '../models/student-wrapper';
 import { SessionService } from '../services/session.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-mainmenu',
@@ -11,6 +13,8 @@ import { SessionService } from '../services/session.service';
 })
 export class MainmenuComponent {
   @Input() isLogin: boolean | undefined;
+  student: StudentWrapper | undefined;
+  studentId: number | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -20,8 +24,6 @@ export class MainmenuComponent {
     );
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-  ) {
+    private breakpointObserver: BreakpointObserver) {
   }
-
 }

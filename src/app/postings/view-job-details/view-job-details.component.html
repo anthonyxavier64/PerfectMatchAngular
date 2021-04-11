@@ -16,9 +16,48 @@
       <span>PerfectMatch</span>
 
     </mat-toolbar>
-
-
     <!-- Add Content Here -->
-   
+
+    <div class="p-col-6" style="vertical-align: middle; text-align: center; margin: 0 auto;">
+      <mat-card style="margin: auto; float: center">
+        <span *ngIf="retrieveJobError == true" style="color:red;">Job ID {{postingId}} does not exist!</span>
+        <span *ngIf="postingId == null" style="color:red;">Job ID {{postingId}} does not exist!</span>
+
+        <mat-card-title>{{jobToView.title}}</mat-card-title>
+        <mat-card-subtitle>{{jobToView.industry}}</mat-card-subtitle>
+        <!-- <img *ngIf="jobToView.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
+        <img *ngIf="jobToView.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
+        <img *ngIf="jobToView.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
+        <img *ngIf="jobToView.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
+        <img *ngIf="jobToView.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
+        <img *ngIf="jobToView.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
+        <img *ngIf="jobToView.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg"> -->
+      </mat-card>
+      <button mat-raised-button color="primary" type="submit" (click)="apply()">Apply Now</button>
+    </div>
+
+    <p-fieldset class="p-col-6" style="display: inline-block" [toggleable]="true">
+      <ng-template pTemplate="header">Start Date</ng-template>
+      Earliest: {{jobToView.earliestStartDate}}
+      <br />
+      Latest: {{jobToView.latestStartDate}}
+    </p-fieldset>
+
+    <p-fieldset class="p-col-6" style="display: inline-block" [toggleable]="true">
+      <ng-template pTemplate="header">Monthly Salary</ng-template>
+      {{jobToView.pay}}
+    </p-fieldset>
+
+    <p-fieldset [toggleable]="true">
+      <ng-template pTemplate="header">Job Description</ng-template>
+      {{jobToView.description}}
+    </p-fieldset>
+
+    <p-fieldset [toggleable]="true">
+      <ng-template pTemplate="header">Required Skills</ng-template>
+        <div *ngFor="let s of jobToView.requiredSkills">
+          {{s}}
+        </div>      
+    </p-fieldset>
   </mat-sidenav-content>
 </mat-sidenav-container>

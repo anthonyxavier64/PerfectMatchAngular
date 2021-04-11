@@ -40,18 +40,17 @@
         style="display: flex; justify-content: center; align-items: center;">
         <div class="p-col-2" style="margin: 10px 10px 10px 10px;">
           <mat-card>
-            <mat-card-title>{{job.jobTitle}}</mat-card-title>
+            <mat-card-title>{{job.title}}</mat-card-title>
             <mat-card-subtitle>{{job.industry}}</mat-card-subtitle>
             <img *ngIf="job.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
             <img *ngIf="job.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
             <img *ngIf="job.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
             <img *ngIf="job.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
-            <img *ngIf="job.industry === 'SOFTWARE_DEV'" mat-card-image
-              src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="job.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
             <img *ngIf="job.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
             <img *ngIf="job.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
             <mat-card-content>
-              Monthly Salary: ${{job.monthlySalary}}
+              Monthly Salary: ${{job.pay}}
               <div *ngIf="job.earliestStartDate !== undefined">
                 <br>
                 Earliest start date:<br>{{job.earliestStartDate | date: 'dd-MM-yyyy'}}
@@ -62,7 +61,7 @@
               </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
-              <button mat-raised-button routerLink="viewJobDetails/{{job.jobId}}">Details</button>
+              <button mat-raised-button routerLink="/postings/viewJobDetails/{{job.postingId}}">Details</button>
             </mat-card-actions>
           </mat-card>
         </div>

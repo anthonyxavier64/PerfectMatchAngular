@@ -46,6 +46,11 @@ export class LoginformComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  clear(): void {
+    this.email = undefined;
+    this.password = undefined;
+  }
+
 
   studentLogin(): void {
     this.studentService.studentLogin(this.email, this.password).subscribe(

@@ -8,6 +8,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { StudentWrapper } from '../models/student-wrapper';
+import { Offer } from '../models/offer';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -43,6 +44,11 @@ export class StudentService {
   editStudentDetails(student: StudentWrapper): Observable<StudentWrapper> { 
     return this.httpClient
     .put<StudentWrapper>(this.baseUrl + "/editStudentDetails", student, httpOptions)
+    .pipe(catchError(this.handleError));
+  }
+
+  getStudentOffers(studentId: number): Observable<Offer[]> {
+    return this.httpClient.get<Offer[]>(this.baseUrl + "/getStudentOffers/" + studentId)
     .pipe(catchError(this.handleError));
   }
 
