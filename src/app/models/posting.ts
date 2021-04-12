@@ -2,6 +2,7 @@ import { Industry } from "../enumeration/industry.enum";
 import { Application } from "./application";
 import { Offer } from "./offer";
 import { Startup } from "./startup";
+import { StudentWrapper } from "./student-wrapper";
 
 export abstract class Posting {
     postingId: number | undefined;
@@ -16,18 +17,20 @@ export abstract class Posting {
     offers: Offer[] | undefined;
     applications: Application[] | undefined;
     startup: Startup | undefined;
+    acceptedStudent: StudentWrapper | undefined;
 
     constructor(postingId?: number, title?: string,
-        description?: string, pay?: number, 
-        earliestStartDate?: Date, latestStartDate?: Date, 
-        industry?: Industry, requiredSkills?: string[]) {
-            this.postingId = postingId;
-            this.title = title;
-            this.description = description;
-            this.pay = pay;
-            this.earliestStartDate = earliestStartDate;
-            this.latestStartDate = latestStartDate;
-            this.industry = industry;
-            this.requiredSkills = requiredSkills;
+        description?: string, pay?: number,
+        earliestStartDate?: Date, latestStartDate?: Date,
+        industry?: Industry, requiredSkills?: string[], acceptedStudent?: StudentWrapper) {
+        this.postingId = postingId;
+        this.title = title;
+        this.description = description;
+        this.pay = pay;
+        this.earliestStartDate = earliestStartDate;
+        this.latestStartDate = latestStartDate;
+        this.industry = industry;
+        this.requiredSkills = requiredSkills;
+        this.acceptedStudent = acceptedStudent;
     }
 }

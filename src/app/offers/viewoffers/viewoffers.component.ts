@@ -22,7 +22,7 @@ export class ViewoffersComponent implements OnInit {
   isLogin: boolean = true;
   isLoading: boolean = true;
 
-  offers: Offer[];
+  offers: any[];
   student: StudentWrapper | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -39,28 +39,11 @@ export class ViewoffersComponent implements OnInit {
     private offerService: OfferService,
     private messageService: MessageService) {
     this.offers = new Array();
-    this.student = this.sessionService.getCurrentStudent();
   }
 
   ngOnInit(): void {
+    this.student = this.sessionService.getCurrentStudent();
     this.retrieveOffers();
-    for (var offer of this.offers) {
-      this.retrieveOfferPosting(offer);
-    }
-  }
-
-  retrieveOfferPosting(offer: Offer): void {
-    if (offer.offerId != null) {
-      this.offerService.getOfferPosting(offer.offerId).subscribe(
-        response => {
-          offer.posting = response;
-        },
-        error => {
-          console.log(error);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Offer posting not found!' })
-        }
-      );;
-    }
   }
 
   retrieveOffers() {
@@ -72,11 +55,12 @@ export class ViewoffersComponent implements OnInit {
               offerId: offer.offerId,
               offerMessage: offer.offerMessage,
               offerStatus: offer.offerStatus,
-              student: this.student,
-              posting: undefined
+              student: offer.student,
+              posting: offer.posting
             };
             this.offers.push(editedOffer);
           });
+          this.isLoading = false;
         },
         (error) => {
           this.messageService.add({
