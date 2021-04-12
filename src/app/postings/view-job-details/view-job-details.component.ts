@@ -21,7 +21,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 export class ViewJobDetailsComponent implements OnInit {
   isLogin: boolean = true;
   postingId: string | null;
-  jobToView: Job;
+  jobToView: any;
   retrieveJobError: boolean;
   requiredSkills: string[] | undefined;
 
@@ -55,9 +55,23 @@ export class ViewJobDetailsComponent implements OnInit {
     if (this.postingId !== null) {
       this.jobService.getJobById(parseInt(this.postingId)).subscribe(
         (response) => {
-          this.jobToView = response;
-          this.requiredSkills = this.jobToView.requiredSkills;
-          console.log(this.jobToView);
+          let earliestStart = undefined;
+          let latestStart = undefined;
+          if (response.earliestStartDate !== undefined) {
+            earliestStart = new Date(response.earliestStartDate);
+          }
+          if (response.latestStartDate !== undefined) {
+            latestStart = new Date(response.latestStartDate);
+          }
+
+          this.jobToView.postingId = response.postingId;
+          this.jobToView.title = response.title;
+          this.jobToView.description = response.description;
+          this.jobToView.pay = response.pay;
+          this.jobToView.earliestStartDate = earliestStart;
+          this.jobToView.latestStartDate = latestStart;
+          this.jobToView.industry = response.industry;
+          this.jobToView.requiredSkills = response.requiredSkills;
         },
         (error) => {
           this.retrieveJobError = true;
@@ -75,26 +89,21 @@ export class ViewJobDetailsComponent implements OnInit {
   apply() {
     let application: Application = new Application();
     application.offerSent = false;
-    application.applicationStatus = ApplicationStatus.APPLIED.toString();
+    application.applicationStatus = ApplicationStatus.PENDING.toString();
     application.postingId = this.jobToView.postingId;
     application.studentId = this.sessionService.getCurrentStudent()?.studentId;
+
     this.applicationService.createNewApplication(application).subscribe(
       response => {
-        let newApplication: Application = response;
-        if (newApplication.applicationId == null) {
-          this.messageService.add({
-            severity: 'error', summary: "Application for this posting already exists"
-          });
-          return;
-        }
+
         this.childEvent.emit(true);
         this.messageService.add({
-          severity: 'success', summary: "New application with ID " + newApplication.applicationId + " created successfully"
+          severity: 'success', summary: "Application sent successfully"
         });
       },
       error => {
         this.messageService.add({
-          severity: 'error', summary: "Error", detail: 'Unable to create application.'
+          severity: 'error', summary: "Error", detail: 'Unable to create application. Could have already applied.'
         })
       }
     );

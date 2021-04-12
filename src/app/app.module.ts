@@ -36,6 +36,8 @@ import { ProjectdetailsComponent } from './postings/projectdetails/projectdetail
 import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-details.component';
 import { ViewoffersComponent } from './offers/viewoffers/viewoffers.component';
 import {OrderListModule} from 'primeng/orderlist';
+import { ViewofferdetailsComponent } from './offers/viewofferdetails/viewofferdetails.component';
+import {RatingModule} from 'primeng/rating';
 // import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
@@ -52,6 +54,7 @@ import {OrderListModule} from 'primeng/orderlist';
     ProjectdetailsComponent,
     ViewJobDetailsComponent,
     ViewoffersComponent,
+    ViewofferdetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import {OrderListModule} from 'primeng/orderlist';
     DataViewModule,
     DropdownModule,
     OrderListModule,
+    RatingModule
     // TimelineModule,
   ],
   providers: [],

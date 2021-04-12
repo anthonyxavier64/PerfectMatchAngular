@@ -80,7 +80,7 @@ export class EditprofileComponent implements OnInit {
           summary: 'Account edited succesfully!',
         });
         this.childEvent.emit(response);
-        this.router.navigate(['/viewProfile']);
+        this.router.navigate(['/profile/viewProfile']);
       },
       (error) => {
         this.messageService.add({

@@ -13,6 +13,7 @@ export abstract class Posting {
     latestStartDate: Date | undefined;
     industry: Industry | undefined;
     requiredSkills: string[] | undefined;
+    isProject: boolean | undefined;
 
     offers: Offer[] | undefined;
     applications: Application[] | undefined;
@@ -22,7 +23,7 @@ export abstract class Posting {
     constructor(postingId?: number, title?: string,
         description?: string, pay?: number,
         earliestStartDate?: Date, latestStartDate?: Date,
-        industry?: Industry, requiredSkills?: string[], acceptedStudent?: StudentWrapper) {
+        industry?: Industry, requiredSkills?: string[], acceptedStudent?: StudentWrapper, isProject?: boolean) {
         this.postingId = postingId;
         this.title = title;
         this.description = description;
@@ -32,5 +33,6 @@ export abstract class Posting {
         this.industry = industry;
         this.requiredSkills = requiredSkills;
         this.acceptedStudent = acceptedStudent;
+        this.isProject = isProject;
     }
 }

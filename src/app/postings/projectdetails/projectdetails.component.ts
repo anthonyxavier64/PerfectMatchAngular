@@ -21,7 +21,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 export class ProjectdetailsComponent implements OnInit {
   isLogin: boolean = true;
   postingId: string | null;
-  projectToView: Project;
+  projectToView: any;
   milestones: string[] | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -52,9 +52,24 @@ export class ProjectdetailsComponent implements OnInit {
     if (this.postingId !== null) {
       this.projectService.getProjectById(parseInt(this.postingId)).subscribe(
         (response) => {
-          this.projectToView = response;
-          this.milestones = this.projectToView.milestones;
-          console.log(this.projectToView);
+            let earliestStart = undefined;
+            let latestStart = undefined;
+            if (response.earliestStartDate !== undefined) {
+              earliestStart = new Date(response.earliestStartDate);
+            }
+            if (response.latestStartDate !== undefined) {
+              latestStart = new Date(response.latestStartDate);
+            }
+            this.projectToView.postingId = response.postingId;
+            this.projectToView.title = response.title;
+            this.projectToView.description = response.description;
+            this.projectToView.pay = response.pay;
+            this.projectToView.earliestStartDate = earliestStart;
+            this.projectToView.latestStartDate = latestStart;
+            this.projectToView.industry = response.industry;
+            this.projectToView.requiredSkills = response.requiredSkills;
+            this.projectToView.projectSpecialisation = response.projectSpecialisation;
+            this.projectToView.isComplete = response.isComplete;
         },
         (error) => {
           this.messageService.add({
@@ -62,7 +77,6 @@ export class ProjectdetailsComponent implements OnInit {
             summary: 'Error',
             detail: 'Unable to retrieve project.',
           });
-          this.router.navigate(['/postings/viewProjects']);
         }
       );
     }
@@ -71,20 +85,20 @@ export class ProjectdetailsComponent implements OnInit {
   apply() {
     let application: Application = new Application();
     application.offerSent = false;
-    application.applicationStatus = ApplicationStatus.APPLIED.toString();
+    application.applicationStatus = ApplicationStatus.PENDING.toString();
     application.postingId = this.projectToView.postingId;
     application.studentId = this.sessionService.getCurrentStudent()?.studentId;
     this.applicationService.createNewApplication(application).subscribe(
       response => {
-        let newApplication: Application = response;
+
         this.childEvent.emit(true);
         this.messageService.add({
-          severity: 'success', summary: "New application with ID " + newApplication.applicationId + " created successfully"
+          severity: 'success', summary: "Application sent successfully"
         });
       },
       error => {
         this.messageService.add({
-          severity: 'error', summary: "Error", detail: 'Unable to create application.'
+          severity: 'error', summary: "Error", detail: 'Unable to create application. Could have already applied.'
         })
       }
     );

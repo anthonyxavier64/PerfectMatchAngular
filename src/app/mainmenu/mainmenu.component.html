@@ -5,9 +5,9 @@
   <a *ngIf="!isLogin" mat-list-item routerLink="/register">Registration</a>
 
   <div *ngIf="isLogin">
-    <a mat-list-item routerLink="/postings/viewAllJobs">Jobs</a>
     <a mat-list-item routerLink="/profile/viewProfile">Profile</a>
     <a mat-list-item routerLink="/postings/viewProjects">Projects</a>
+    <a mat-list-item routerLink="/postings/viewAllJobs">Jobs</a>
     <a mat-list-item routerLink="/offers/viewoffers">Offers</a>
   </div>
 </mat-nav-list>

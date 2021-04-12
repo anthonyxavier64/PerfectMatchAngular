@@ -39,7 +39,7 @@
       </ng-template>
       <ng-template let-project pTemplate="gridItem"
         style="display: flex; justify-content: center; align-items: center;">
-        <div class="p-col-2" style="margin: 10px 10px 10px 10px;">
+        <div *ngIf="!project.isComplete" class="p-col-2" style="margin: 10px 10px 10px 10px;">
           <mat-card>
             <mat-card-title>{{project.title}}</mat-card-title>
             <mat-card-subtitle>{{project.industry}}</mat-card-subtitle>
@@ -47,7 +47,8 @@
             <img *ngIf="project.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
             <img *ngIf="project.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
             <img *ngIf="project.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
-            <img *ngIf="project.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="project.industry === 'SOFTWARE_DEV'" mat-card-image
+              src="../../../assets/images/softwaredev.jpg">
             <img *ngIf="project.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
             <img *ngIf="project.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
             <mat-card-content>
