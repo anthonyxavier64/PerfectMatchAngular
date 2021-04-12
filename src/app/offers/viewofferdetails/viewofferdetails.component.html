@@ -1,0 +1,185 @@
+<p-toast></p-toast>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span>PerfectMatch</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="p-col-6" style="vertical-align: middle; text-align: center; margin: 0 auto;">
+      <mat-card style="margin: auto; float: center">
+        <mat-card-title>{{startup.companyName}}</mat-card-title>
+        <mat-card-subtitle>{{startup.industry}}</mat-card-subtitle>
+        <img *ngIf="startup.industry === 'FOR_TESTING_ONLY'" mat-card-image src="../../../assets/images/education.jpg">
+        <img *ngIf="startup.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
+        <img *ngIf="startup.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
+        <img *ngIf="startup.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
+        <img *ngIf="startup.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
+        <img *ngIf="startup.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
+        <img *ngIf="startup.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
+        <img *ngIf="startup.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
+      </mat-card>
+    </div>
+
+    <mat-card style="background-color: #d4ccd6;">
+      <mat-card-title style="font-size: 30px; font-weight: bold;">
+        Startup details
+      </mat-card-title>
+      <div style="margin-bottom: 20px"></div>
+      <mat-card style="width: 38%; float: left;">
+        <mat-card-title>
+          Company name
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          {{startup.companyName}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="width: 60%; float: right;">
+        <mat-card-title>
+          Description
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          {{startup.description}}
+        </mat-card-content>
+      </mat-card>
+      <div style="clear: both;"></div>
+      <mat-card style="width: 38%; margin: 10px 0 0 0">
+        <mat-card-title>
+          Company registration number
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          <div *ngIf="startup.startupRegistrationName !== undefined">{{startup.startupRegistrationName}}</div>
+          <div *ngIf="startup.startupRegistrationName === undefined">-</div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="width: 38%; margin: 10px 0 0 0">
+        <mat-card-title>
+          Company email
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          {{startup.email}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="width: 38%; margin: 10px 0 0 0">
+        <mat-card-title>
+          Company location
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          {{startup.startupLocation}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="width: 38%; margin: 10px 0 0 0">
+        <mat-card-title>
+          Company rating
+        </mat-card-title>
+        <mat-card-content>
+          <p-rating [(ngModel)]="startup.rating" [readonly]="true" [cancel]="false"></p-rating>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+
+    <div style="margin-bottom: 50px"></div>
+
+    <mat-card style="background-color: #d4ccd6;">
+      <mat-card-title style="font-size: 30px; font-weight: bold;">
+        Offer details
+      </mat-card-title>
+      <div style="margin-bottom: 20px"></div>
+      <mat-card style="width: 50%; float: left;">
+        <mat-card-title>
+          Offer mesage
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          {{offer.offerMessage}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="width: 40%; float: right;">
+        <mat-card-title>
+          Offer status
+        </mat-card-title>
+        <mat-card-content style="font-size: 18px;">
+          {{offer.offerStatus}}
+        </mat-card-content>
+      </mat-card>
+      <div style="clear: both;"></div>
+    </mat-card>
+
+    <div style="margin-bottom: 50px"></div>
+
+    <mat-card style="background-color: #d4ccd6;">
+      <mat-card-title style="font-size: 30px; font-weight: bold;">
+        <div *ngIf="isProject">Project details</div>
+        <div *ngIf="!isProject">Job details</div>
+      </mat-card-title>
+      <div style="margin-bottom: 20px"></div>
+      <div *ngIf="posting !== undefined">
+        <mat-card style="width: 38%; float: left;">
+          <mat-card-title>
+            Title
+          </mat-card-title>
+          <mat-card-content style="font-size: 18px;">
+            {{posting.title}}
+          </mat-card-content>
+        </mat-card>
+        <mat-card style="width: 60%; float: right;">
+          <mat-card-title>
+            Description
+          </mat-card-title>
+          <mat-card-content style="font-size: 18px;">
+            {{posting.description}}
+          </mat-card-content>
+        </mat-card>
+        <div style="clear: both;"></div>
+        <mat-card style="width: 38%; margin: 10px 0 0 0">
+          <mat-card-title>
+            Start date
+          </mat-card-title>
+          <mat-card-content style="font-size: 18px;">
+            Earliest: {{posting.earliestStartDate | date:"dd-MM-yyyy"}} | Latest:
+            {{posting.latestStartDate | date:"dd-MM-yyyy"}}
+          </mat-card-content>
+        </mat-card>
+        <mat-card style="width: 38%; margin: 10px 0 0 0">
+          <mat-card-title>
+            Required skills
+          </mat-card-title>
+          <mat-card-content style="font-size: 18px;" *ngFor="let skill of posting.requiredSkills">
+            {{skill}}
+          </mat-card-content>
+        </mat-card>
+        <div *ngIf="isProject">
+          <mat-card style="width: 38%; margin: 10px 0 0 0">
+            <mat-card-title>
+              Specialisation
+            </mat-card-title>
+            <mat-card-content style="font-size: 18px;">
+              {{projectSpecialisation}}
+            </mat-card-content>
+          </mat-card>
+          <mat-card style="width: 38%; margin: 10px 0 0 0">
+            <mat-card-title>
+              Milestones
+            </mat-card-title>
+            <mat-card-content style="font-size: 18px;" *ngFor="let milestone of milestones">
+              {{milestone}}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card>
+
+    <div style="margin-bottom: 100px"></div>
+    <div style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
+      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="apply()">Apply
+        Now</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
