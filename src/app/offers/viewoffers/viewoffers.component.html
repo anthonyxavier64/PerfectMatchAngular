@@ -20,23 +20,35 @@
 
     <!-- Add Content Here -->
     <p-dataView #dv [value]="offers" layout="grid" [loading]="isLoading">
-      <ng-template let-offer pTemplate="gridItem"
-        style="display: flex; justify-content: center; align-items: center;">
-        <div class="p-col-2" style="margin: 10px 10px 10px 10px;">
+      <ng-template let-offer pTemplate="gridItem" style="display: flex; justify-content: center; align-items: center;">
+        <div class="p-col-3" style="margin: 10px 10px 10px 10px;">
           <mat-card>
             <mat-card-title>{{offer.posting.title}}</mat-card-title>
             <mat-card-subtitle>{{offer.posting.industry}}</mat-card-subtitle>
-            <img *ngIf="offer.posting.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
+            <img *ngIf="offer.posting.industry === 'EDUCATION'" mat-card-image
+              src="../../../assets/images/education.jpg">
             <img *ngIf="offer.posting.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
-            <img *ngIf="offer.posting.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
-            <img *ngIf="offer.posting.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
-            <img *ngIf="offer.posting.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="offer.posting.industry === 'ENGINEERING'" mat-card-image
+              src="../../../assets/images/engineering.jpg">
+            <img *ngIf="offer.posting.industry === 'MARKETING'" mat-card-image
+              src="../../../assets/images/marketing.jpg">
+            <img *ngIf="offer.posting.industry === 'SOFTWARE_DEV'" mat-card-image
+              src="../../../assets/images/softwaredev.jpg">
             <img *ngIf="offer.posting.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
             <img *ngIf="offer.posting.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
             <mat-card-content>
-              Message: {{offer.offerMessage}}
-              Monthly Salary: ${{offer.posting.pay}}
-              Status: {{offer.offerStatus}}
+              <div>
+                Company:<br>{{offer.posting.startup.startupId}}
+              </div>
+              <br>
+
+              <div>
+                Message:<br>{{offer.offerMessage}}
+              </div>
+              <br>
+              <div>
+                Status:<br>{{offer.offerStatus}}
+              </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
               <!-- <button mat-raised-button routerLink="/offer/viewOffer/{{offer.offerId}}">Details</button> -->
