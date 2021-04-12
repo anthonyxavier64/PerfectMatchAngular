@@ -9,6 +9,7 @@ import { ViewprojectsComponent } from './postings/viewprojects/viewprojects.comp
 import { ProjectdetailsComponent } from './postings/projectdetails/projectdetails.component';
 import { ViewJobDetailsComponent } from './postings/view-job-details/view-job-details.component';
 import { ViewoffersComponent } from './offers/viewoffers/viewoffers.component';
+import { ViewofferdetailsComponent } from './offers/viewofferdetails/viewofferdetails.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'postings/viewProjectDetails/:postingId', component: ProjectdetailsComponent},
   { path: 'postings/viewJobDetails', component: ViewJobDetailsComponent},
   { path: 'postings/viewJobDetails/:postingId', component: ViewJobDetailsComponent},
-  { path: 'offers/viewoffers', component: ViewoffersComponent}
+  { path: 'offers/viewoffers', component: ViewoffersComponent},
+  { path: 'offer/viewOffer/:offerId', component: ViewofferdetailsComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

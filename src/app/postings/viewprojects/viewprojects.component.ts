@@ -49,7 +49,6 @@ export class ViewprojectsComponent implements OnInit {
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(
       (response) => {
-        let result: any[] = new Array();
 
         response.forEach((project) => {
           let earliestStart = undefined;
@@ -110,7 +109,7 @@ export class ViewprojectsComponent implements OnInit {
         ))
       : (this.searchNameString += event.data.toLowerCase());
     this.projects.forEach((project) => {
-      if (project.projectTitle.toLowerCase().includes(this.searchNameString)) {
+      if (project.title.toLowerCase().includes(this.searchNameString)) {
         this.displayedProjects.push(project);
       }
     });

@@ -8,6 +8,8 @@ export class Application {
     applicationStatus: String | undefined;
     postingId: number | undefined;
     studentId: number | undefined;
+    posting: Posting | undefined;
+    student: StudentWrapper | undefined;
 
     constructor(applicationId?: number, offerSent?: boolean,
         applicationStatus?: String) {

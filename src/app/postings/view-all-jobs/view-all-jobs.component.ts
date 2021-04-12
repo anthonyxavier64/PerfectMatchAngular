@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 import { JobService } from 'src/app/services/job.service';
+import { StartupLocation } from 'src/app/enumeration/startup-location.enum';
 
 @Component({
   selector: 'app-view-all-jobs',
@@ -13,12 +14,12 @@ import { JobService } from 'src/app/services/job.service';
   providers: [MessageService],
 })
 export class ViewAllJobsComponent {
-
   jobs: any[];
   displayedJobs: any[];
   isLogin: boolean = true;
   isLoading: boolean = true;
   sortOptions: [{}, {}];
+  areaOptions: [{}, {}, {}, {}, {}];
   sortOrder: number;
   sortField: string;
   searchNameString: string = '';
@@ -43,6 +44,13 @@ export class ViewAllJobsComponent {
       { label: 'High to Low', value: 'HighToLow' },
       { label: 'Low to High', value: 'LowToHigh' },
     ];
+    this.areaOptions = [
+      { label: 'North', value: 'NORTH' },
+      { label: 'East', value: 'EAST' },
+      { label: 'South', value: 'SOUTH' },
+      { label: 'West', value: 'WEST' },
+      { label: 'Central', value: 'CENTRAL' },
+    ];
     this.sortOrder = -1;
     this.sortField = '';
   }
@@ -61,6 +69,7 @@ export class ViewAllJobsComponent {
           if (job.latestStartDate !== undefined) {
             latestStart = new Date(job.latestStartDate);
           }
+          
           let editedJob = {
             postingId: job.postingId,
             title: job.title,
@@ -70,6 +79,7 @@ export class ViewAllJobsComponent {
             latestStartDate: latestStart,
             industry: job.industry,
             requiredSkills: job.requiredSkills,
+            startup: job.startup,
           };
           this.jobs.push(editedJob);
           this.displayedJobs.push(editedJob);
@@ -90,13 +100,48 @@ export class ViewAllJobsComponent {
     let value = event.value;
 
     if (value.indexOf('H') === 0) {
-      this.displayedJobs.sort((a, b) =>
-        a.pay > b.pay ? -1 : 1
-      );
+      this.displayedJobs.sort((a, b) => (a.pay > b.pay ? -1 : 1));
     } else {
-      this.displayedJobs.sort((a, b) =>
-        a.pay > b.pay ? 1 : -1
-      );
+      this.displayedJobs.sort((a, b) => (a.pay > b.pay ? 1 : -1));
+    }
+  }
+
+  onAreaChange(event: any) {
+    let value = event.value;
+
+    this.displayedJobs = new Array();
+
+    if (value.indexOf('N') == 0) {
+      this.jobs.forEach((job) => {
+        if (job.startup.startupLocation === 'NORTH') {
+          console.log('here')
+          this.displayedJobs.push(job);
+        }
+      });
+    } else if (value.indexOf('E') == 0) {
+      this.jobs.forEach((job) => {
+        if (job.startup.startupLocation === 'EAST') {
+          this.displayedJobs.push(job);
+        }
+      });
+    } else if (value.indexOf('S') == 0) {
+      this.jobs.forEach((job) => {
+        if (job.startup.startupLocation === 'SOUTH') {
+          this.displayedJobs.push(job);
+        }
+      });
+    } else if (value.indexOf('C') == 0) {
+      this.jobs.forEach((job) => {
+        if (job.startup.startupLocation === 'CENTRAL') {
+          this.displayedJobs.push(job);
+        }
+      });
+    } else {
+      this.jobs.forEach((job) => {
+        if (job.startup.startupLocation === 'WEST') {
+          this.displayedJobs.push(job);
+        }
+      });
     }
   }
 
@@ -109,9 +154,7 @@ export class ViewAllJobsComponent {
         ))
       : (this.searchNameString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
-      if (
-        job.jobTitle.toLowerCase().startsWith(this.searchNameString)
-      ) {
+      if (job.title.toLowerCase().includes(this.searchNameString)) {
         this.displayedJobs.push(job);
       }
     });
@@ -126,9 +169,7 @@ export class ViewAllJobsComponent {
         ))
       : (this.searchIndustryString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
-      if (
-        job.industry.toLowerCase().startsWith(this.searchIndustryString)
-      ) {
+      if (job.industry.toLowerCase().startsWith(this.searchIndustryString)) {
         this.displayedJobs.push(job);
       }
     });
