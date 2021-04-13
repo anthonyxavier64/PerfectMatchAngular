@@ -89,7 +89,7 @@ export class ViewJobDetailsComponent implements OnInit {
   apply() {
     let application: Application = new Application();
     application.offerSent = false;
-    application.applicationStatus = ApplicationStatus.PENDING.toString();
+    application.applicationStatus = ApplicationStatus.PENDING;
     application.postingId = this.jobToView.postingId;
     application.studentId = this.sessionService.getCurrentStudent()?.studentId;
 

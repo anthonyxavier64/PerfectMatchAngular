@@ -64,16 +64,9 @@ export class ViewofferdetailsComponent {
           this.offer.offerMessage = response.offerMessage;
           this.offer.offerStatus = response.offerStatus;
 
-          this.startup.startupId = tempStartup?.startupId;
-          this.startup.companyName = tempStartup?.companyName;
-          this.startup.description = tempStartup?.description;
-          this.startup.email = tempStartup?.email;
-          this.startup.industry = tempStartup?.industry;
-          this.startup.password = tempStartup?.password;
-          this.startup.rating = tempStartup?.rating;
-          this.startup.startupLocation = tempStartup?.startupLocation;
-          this.startup.startupRegistrationName =
-            tempStartup?.startupRegistrationName;
+          if (tempStartup !== undefined) {
+            this.startup = tempStartup;
+          }
 
           let earliestStart = undefined;
           let latestStart = undefined;
@@ -119,7 +112,7 @@ export class ViewofferdetailsComponent {
   apply() {
     let application: Application = new Application();
     application.offerSent = false;
-    application.applicationStatus = ApplicationStatus.PENDING.toString();
+    application.applicationStatus = ApplicationStatus.PENDING;
     application.postingId = this.posting.postingId;
     application.studentId = this.sessionService.getCurrentStudent()?.studentId;
     this.applicationService.createNewApplication(application).subscribe(

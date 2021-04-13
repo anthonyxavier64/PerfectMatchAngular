@@ -5,14 +5,14 @@ import { StudentWrapper } from "./student-wrapper";
 export class Application {
     applicationId: number | undefined;
     offerSent: boolean | undefined;
-    applicationStatus: String | undefined;
+    applicationStatus: ApplicationStatus | undefined;
     postingId: number | undefined;
     studentId: number | undefined;
     posting: Posting | undefined;
     student: StudentWrapper | undefined;
 
     constructor(applicationId?: number, offerSent?: boolean,
-        applicationStatus?: String) {
+        applicationStatus?: ApplicationStatus) {
             this.applicationId = applicationId;
             this.offerSent = offerSent;
             this.applicationStatus = applicationStatus;

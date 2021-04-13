@@ -38,6 +38,8 @@ import { ViewoffersComponent } from './offers/viewoffers/viewoffers.component';
 import {OrderListModule} from 'primeng/orderlist';
 import { ViewofferdetailsComponent } from './offers/viewofferdetails/viewofferdetails.component';
 import {RatingModule} from 'primeng/rating';
+import { ViewallapplicationsComponent } from './applications/viewallapplications/viewallapplications.component';
+import { ViewapplicationdetailsComponent } from './applications/viewapplicationdetails/viewapplicationdetails.component';
 // import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
@@ -55,6 +57,8 @@ import {RatingModule} from 'primeng/rating';
     ViewJobDetailsComponent,
     ViewoffersComponent,
     ViewofferdetailsComponent,
+    ViewallapplicationsComponent,
+    ViewapplicationdetailsComponent,
   ],
   imports: [
     BrowserModule,
