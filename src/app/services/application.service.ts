@@ -26,6 +26,11 @@ export class ApplicationService {
     .pipe(catchError(this.handleError));
   }
 
+  getApplicationById(applicationId: number): Observable<Application> {
+    return this.httpClient.get<Application>(this.baseUrl + '/retrieveApplicationById/' + applicationId)
+    .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = '';
 

@@ -1,0 +1,73 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span>PerfectMatch</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <p-dataView #dv [value]="displayedApplications" layout="grid" [loading]="isLoading">
+      <ng-template pTemplate="header">
+        <p-dropdown [options]="sortOptions" placeholder="Filter by Type" (onChange)="onSortChange($event)"
+          styleClass="p-mb-2 p-mb-md-0">
+        </p-dropdown>&nbsp;
+        <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
+          <i class="pi pi-search"></i>
+          <input type="search" pInputText placeholder="Search by Name" (input)="searchApplicationName($event)">
+        </span>&nbsp;
+        <p-dropdown [options]="statusOptions" placeholder="Filter by Status" (onChange)="onStatusChange($event)"
+          styleClass="p-mb-2 p-mb-md-0">
+
+        </p-dropdown>
+      </ng-template>
+      <ng-template let-application pTemplate="gridItem"
+        style="display: flex; justify-content: center; align-items: center;">
+        <div class="p-col-3" style="margin: 10px 10px 10px 10px;">
+          <mat-card>
+            <mat-card-title>{{application.posting.title}}</mat-card-title>
+            <mat-card-subtitle>{{application.posting.industry}}</mat-card-subtitle>
+            <img *ngIf="application.posting.industry === 'EDUCATION'" mat-card-image
+              src="../../../assets/images/education.jpg">
+            <img *ngIf="application.posting.industry === 'FINANCE'" mat-card-image
+              src="../../../assets/images/finance.jpg">
+            <img *ngIf="application.posting.industry === 'ENGINEERING'" mat-card-image
+              src="../../../assets/images/engineering.jpg">
+            <img *ngIf="application.posting.industry === 'MARKETING'" mat-card-image
+              src="../../../assets/images/marketing.jpg">
+            <img *ngIf="application.posting.industry === 'SOFTWARE_DEV'" mat-card-image
+              src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="application.posting.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
+            <img *ngIf="application.posting.industry === 'TOURISM'" mat-card-image
+              src="../../../assets/images/tourism.jpg">
+            <mat-card-content>
+              <div>
+                Offered:<br>
+                <div *ngIf="application.offerSent">Yes</div>
+                <div *ngIf="!application.offerSent">No</div>
+              </div>
+              <br>
+              <div>
+                Status:<br>{{application.applicationStatus}}
+              </div>
+            </mat-card-content>
+            <mat-card-actions style="text-align: right;">
+              <button mat-raised-button
+                routerLink="/applications/viewapplicationdetails/{{application.applicationId}}">Details</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+      </ng-template>
+    </p-dataView>
+  </mat-sidenav-content>
+</mat-sidenav-container>
