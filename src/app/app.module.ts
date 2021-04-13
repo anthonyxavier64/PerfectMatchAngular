@@ -40,6 +40,7 @@ import { ViewofferdetailsComponent } from './offers/viewofferdetails/viewofferde
 import {RatingModule} from 'primeng/rating';
 import { ViewallapplicationsComponent } from './applications/viewallapplications/viewallapplications.component';
 import { ViewapplicationdetailsComponent } from './applications/viewapplicationdetails/viewapplicationdetails.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 // import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
@@ -86,6 +87,7 @@ import { ViewapplicationdetailsComponent } from './applications/viewapplicationd
     DropdownModule,
     OrderListModule,
     RatingModule,
+    MatFormFieldModule
     // TimelineModule,
   ],
   providers: [],

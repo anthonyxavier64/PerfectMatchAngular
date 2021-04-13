@@ -7,28 +7,27 @@
 
   <mat-sidenav-content>
 
-    <mat-toolbar style="background-color: rgb(46, 44, 44);">
+    <mat-toolbar style="background-color: rgb(43, 14, 88);">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon style="font-size: 30px;" aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon style="font-size: 30px; color:whitesmoke;" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <app-loginform style="margin-bottom: 30px;" (childEvent)="setIsLogin($event)"></app-loginform>
-      <span style="padding:20px; color:white;">Perfect Match</span>
+      <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
 
     </mat-toolbar>
 
     <!-- Add Content Here -->
-    <div style="text-align:center; padding:130px 50px; background-image: url(../../assets/images/office.jpeg);" class="title-div">
+    <div style="text-align:center; padding:155px 50px; background-image: url(../../assets/images/office.jpeg);" class="title-div">
       <h1 class="perfect-match-title" style="font-size: 50px;">
         Perfect Match
       </h1>
-      <br/>
-      <p class="introduction">A job matching platform for students and startups.</p>
+      <p class="introduction"><i>Connecting new enterprises to new talent.</i></p>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="features" style="padding:50px 10px;">
+    <div class="features" style="padding:20px 10px;">
       <div class="feature-row">
         <div class="feature-column">
           <h3>Score a Dream Internship</h3>
