@@ -1,16 +1,20 @@
-<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
   </mat-sidenav>
+
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+
+    <mat-toolbar style="background-color: rgb(43, 14, 88);">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon style="font-size: 30px;" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>PerfectMatch</span>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
+
     </mat-toolbar>
     <!-- Add Content Here -->
     <div class="p-col-6" style="vertical-align: middle; text-align: center; margin: 0 auto;">

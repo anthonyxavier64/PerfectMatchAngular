@@ -1,15 +1,15 @@
   <p-toast></p-toast>
   <aside *ngIf="sessionService.getIsLogin() == false" style="position: fixed; right: 2%;">
-    <input type="text" [(ngModel)]="email" size="16" required maxlength="32" placeholder="email" pInputText />
+    <input type="text" style="background-color:whitesmoke" [(ngModel)]="email" size="16" required maxlength="32" placeholder="Email" pInputText />
     &nbsp;
-    <input type="password" [(ngModel)]="password" size="16" required maxlength="32" placeholder="password" pInputText />
+    <input type="password" style="background-color:whitesmoke" [(ngModel)]="password" size="16" required maxlength="32" placeholder="Password" pInputText />
     &nbsp;
-    <button mat-raised-button (click)="clear()">Clear</button>
+    <button mat-stroked-button style="background-color:whitesmoke" (click)="clear()">Clear</button>
     &nbsp;
-    <button mat-raised-button (click)="studentLogin()">Login</button>
+    <button mat-stroked-button style="background-color:whitesmoke" (click)="studentLogin()">Login</button>
   </aside>
 
-  <aside *ngIf="sessionService.getIsLogin() == true" style="position: fixed; right: 2%; color:white;">
+  <aside *ngIf="sessionService.getIsLogin() == true" style="position: fixed; right: 2%; color:whitesmoke;">
     Hi {{sessionService.getCurrentStudent()?.name}}!&nbsp;&nbsp;
     &nbsp;<button mat-raised-button (click)="studentLogout()">Logout</button>
   </aside>
