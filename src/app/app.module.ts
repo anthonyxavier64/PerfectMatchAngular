@@ -81,7 +81,7 @@ import {RatingModule} from 'primeng/rating';
     DataViewModule,
     DropdownModule,
     OrderListModule,
-    RatingModule
+    RatingModule,
     // TimelineModule,
   ],
   providers: [],
