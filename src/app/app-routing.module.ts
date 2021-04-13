@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'postings/viewJobDetails', component: ViewJobDetailsComponent},
   { path: 'postings/viewJobDetails/:postingId', component: ViewJobDetailsComponent},
   { path: 'offers/viewoffers', component: ViewoffersComponent},
-  { path: 'offer/viewOffer/:offerId', component: ViewofferdetailsComponent}
+  { path: 'offer/viewOffer/:offerId', component: ViewofferdetailsComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
