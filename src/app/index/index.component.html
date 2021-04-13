@@ -2,11 +2,11 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
-
+    
   </mat-sidenav>
 
   <mat-sidenav-content>
-
+    
     <mat-toolbar color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
@@ -14,52 +14,16 @@
       </button>
       <app-loginform style="margin-bottom: 30px;" (childEvent)="setIsLogin($event)"></app-loginform>
       <span>PerfectMatch</span>
-
+      
     </mat-toolbar>
-
+    
+    
     <!-- Add Content Here -->
-    <div style="text-align:center; padding:130px 50px; background-image: url(../../assets/images/office.jpeg);" class="title-div">
-      <h1 class="perfect-match-title" style="font-size: 50px;">
-        Perfect Match
-      </h1>
-      <br/>
-      <p class="introduction">A job matching platform for students and startups.</p>
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <div class="features" style="padding:50px 10px;">
-      <div class="feature-row">
-        <div class="feature-column">
-          <h3>Score a Dream Internship</h3>
-          <br />
-          <p class="feature-p">A comfortable space to explore your options.
-          </p>
-        </div>
-        <mat-divider [vertical]="true" style="height:170px"></mat-divider>
-
-        <div class="feature-column">
-          <h3>Grow Your Skills</h3>
-              <br />
-              <p class="feature-p">Immerse yourself in in the fast-paced and vibrant start-up environment.
-              </p>
-        </div>
-        <mat-divider [vertical]="true" style="height:170px"></mat-divider>
-
-        <div class="feature-column">
-          <h3>Track Work Experience</h3>
-          <br />
-          <p class="feature-p">Keep a repository of past work and employer reviews.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- <mat-grid-list cols="3" rowHeight="1.5:1" gutterSize="5px">
+    <mat-grid-list cols="3" rowHeight="1.5:1" gutterSize="5px">
       <mat-grid-tile colspan="2"><img src="../../assets/images/Internship.jpg" /></mat-grid-tile>
       <mat-grid-tile><img src="../../assets/images/Learning.jpg" /></mat-grid-tile>
       <mat-grid-tile>3</mat-grid-tile>
       <mat-grid-tile colspan="2"><img src="../../assets/images/Rocketship.png" /></mat-grid-tile>
-    </mat-grid-list> -->
+    </mat-grid-list>
   </mat-sidenav-content>
 </mat-sidenav-container>
