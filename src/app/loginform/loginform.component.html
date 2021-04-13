@@ -9,7 +9,7 @@
     <button mat-raised-button (click)="studentLogin()">Login</button>
   </aside>
 
-  <aside *ngIf="sessionService.getIsLogin() == true" style="position: fixed; right: 2%;">
+  <aside *ngIf="sessionService.getIsLogin() == true" style="position: fixed; right: 2%; color:white;">
     Hi {{sessionService.getCurrentStudent()?.name}}!&nbsp;&nbsp;
     &nbsp;<button mat-raised-button (click)="studentLogout()">Logout</button>
   </aside>
