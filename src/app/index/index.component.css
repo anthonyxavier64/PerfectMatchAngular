@@ -31,3 +31,33 @@ mat-card {
 .full-width-input {
   width: 100%;
 }
+
+
+.feature-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.feature-column {
+      width: 33%;
+      float: left;
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+}
+
+.feature-p {
+  padding: 0 10px;
+
+}
+
+h3 {
+  font-size: 26px;
+  margin-bottom: 0px;
+}
+
+.mat-icon {
+  font-size: 66px;
+}
