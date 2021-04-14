@@ -41,6 +41,11 @@ import {RatingModule} from 'primeng/rating';
 import { ViewallapplicationsComponent } from './applications/viewallapplications/viewallapplications.component';
 import { ViewapplicationdetailsComponent } from './applications/viewapplicationdetails/viewapplicationdetails.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ViewAllFavoritesComponent } from './favorites/view-all-favorites/view-all-favorites.component';
+import {PanelModule} from 'primeng/panel';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 // import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
@@ -60,6 +65,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ViewofferdetailsComponent,
     ViewallapplicationsComponent,
     ViewapplicationdetailsComponent,
+    ViewAllFavoritesComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +93,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     DropdownModule,
     OrderListModule,
     RatingModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    PanelModule,
+    TableModule,
+    ButtonModule,
+    DialogModule
     // TimelineModule,
   ],
   providers: [],

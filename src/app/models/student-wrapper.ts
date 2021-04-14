@@ -1,6 +1,7 @@
 import { Application } from "./application";
 import { Offer } from "./offer";
 import { Payment } from "./payment";
+import { Posting } from "./posting";
 
 export class StudentWrapper {
     studentId: number | undefined;
@@ -14,6 +15,7 @@ export class StudentWrapper {
     projectedGraduationYear: string | undefined;
     relevantSkills: string[] | undefined;
     availabilityPeriod: string[] | undefined;
+    favorites: Posting[];
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,
@@ -31,5 +33,6 @@ export class StudentWrapper {
             this.projectedGraduationYear = projectedGraduationYear;
             this.relevantSkills = new Array();
             this.availabilityPeriod = new Array();
+            this.favorites = new Array();
     }
 }

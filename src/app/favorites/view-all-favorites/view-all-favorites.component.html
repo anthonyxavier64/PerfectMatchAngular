@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar style="background-color: rgb(43, 14, 88);">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon style="font-size: 30px; color:whitesmoke;" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
+
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+
+    <p-panel header="Favorites">
+      <p-table [value]="favorites">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Pay</th>
+            <th>Industry</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-posting>
+          <tr>
+            <td>{{posting.title}}</td>
+
+            <td>
+              <span *ngIf="isProject(posting) == true">Project</span>
+              <span *ngIf="isProject(posting) == false">Job</span>
+            </td>
+
+            <td>{{posting.description}}</td>
+            <td>{{posting.pay}}</td>
+            <td>{{posting.industry}}</td>
+            <td>
+              <button mat-icon-button (click)="removePostingFromFavorites(posting)">
+                <mat-icon style="font-size: 30px;">delete</mat-icon>
+              </button>
+              &nbsp;
+              <button mat-icon-button (click)="viewPostingDetails(posting)">
+                <mat-icon style="font-size: 30px;">description</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
