@@ -10,6 +10,8 @@ import { catchError } from 'rxjs/operators';
 import { StudentWrapper } from '../models/student-wrapper';
 import { Offer } from '../models/offer';
 import { Application } from '../models/application';
+import { Startup } from '../models/startup';
+import { Posting } from '../models/posting';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -23,7 +25,7 @@ export class StudentService {
 
   constructor(
     private httpClient: HttpClient
-  ) {}
+  ) { }
 
   studentLogin(
     email: string | undefined,
@@ -42,20 +44,25 @@ export class StudentService {
       .pipe(catchError(this.handleError));
   }
 
-  editStudentDetails(student: StudentWrapper): Observable<StudentWrapper> { 
+  editStudentDetails(student: StudentWrapper): Observable<StudentWrapper> {
     return this.httpClient
-    .put<StudentWrapper>(this.baseUrl + "/editStudentDetails", student, httpOptions)
-    .pipe(catchError(this.handleError));
+      .put<StudentWrapper>(this.baseUrl + "/editStudentDetails", student, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   getStudentOffers(studentId: number): Observable<Offer[]> {
     return this.httpClient.get<Offer[]>(this.baseUrl + "/getStudentOffers/" + studentId)
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
 
   getStudentApplications(studentId: number): Observable<Application[]> {
     return this.httpClient.get<Application[]>(this.baseUrl + "/getApplicationsByStudentId/" + studentId)
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
+  }
+
+  getStudentFavorites(studentId: number): Observable<Posting[]> {
+    return this.httpClient.get<Posting[]>(this.baseUrl + "/getFavoritesByStudentId/" + studentId)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

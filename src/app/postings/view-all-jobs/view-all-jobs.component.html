@@ -10,7 +10,7 @@
     <mat-toolbar style="background-color: rgb(43, 14, 88);">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon style="font-size: 30px;" aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon style="font-size: 30px; color: whitesmoke;" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <app-loginform style="margin-bottom: 30px;"></app-loginform>
       <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
@@ -61,7 +61,17 @@
               </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
-              <button mat-raised-button routerLink="/postings/viewJobDetails/{{job.postingId}}">Details</button>
+              <button *ngIf="bookmarked(job) == false" style="width:10px; display:inline-block"
+                (click)="addToFavorites(job)" mat-icon-button>
+                <mat-icon>bookmark_border</mat-icon>
+              </button>
+              <button *ngIf="bookmarked(job) == true" style="width:10px; display:inline-block"
+                (click)="addToFavorites(job)" mat-icon-button>
+                <mat-icon>bookmark</mat-icon>
+              </button>
+              &nbsp;
+              <button style="display:inline-block" mat-raised-button
+                routerLink="/postings/viewJobDetails/{{job.postingId}}">Details</button>
             </mat-card-actions>
           </mat-card>
         </div>
