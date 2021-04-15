@@ -11,6 +11,7 @@ import { Posting } from 'src/app/models/posting';
 import { Job } from 'src/app/models/job';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
+import { Favourites } from 'src/app/models/favourites';
 
 @Component({
   selector: 'app-view-all-favorites',
@@ -23,8 +24,8 @@ export class ViewAllFavoritesComponent {
   isLoading: boolean = true;
 
   isLogin: boolean = true;
-  student: StudentWrapper | undefined;
-  favorites: Posting[];
+  student: any | undefined;
+  favorites: Favourites[];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -48,7 +49,8 @@ export class ViewAllFavoritesComponent {
     if (this.student != null && this.student.studentId != null)
       this.studentService.getStudentFavorites(this.student.studentId).subscribe(
         (response) => {
-          this.favorites = response;
+          this.student = response;
+          this.favorites = this.student.favorites;
         },
         (error) => {
           this.messageService.add({
@@ -71,7 +73,7 @@ export class ViewAllFavoritesComponent {
     let index: number = -1;
     if (posting != null && this.student != null) {
       for (let i = 0; i < this.favorites.length; i++) {
-        if (this.favorites[i] == posting) {
+        if (this.favorites[i].post == posting) {
           index = i;
         }
       }

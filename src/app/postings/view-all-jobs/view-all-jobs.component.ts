@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, NgZone } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -11,6 +11,8 @@ import { SessionService } from 'src/app/services/session.service';
 import { StudentService } from 'src/app/services/student.service';
 import { StudentWrapper } from 'src/app/models/student-wrapper';
 import { Posting } from 'src/app/models/posting';
+import { Favourites } from 'src/app/models/favourites';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-all-jobs',
@@ -25,6 +27,7 @@ export class ViewAllJobsComponent {
   isLoading: boolean = true;
   sortOptions: [{}, {}];
   areaOptions: [{}, {}, {}, {}, {}];
+  bookmarkIds: number[];
   sortOrder: number;
   sortField: string;
   searchNameString: string = '';
@@ -40,15 +43,16 @@ export class ViewAllJobsComponent {
       shareReplay()
     );
 
-    @Output()
-    childEvent = new EventEmitter<StudentWrapper>();
+  @Output()
+  childEvent = new EventEmitter<StudentWrapper>();
 
   constructor(
     private jobService: JobService,
     private messageService: MessageService,
     private breakpointObserver: BreakpointObserver,
     private sessionService: SessionService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private router: Router
   ) {
     this.student = this.sessionService.getCurrentStudent();
     this.jobs = new Array();
@@ -66,14 +70,22 @@ export class ViewAllJobsComponent {
     ];
     this.sortOrder = -1;
     this.sortField = '';
+    this.bookmarkIds = new Array();
   }
 
   ngOnInit(): void {
     this.student = this.sessionService.getCurrentStudent();
+
+    if (this.student !== undefined) {
+      for (let fav of this.student?.favorites) {
+        if (fav.post?.postingId !== undefined) {
+          this.bookmarkIds.push(fav.post.postingId);
+        }
+      }
+    }
+
     this.jobService.getJobs().subscribe(
       (response) => {
-        let result: any[] = new Array();
-
         response.forEach((job) => {
           let earliestStart = undefined;
           let latestStart = undefined;
@@ -82,6 +94,14 @@ export class ViewAllJobsComponent {
           }
           if (job.latestStartDate !== undefined) {
             latestStart = new Date(job.latestStartDate);
+          }
+
+          let isBookmarked: boolean = false;
+
+          if (job.postingId !== undefined) {
+            if (this.bookmarkIds.includes(job.postingId)) {
+              isBookmarked = true;
+            }
           }
 
           let editedJob = {
@@ -94,6 +114,7 @@ export class ViewAllJobsComponent {
             industry: job.industry,
             requiredSkills: job.requiredSkills,
             startup: job.startup,
+            isBookmarked: isBookmarked,
           };
           this.jobs.push(editedJob);
           this.displayedJobs.push(editedJob);
@@ -112,64 +133,60 @@ export class ViewAllJobsComponent {
 
   addToFavorites(job: Job) {
     if (this.student != null) {
-      this.student.favorites.push(job);
-      this.studentService.editStudentDetails(this.student).subscribe(
+      let newFav: Favourites = new Favourites();
+      newFav.postingId = job.postingId;
+      newFav.studentId = this.student.studentId;
+      if (job.postingId !== undefined) {
+        this.bookmarkIds.push(job.postingId);
+      }
+      this.studentService.addFavourite(newFav).subscribe(
         (response) => {
           this.sessionService.setCurrentStudent(response);
           this.messageService.add({
             severity: 'success',
             summary: 'posting added to favorites!',
           });
-          this.childEvent.emit(response);
         },
         (error) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Unable to add to favorites',
+            detail: 'Unable to add to favourites',
           });
         }
       );
     }
   }
 
-  removeJobFromFavorites(job: Job) {
-    let index: number = -1;
-    if (job != null && this.student != null) {
-      for (let i = 0; i < this.student.favorites.length; i++) {
-        if (this.student.favorites[i] == job) {
+  removeFromFavourites(job: Job) {
+    if (this.student !== undefined) {
+      let newFav: Favourites = new Favourites();
+      newFav.postingId = job.postingId;
+      newFav.studentId = this.student.studentId;
+      let index:number = -1;
+      for (let i = 0; i < this.bookmarkIds.length; i++) {
+        if (this.bookmarkIds[i] == job.postingId) {
           index = i;
         }
       }
-      this.student.favorites.splice(index, 1);
-
-      this.studentService.editStudentDetails(this.student).subscribe(
+      this.bookmarkIds.splice(index, 1);
+      this.studentService.removeFavourite(newFav).subscribe(
         (response) => {
           this.sessionService.setCurrentStudent(response);
           this.messageService.add({
             severity: 'success',
-            summary: 'Job removed from favorites!',
+            summary: 'posting removed from favorites!',
           });
-          this.childEvent.emit(response);
         },
         (error) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Unable to remove from favorites',
+            detail: 'Unable to remove from favourites',
           });
         }
       );
     }
-  }
-
-  bookmarked(job:Job) : boolean {
-    if (this.student != null) {
-      if (this.student.favorites.includes(job)) {
-        return true;
-      }
-    }
-    return false;
   }
 
   onSortChange(event: any) {
@@ -182,6 +199,15 @@ export class ViewAllJobsComponent {
     }
   }
 
+  bookmarked(job: any): boolean {
+    if (this.student !== undefined) {
+      if (this.bookmarkIds?.includes(job.postingId)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   onAreaChange(event: any) {
     let value = event.value;
 
@@ -190,7 +216,6 @@ export class ViewAllJobsComponent {
     if (value.indexOf('N') == 0) {
       this.jobs.forEach((job) => {
         if (job.startup.startupLocation === 'NORTH') {
-          console.log('here')
           this.displayedJobs.push(job);
         }
       });
@@ -225,9 +250,9 @@ export class ViewAllJobsComponent {
     this.displayedJobs = new Array();
     event.data === null
       ? (this.searchNameString = this.searchNameString.substring(
-        0,
-        this.searchNameString.length - 1
-      ))
+          0,
+          this.searchNameString.length - 1
+        ))
       : (this.searchNameString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.title.toLowerCase().includes(this.searchNameString)) {
@@ -240,9 +265,9 @@ export class ViewAllJobsComponent {
     this.displayedJobs = new Array();
     event.data === null
       ? (this.searchIndustryString = this.searchIndustryString.substring(
-        0,
-        this.searchIndustryString.length - 1
-      ))
+          0,
+          this.searchIndustryString.length - 1
+        ))
       : (this.searchIndustryString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.industry.toLowerCase().startsWith(this.searchIndustryString)) {
@@ -255,9 +280,9 @@ export class ViewAllJobsComponent {
     this.displayedJobs = new Array();
     event.data === null
       ? (this.searchSkillsString = this.searchSkillsString.substring(
-        0,
-        this.searchSkillsString.length - 1
-      ))
+          0,
+          this.searchSkillsString.length - 1
+        ))
       : (this.searchSkillsString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       let requiredSkills: string[] = job.requiredSkills;
@@ -278,5 +303,12 @@ export class ViewAllJobsComponent {
       return 1;
     }
     return 0;
+  }
+
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

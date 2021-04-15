@@ -12,6 +12,7 @@ import { Offer } from '../models/offer';
 import { Application } from '../models/application';
 import { Startup } from '../models/startup';
 import { Posting } from '../models/posting';
+import { Favourites } from '../models/favourites';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -60,9 +61,19 @@ export class StudentService {
       .pipe(catchError(this.handleError));
   }
 
-  getStudentFavorites(studentId: number): Observable<Posting[]> {
-    return this.httpClient.get<Posting[]>(this.baseUrl + "/getFavoritesByStudentId/" + studentId)
+  getStudentFavorites(studentId: number): Observable<Favourites[]> {
+    return this.httpClient.get<Favourites[]>(this.baseUrl + "/getFavoritesByStudentId/" + studentId)
       .pipe(catchError(this.handleError));
+  }
+
+  addFavourite(favourite: Favourites): Observable<StudentWrapper> {
+    return this.httpClient.get<StudentWrapper>(this.baseUrl + "/addFavourite?studId=" + favourite.studentId + "&postId=" + favourite.postingId)
+    .pipe(catchError(this.handleError));
+  }
+
+  removeFavourite(favourite: Favourites): Observable<StudentWrapper> { 
+    return this.httpClient.get<StudentWrapper>(this.baseUrl + "/removeFavourite?studId=" + favourite.studentId + "&postId=" + favourite.postingId)
+    .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

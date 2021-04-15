@@ -31,24 +31,24 @@
             <th>Action</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-posting>
+        <ng-template pTemplate="body" let-fave>
           <tr>
-            <td>{{posting.title}}</td>
+            <td>{{fave.post.title}}</td>
 
             <td>
-              <span *ngIf="isProject(posting) == true">Project</span>
-              <span *ngIf="isProject(posting) == false">Job</span>
+              <span *ngIf="isProject(fave.post) == true">Project</span>
+              <span *ngIf="isProject(fave.post) == false">Job</span>
             </td>
 
-            <td>{{posting.description}}</td>
-            <td>{{posting.pay}}</td>
-            <td>{{posting.industry}}</td>
+            <td>{{fave.post.description}}</td>
+            <td>{{fave.post.pay}}</td>
+            <td>{{fave.post.industry}}</td>
             <td>
-              <button mat-icon-button (click)="removePostingFromFavorites(posting)">
+              <button mat-icon-button (click)="removePostingFromFavorites(fave.post)">
                 <mat-icon style="font-size: 30px;">delete</mat-icon>
               </button>
               &nbsp;
-              <button mat-icon-button (click)="viewPostingDetails(posting)">
+              <button mat-icon-button (click)="viewPostingDetails(fave.post)">
                 <mat-icon style="font-size: 30px;">description</mat-icon>
               </button>
             </td>
