@@ -1,4 +1,5 @@
 import { Application } from "./application";
+import { Favourites } from "./favourites";
 import { Offer } from "./offer";
 import { Payment } from "./payment";
 import { Posting } from "./posting";
@@ -15,7 +16,7 @@ export class StudentWrapper {
     projectedGraduationYear: string | undefined;
     relevantSkills: string[] | undefined;
     availabilityPeriod: string[] | undefined;
-    favorites: Posting[];
+    favorites: Favourites[];
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,

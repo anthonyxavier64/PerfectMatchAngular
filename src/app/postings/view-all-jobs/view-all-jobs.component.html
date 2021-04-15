@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -61,12 +62,12 @@
               </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
-              <button *ngIf="bookmarked(job) == false" style="width:10px; display:inline-block"
+              <button  *ngIf="bookmarked(job) == false" style="width:10px; display:inline-block"
                 (click)="addToFavorites(job)" mat-icon-button>
                 <mat-icon>bookmark_border</mat-icon>
               </button>
-              <button *ngIf="bookmarked(job) == true" style="width:10px; display:inline-block"
-                (click)="addToFavorites(job)" mat-icon-button>
+              <button  style="width:10px; display:inline-block" *ngIf="bookmarked(job) == true"
+                (click)="removeFromFavourites(job)" mat-icon-button>
                 <mat-icon>bookmark</mat-icon>
               </button>
               &nbsp;
