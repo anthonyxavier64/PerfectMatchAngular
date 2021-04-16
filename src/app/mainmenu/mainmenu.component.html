@@ -5,7 +5,10 @@
     Home
   </a>
 
-  <a *ngIf="!isLogin" mat-list-item routerLink="/register">Registration</a>
+  <a *ngIf="!isLogin" mat-list-item routerLink="/register">
+    <mat-icon style="color:grey">account_box</mat-icon> &nbsp;
+    Registration
+  </a>
 
   <div *ngIf="isLogin">
     <a mat-list-item routerLink="/profile/viewProfile">
