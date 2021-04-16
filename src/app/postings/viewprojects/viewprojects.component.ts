@@ -1,10 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, NgZone } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 import { ProjectService } from 'src/app/services/project.service';
+import { Router } from '@angular/router';
+import { Favourites } from 'src/app/models/favourites';
+import { SessionService } from 'src/app/services/session.service';
+import { StudentService } from 'src/app/services/student.service';
+import { StudentWrapper } from 'src/app/models/student-wrapper';
+import { Project } from 'src/app/models/project';
 
 @Component({
   selector: 'app-viewprojects',
@@ -18,11 +24,14 @@ export class ViewprojectsComponent implements OnInit {
   isLogin: boolean = true;
   isLoading: boolean = true;
   sortOptions: [{}, {}];
+  areaOptions: [{}, {}, {}, {}, {}];
   sortOrder: number;
   sortField: string;
   searchNameString: string = '';
   searchIndustryString: string = '';
   searchSkillsString: string = '';
+  bookmarkIds: number[];
+  student: StudentWrapper | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -31,10 +40,16 @@ export class ViewprojectsComponent implements OnInit {
       shareReplay()
     );
 
+  @Output()
+  childEvent = new EventEmitter<StudentWrapper>();
+
   constructor(
     private projectService: ProjectService,
     private messageService: MessageService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private sessionService: SessionService,
+    private studentService: StudentService,
+    private router: Router
   ) {
     this.projects = new Array();
     this.displayedProjects = new Array();
@@ -42,11 +57,29 @@ export class ViewprojectsComponent implements OnInit {
       { label: 'High to Low', value: 'HighToLow' },
       { label: 'Low to High', value: 'LowToHigh' },
     ];
+    this.areaOptions = [
+      { label: 'North', value: 'NORTH' },
+      { label: 'East', value: 'EAST' },
+      { label: 'South', value: 'SOUTH' },
+      { label: 'West', value: 'WEST' },
+      { label: 'Central', value: 'CENTRAL' },
+    ];
     this.sortOrder = -1;
     this.sortField = '';
+    this.bookmarkIds = new Array();
   }
 
   ngOnInit(): void {
+    this.student = this.sessionService.getCurrentStudent();
+
+    if (this.student !== undefined) {
+      for (let fav of this.student?.favorites) {
+        if (fav.post?.postingId !== undefined) {
+          this.bookmarkIds.push(fav.post.postingId);
+        }
+      }
+    }
+
     this.projectService.getProjects().subscribe(
       (response) => {
 
@@ -59,6 +92,15 @@ export class ViewprojectsComponent implements OnInit {
           if (project.latestStartDate !== undefined) {
             latestStart = new Date(project.latestStartDate);
           }
+
+          let isBookmarked: boolean = false;
+
+          if (project.postingId !== undefined) {
+            if (this.bookmarkIds.includes(project.postingId)) {
+              isBookmarked = true;
+            }
+          }
+
           let editedProject = {
             postingId: project.postingId,
             title: project.title,
@@ -70,6 +112,8 @@ export class ViewprojectsComponent implements OnInit {
             requiredSkills: project.requiredSkills,
             projectSpecialisation: project.projectSpecialisation,
             isComplete: project.isComplete,
+            startup: project.startup,
+            isBookmarked: isBookmarked,
           };
           this.projects.push(editedProject);
           this.displayedProjects.push(editedProject);
@@ -104,9 +148,9 @@ export class ViewprojectsComponent implements OnInit {
     this.displayedProjects = new Array();
     event.data === null
       ? (this.searchNameString = this.searchNameString.substring(
-          0,
-          this.searchNameString.length - 1
-        ))
+        0,
+        this.searchNameString.length - 1
+      ))
       : (this.searchNameString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       if (project.title.toLowerCase().includes(this.searchNameString)) {
@@ -115,13 +159,51 @@ export class ViewprojectsComponent implements OnInit {
     });
   }
 
+  onAreaChange(event: any) {
+    let value = event.value;
+
+    this.displayedProjects = new Array();
+
+    if (value.indexOf('N') == 0) {
+      this.projects.forEach((project) => {
+        if (project.startup.startupLocation === 'NORTH') {
+          this.displayedProjects.push(project);
+        }
+      });
+    } else if (value.indexOf('E') == 0) {
+      this.projects.forEach((project) => {
+        if (project.startup.startupLocation === 'EAST') {
+          this.displayedProjects.push(project);
+        }
+      });
+    } else if (value.indexOf('S') == 0) {
+      this.projects.forEach((project) => {
+        if (project.startup.startupLocation === 'SOUTH') {
+          this.displayedProjects.push(project);
+        }
+      });
+    } else if (value.indexOf('C') == 0) {
+      this.projects.forEach((project) => {
+        if (project.startup.startupLocation === 'CENTRAL') {
+          this.displayedProjects.push(project);
+        }
+      });
+    } else {
+      this.projects.forEach((project) => {
+        if (project.startup.startupLocation === 'WEST') {
+          this.displayedProjects.push(project);
+        }
+      });
+    }
+  }
+
   searchIndustryEvent(event: any) {
     this.displayedProjects = new Array();
     event.data === null
       ? (this.searchIndustryString = this.searchIndustryString.substring(
-          0,
-          this.searchIndustryString.length - 1
-        ))
+        0,
+        this.searchIndustryString.length - 1
+      ))
       : (this.searchIndustryString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       if (
@@ -136,9 +218,9 @@ export class ViewprojectsComponent implements OnInit {
     this.displayedProjects = new Array();
     event.data === null
       ? (this.searchSkillsString = this.searchSkillsString.substring(
-          0,
-          this.searchSkillsString.length - 1
-        ))
+        0,
+        this.searchSkillsString.length - 1
+      ))
       : (this.searchSkillsString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       let requiredSkills: string[] = project.requiredSkills;
@@ -161,5 +243,80 @@ export class ViewprojectsComponent implements OnInit {
       return 1;
     }
     return 0;
+  }
+
+  addToFavorites(project: Project) {
+    if (this.student != null) {
+      let newFav: Favourites = new Favourites();
+      newFav.postingId = project.postingId;
+      newFav.studentId = this.student.studentId;
+      if (project.postingId !== undefined) {
+        this.bookmarkIds.push(project.postingId);
+      }
+      this.studentService.addFavourite(newFav).subscribe(
+        (response) => {
+          this.sessionService.setCurrentStudent(response);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Project added to favorites!',
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Unable to add to favourites',
+          });
+        }
+      );
+    }
+  }
+
+  removeFromFavourites(project: Project) {
+    if (this.student !== undefined) {
+      let newFav: Favourites = new Favourites();
+      newFav.postingId = project.postingId;
+      newFav.studentId = this.student.studentId;
+      let index: number = -1;
+      for (let i = 0; i < this.bookmarkIds.length; i++) {
+        if (this.bookmarkIds[i] == project.postingId) {
+          index = i;
+        }
+      }
+      this.bookmarkIds.splice(index, 1);
+      this.studentService.removeFavourite(newFav).subscribe(
+        (response) => {
+          this.sessionService.setCurrentStudent(response);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Project removed from favorites!',
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Unable to remove from favourites',
+          });
+        }
+      );
+    }
+  }
+  bookmarked(job: any): boolean {
+    if (this.student !== undefined) {
+      if (this.bookmarkIds?.includes(job.postingId)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  reset() {
+    this.displayedProjects = this.projects;
+    this.sortOrder = -1;
+    this.sortField = '';
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
   }
 }

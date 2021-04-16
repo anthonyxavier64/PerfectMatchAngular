@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -52,7 +53,8 @@
               Password is required.
             </div>
             <div *ngIf="password.errors != null && password.errors.minlength">
-              Minimum length of 6 is required.            </div>
+              Minimum length of 6 is required.
+            </div>
           </div>
         </span>
         <br /> <br />
@@ -92,12 +94,15 @@
           </div>
         </span>
       </div>
-      
-      <div style="width: 30%; float: left;"> 
+
+      <div style="width: 30%; float: left;">
         <label for="projectedGraduationYear">Projected Graduation Date</label>
-        <br/>
-        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduation_Year="ngModel" [(ngModel)]="projectedGraduationYear" required="true" type="date" pInputText>
-        <div *ngIf="projectedGraduation_Year.invalid && (projectedGraduation_Year.dirty || projectedGraduation_Year.touched || submitted)" class="errorText">
+        <br />
+        <input id="projectedGraduationYear" name="projectedGraduationYear" #projectedGraduation_Year="ngModel"
+          [(ngModel)]="projectedGraduationYear" required="true" type="date" pInputText>
+        <div
+          *ngIf="projectedGraduation_Year.invalid && (projectedGraduation_Year.dirty || projectedGraduation_Year.touched || submitted)"
+          class="errorText">
           <div *ngIf="projectedGraduation_Year.errors != null && projectedGraduation_Year.errors.required">
             Projected graduation year is required.
           </div>
@@ -126,15 +131,28 @@
         </div>
 
         <br /><br />
-        <label for="skills">Skills</label>
-        <br />
-        <input id="skills" name="skills" #skills="ngModel" [(ngModel)]="newSkill" class="form-control" pInputText>
-        <button mat-raised-button (click)="addSkill()">Add</button>
-        <ul>
-          <li *ngFor="let skill of relevantSkills">
-            {{skill}}
-          </li>
-        </ul>
+        <p-panel header="Relevant Skills">
+          <input style="width:80%;" placeholder="Add Skill" id="skills" name="skills" #skills="ngModel" [(ngModel)]="newSkill"
+            class="form-control" pInputText>
+          <button mat-icon-button (click)="addSkill()">
+            <mat-icon>playlist_add</mat-icon>
+          </button>
+
+          <p-table [value]="relevantSkills">
+            <ng-template pTemplate="body" let-skillitem>
+              <tr>
+                <td style="font-size:15px;">
+                  {{skillitem}}
+                </td>
+                <td style="width:30%; text-align:center">
+                  <button mat-icon-button (click)="removeSkill(skillitem)">
+                    <mat-icon style="font-size:20px">delete_outline</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-panel>
       </div>
 
       <div style="width: 30%; float: left;">
@@ -143,16 +161,17 @@
           <label>Biography</label>
           <br />
           <textarea id="biography" name="biography" #biography="ngModel" [(ngModel)]="newStudent.biography" [rows]="7"
-            [cols]="30" pInputTextarea autoResize="autoResize" maxlength="250" placeholder="Max 250 characters"></textarea>
+            [cols]="30" pInputTextarea autoResize="autoResize" maxlength="250"
+            placeholder="Max 250 characters"></textarea>
         </span>
         <br /> <br />
 
         <span>
           <button mat-raised-button (click)="clear()">Clear</button> &nbsp;
-        <button mat-raised-button type="submit" (click)="create(createStudentForm)">Register</button>
-      </span>
-      </div>      
-      
+          <button mat-raised-button type="submit" (click)="create(createStudentForm)">Register</button>
+        </span>
+      </div>
+
     </form>
 
     <!-- 

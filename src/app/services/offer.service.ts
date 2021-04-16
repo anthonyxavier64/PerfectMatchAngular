@@ -28,17 +28,23 @@ export class OfferService {
 
   getOffers(): Observable<Offer[]> {
     return this.httpClient.get<Offer[]>(this.baseUrl + "/retrieveAllOffers")
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
 
   getOfferById(offerId: number): Observable<Offer> {
     return this.httpClient.get<Offer>(this.baseUrl + "/retrieveOfferById/" + offerId)
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
 
   getOfferPosting(offerId: number): Observable<Posting> {
     return this.httpClient.get<Posting>(this.baseUrl + "/getOfferPosting/" + offerId)
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
+  }
+
+  updateOffer(offer: Offer): Observable<Offer> {
+    return this.httpClient
+      .put<Offer>(this.baseUrl + "/updateOffer", offer, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
