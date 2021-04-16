@@ -25,13 +25,14 @@ export class ViewprojectsComponent implements OnInit {
   isLoading: boolean = true;
   sortOptions: [{}, {}];
   areaOptions: [{}, {}, {}, {}, {}];
-  sortOrder: number;
   sortField: string;
   searchNameString: string = '';
   searchIndustryString: string = '';
   searchSkillsString: string = '';
   bookmarkIds: number[];
   student: StudentWrapper | undefined;
+  selectedOption: string | null;
+  areaOptionSelect: string | null;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -53,6 +54,8 @@ export class ViewprojectsComponent implements OnInit {
   ) {
     this.projects = new Array();
     this.displayedProjects = new Array();
+    this.selectedOption = null;
+    this.areaOptionSelect = null;
     this.sortOptions = [
       { label: 'High to Low', value: 'HighToLow' },
       { label: 'Low to High', value: 'LowToHigh' },
@@ -64,7 +67,6 @@ export class ViewprojectsComponent implements OnInit {
       { label: 'West', value: 'WEST' },
       { label: 'Central', value: 'CENTRAL' },
     ];
-    this.sortOrder = -1;
     this.sortField = '';
     this.bookmarkIds = new Array();
   }
@@ -82,7 +84,6 @@ export class ViewprojectsComponent implements OnInit {
 
     this.projectService.getProjects().subscribe(
       (response) => {
-
         response.forEach((project) => {
           let earliestStart = undefined;
           let latestStart = undefined;
@@ -132,25 +133,33 @@ export class ViewprojectsComponent implements OnInit {
 
   onSortChange(event: any) {
     let value = event.value;
+    
+    this.areaOptionSelect = null;
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
+
+    this.displayedProjects = this.projects;
 
     if (value.indexOf('H') === 0) {
-      this.displayedProjects.sort((a, b) =>
-        a.pay > b.pay ? -1 : 1
-      );
+      this.displayedProjects.sort((a, b) => (a.pay > b.pay ? -1 : 1));
     } else {
-      this.displayedProjects.sort((a, b) =>
-        a.pay > b.pay ? 1 : -1
-      );
+      this.displayedProjects.sort((a, b) => (a.pay > b.pay ? 1 : -1));
     }
   }
 
   searchNameEvent(event: any) {
+    this.areaOptionSelect = null;
+    this.selectedOption = null;
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
+
     this.displayedProjects = new Array();
     event.data === null
       ? (this.searchNameString = this.searchNameString.substring(
-        0,
-        this.searchNameString.length - 1
-      ))
+          0,
+          this.searchNameString.length - 1
+        ))
       : (this.searchNameString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       if (project.title.toLowerCase().includes(this.searchNameString)) {
@@ -161,6 +170,11 @@ export class ViewprojectsComponent implements OnInit {
 
   onAreaChange(event: any) {
     let value = event.value;
+
+    this.selectedOption = null;
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
 
     this.displayedProjects = new Array();
 
@@ -198,12 +212,17 @@ export class ViewprojectsComponent implements OnInit {
   }
 
   searchIndustryEvent(event: any) {
+    this.areaOptionSelect = null;
+    this.selectedOption = null;
+    this.searchNameString = '';
+    this.searchSkillsString = '';
+
     this.displayedProjects = new Array();
     event.data === null
       ? (this.searchIndustryString = this.searchIndustryString.substring(
-        0,
-        this.searchIndustryString.length - 1
-      ))
+          0,
+          this.searchIndustryString.length - 1
+        ))
       : (this.searchIndustryString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       if (
@@ -215,12 +234,17 @@ export class ViewprojectsComponent implements OnInit {
   }
 
   searchSkillsEvent(event: any) {
+    this.areaOptionSelect = null;
+    this.selectedOption = null;
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+
     this.displayedProjects = new Array();
     event.data === null
       ? (this.searchSkillsString = this.searchSkillsString.substring(
-        0,
-        this.searchSkillsString.length - 1
-      ))
+          0,
+          this.searchSkillsString.length - 1
+        ))
       : (this.searchSkillsString += event.data.toLowerCase());
     this.projects.forEach((project) => {
       let requiredSkills: string[] = project.requiredSkills;
@@ -313,8 +337,8 @@ export class ViewprojectsComponent implements OnInit {
 
   reset() {
     this.displayedProjects = this.projects;
-    this.sortOrder = -1;
-    this.sortField = '';
+    this.areaOptionSelect = null;
+    this.selectedOption = null;
     this.searchNameString = '';
     this.searchIndustryString = '';
     this.searchSkillsString = '';

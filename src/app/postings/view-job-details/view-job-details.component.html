@@ -34,6 +34,9 @@
         <img *ngIf="jobToView.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
         <img *ngIf="jobToView.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
       </mat-card>
+      <div style="margin-bottom: 10px;"></div>
+      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="viewStartupDetails()">View
+        startup</button>
     </div>
 
     <mat-card style="background-color: #f5eff7">

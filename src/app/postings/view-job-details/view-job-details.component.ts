@@ -24,6 +24,7 @@ export class ViewJobDetailsComponent implements OnInit {
   jobToView: any;
   retrieveJobError: boolean;
   requiredSkills: string[] | undefined;
+  startupId:number | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -43,7 +44,7 @@ export class ViewJobDetailsComponent implements OnInit {
     private router: Router,
 
     private sessionService: SessionService,
-    public applicationService: ApplicationService,
+    public applicationService: ApplicationService
   ) {
     this.postingId = null;
     this.jobToView = new Job();
@@ -63,6 +64,8 @@ export class ViewJobDetailsComponent implements OnInit {
           if (response.latestStartDate !== undefined) {
             latestStart = new Date(response.latestStartDate);
           }
+
+          this.startupId = response.startup?.startupId;
 
           this.jobToView.postingId = response.postingId;
           this.jobToView.title = response.title;
@@ -94,18 +97,25 @@ export class ViewJobDetailsComponent implements OnInit {
     application.studentId = this.sessionService.getCurrentStudent()?.studentId;
 
     this.applicationService.createNewApplication(application).subscribe(
-      response => {
-
+      (response) => {
         this.childEvent.emit(true);
         this.messageService.add({
-          severity: 'success', summary: "Application sent successfully"
+          severity: 'success',
+          summary: 'Application sent successfully',
         });
       },
-      error => {
+      (error) => {
         this.messageService.add({
-          severity: 'error', summary: "Error", detail: 'Unable to create application. You have already applied for the job.'
-        })
+          severity: 'error',
+          summary: 'Error',
+          detail:
+            'Unable to create application. You have already applied for the job.',
+        });
       }
     );
+  }
+
+  viewStartupDetails() {
+    this.router.navigate(['/viewStartupDetails/' + this.startupId]);
   }
 }

@@ -33,6 +33,8 @@ export class ViewAllJobsComponent {
   searchNameString: string = '';
   searchIndustryString: string = '';
   searchSkillsString: string = '';
+  areaSelectOption: string | null;
+  selectSalaryOption: string | null;
 
   student: StudentWrapper | undefined;
 
@@ -57,6 +59,8 @@ export class ViewAllJobsComponent {
     this.student = this.sessionService.getCurrentStudent();
     this.jobs = new Array();
     this.displayedJobs = new Array();
+    this.areaSelectOption = null;
+    this.selectSalaryOption = null;
     this.sortOptions = [
       { label: 'High to Low', value: 'HighToLow' },
       { label: 'Low to High', value: 'LowToHigh' },
@@ -190,8 +194,8 @@ export class ViewAllJobsComponent {
   }
   reset() {
     this.displayedJobs = this.jobs;
-    this.sortOrder = -1;
-    this.sortField = '';
+    this.areaSelectOption = null;
+    this.selectSalaryOption = null;
     this.searchNameString = '';
     this.searchIndustryString = '';
     this.searchSkillsString = '';
@@ -199,6 +203,13 @@ export class ViewAllJobsComponent {
 
   onSortChange(event: any) {
     let value = event.value;
+
+    this.areaSelectOption = null;
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
+
+    this.displayedJobs = this.jobs;
 
     if (value.indexOf('H') === 0) {
       this.displayedJobs.sort((a, b) => (a.pay > b.pay ? -1 : 1));
@@ -218,6 +229,11 @@ export class ViewAllJobsComponent {
 
   onAreaChange(event: any) {
     let value = event.value;
+
+    this.selectSalaryOption = null;
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
 
     this.displayedJobs = new Array();
 
@@ -256,11 +272,17 @@ export class ViewAllJobsComponent {
 
   searchNameEvent(event: any) {
     this.displayedJobs = new Array();
+
+    this.areaSelectOption = null;
+    this.selectSalaryOption = null;
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
+
     event.data === null
       ? (this.searchNameString = this.searchNameString.substring(
-        0,
-        this.searchNameString.length - 1
-      ))
+          0,
+          this.searchNameString.length - 1
+        ))
       : (this.searchNameString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.title.toLowerCase().includes(this.searchNameString)) {
@@ -271,11 +293,17 @@ export class ViewAllJobsComponent {
 
   searchIndustryEvent(event: any) {
     this.displayedJobs = new Array();
+
+    this.areaSelectOption = null;
+    this.selectSalaryOption = null;
+    this.searchNameString = '';
+    this.searchSkillsString = '';
+
     event.data === null
       ? (this.searchIndustryString = this.searchIndustryString.substring(
-        0,
-        this.searchIndustryString.length - 1
-      ))
+          0,
+          this.searchIndustryString.length - 1
+        ))
       : (this.searchIndustryString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.industry.toLowerCase().startsWith(this.searchIndustryString)) {
@@ -286,11 +314,17 @@ export class ViewAllJobsComponent {
 
   searchSkillsEvent(event: any) {
     this.displayedJobs = new Array();
+
+    this.areaSelectOption = null;
+    this.selectSalaryOption = null;
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+
     event.data === null
       ? (this.searchSkillsString = this.searchSkillsString.substring(
-        0,
-        this.searchSkillsString.length - 1
-      ))
+          0,
+          this.searchSkillsString.length - 1
+        ))
       : (this.searchSkillsString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       let requiredSkills: string[] = job.requiredSkills;
@@ -311,12 +345,5 @@ export class ViewAllJobsComponent {
       return 1;
     }
     return 0;
-  }
-
-  reloadCurrentRoute() {
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
   }
 }
