@@ -18,12 +18,12 @@ export abstract class Posting {
     offers: Offer[] | undefined;
     applications: Application[] | undefined;
     startup: Startup | undefined;
-    acceptedStudent: StudentWrapper | undefined;
+    acceptedStudentId: number | undefined;
 
     constructor(postingId?: number, title?: string,
         description?: string, pay?: number,
         earliestStartDate?: Date, latestStartDate?: Date,
-        industry?: Industry, requiredSkills?: string[], acceptedStudent?: StudentWrapper, isProject?: boolean) {
+        industry?: Industry, requiredSkills?: string[], acceptedStudentId?: number, isProject?: boolean) {
         this.postingId = postingId;
         this.title = title;
         this.description = description;
@@ -32,7 +32,7 @@ export abstract class Posting {
         this.latestStartDate = latestStartDate;
         this.industry = industry;
         this.requiredSkills = requiredSkills;
-        this.acceptedStudent = acceptedStudent;
+        this.acceptedStudentId = acceptedStudentId;
         this.isProject = isProject;
     }
 }

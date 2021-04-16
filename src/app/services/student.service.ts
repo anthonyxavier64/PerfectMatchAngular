@@ -76,6 +76,11 @@ export class StudentService {
     .pipe(catchError(this.handleError));
   }
 
+  getStudentWork(studentId: number): Observable<Posting[]> {
+    return this.httpClient.get<Posting[]>(this.baseUrl + "/getStudentPostings/" + studentId)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = '';
 
