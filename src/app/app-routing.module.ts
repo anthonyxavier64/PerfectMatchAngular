@@ -13,6 +13,7 @@ import { ViewofferdetailsComponent } from './offers/viewofferdetails/viewofferde
 import { ViewallapplicationsComponent } from './applications/viewallapplications/viewallapplications.component';
 import { ViewapplicationdetailsComponent } from './applications/viewapplicationdetails/viewapplicationdetails.component';
 import { ViewAllFavoritesComponent } from './favorites/view-all-favorites/view-all-favorites.component';
+import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'offer/viewOffer/:offerId', component: ViewofferdetailsComponent},
   { path: 'applications/viewallapplications', component: ViewallapplicationsComponent},
   { path: 'applications/viewapplicationdetails/:applicationId', component: ViewapplicationdetailsComponent},
-  { path: 'favorites/viewAllFavorites', component: ViewAllFavoritesComponent}
+  { path: 'favorites/viewAllFavorites', component: ViewAllFavoritesComponent},
+  { path: 'viewStartupDetails/:startupId', component: ViewstartupdetailsComponent}
 
 ];
 @NgModule({
