@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'applications/viewallapplications', component: ViewallapplicationsComponent},
   { path: 'applications/viewapplicationdetails/:applicationId', component: ViewapplicationdetailsComponent},
   { path: 'favorites/viewAllFavorites', component: ViewAllFavoritesComponent},
-  { path: 'work/viewWorkExperience', component: ViewWorkExperienceComponent}
+  { path: 'work/viewWorkExperience', component: ViewWorkExperienceComponent},
   { path: 'viewStartupDetails/:startupId', component: ViewstartupdetailsComponent}
 
 ];
