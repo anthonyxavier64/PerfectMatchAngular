@@ -21,21 +21,24 @@
     <!-- Add Content Here -->
     <p-dataView [value]="displayedJobs" layout="grid" [loading]="isLoading">
       <ng-template pTemplate="header">
-        <p-dropdown [options]="sortOptions" placeholder="Sort By Monthly Salary" (onChange)="onSortChange($event)"
-          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
-        <p-dropdown [options]="areaOptions" placeholder="Filter By Area" (onChange)="onAreaChange($event)"
-          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
+        <p-dropdown [options]="sortOptions" [(ngModel)]='selectSalaryOption' placeholder="Sort By Monthly Salary"
+          (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
+        <p-dropdown [options]="areaOptions" placeholder="Filter By Area" [(ngModel)]='areaSelectOption'
+          (onChange)="onAreaChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Name" (input)="searchNameEvent($event)">
+          <input type="search" [(ngModel)]='searchNameString' pInputText placeholder="Search by Name"
+            (input)="searchNameEvent($event)">
         </span>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Industry" (input)="searchIndustryEvent($event)">
+          <input type="search" pInputText [(ngModel)]='searchIndustryString' placeholder="Search by Industry"
+            (input)="searchIndustryEvent($event)">
         </span>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Skills" (input)="searchSkillsEvent($event)">
+          <input type="search" pInputText placeholder="Search by Skills" [(ngModel)]='searchSkillsString'
+            (input)="searchSkillsEvent($event)">
         </span>
         &nbsp;
         <button style="display:inline-block" (click)="reset()" mat-stroked-button>
@@ -67,13 +70,13 @@
               </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
-              <button *ngIf="bookmarked(job) == false" style="width:10px; display:inline-block"
+              <button *ngIf="bookmarked(job) == false" style="width:10px; display:inline-block;"
                 (click)="addToFavorites(job)" mat-icon-button>
-                <mat-icon>bookmark_border</mat-icon>
+                <mat-icon>favorite_border</mat-icon>
               </button>
               <button style="width:10px; display:inline-block" *ngIf="bookmarked(job) == true"
                 (click)="removeFromFavourites(job)" mat-icon-button>
-                <mat-icon>bookmark</mat-icon>
+                <mat-icon [ngStyle]="{'color':'red'}">favorite</mat-icon>
               </button>
               &nbsp;
               <button style="display:inline-block" mat-raised-button
