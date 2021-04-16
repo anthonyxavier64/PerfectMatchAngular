@@ -61,3 +61,10 @@ h3 {
 .mat-icon {
   font-size: 66px;
 }
+
+hr {
+  border: dotted #e0e0e0 6px;
+  border-bottom: none;
+  width: 4%;
+  margin: 30px auto 50px auto;
+}

@@ -75,6 +75,7 @@ export class ProjectdetailsComponent implements OnInit {
           this.projectToView.projectSpecialisation =
             response.projectSpecialisation;
           this.projectToView.isComplete = response.isComplete;
+          this.projectToView.acceptedStudentId = response.acceptedStudentId;
         },
         (error) => {
           this.messageService.add({
@@ -85,6 +86,13 @@ export class ProjectdetailsComponent implements OnInit {
         }
       );
     }
+  }
+
+  isAvailable() : boolean {
+    if (this.projectToView.acceptedStudentId != null) {
+      return false;
+    }
+    return true;
   }
 
   apply() {
@@ -103,7 +111,7 @@ export class ProjectdetailsComponent implements OnInit {
       },
       (error) => {
         this.messageService.add({
-          severity: 'error', summary: "Error", detail: 'Unable to create application. You have already applied for the project.'
+          severity: 'error', summary: "Error", detail: 'Unable to create application. An application or offer already exists.'
         });
       }
     );

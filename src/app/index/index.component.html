@@ -18,7 +18,8 @@
     </mat-toolbar>
 
     <!-- Add Content Here -->
-    <div style="text-align:center; padding:155px 50px; background-image: url(../../assets/images/office.jpeg);" class="title-div">
+    <div style="text-align:center; padding:155px 50px; background-image: url(../../assets/images/office.jpeg);"
+      class="title-div">
       <h1 class="perfect-match-title" style="font-size: 50px;">
         Perfect Match
       </h1>
@@ -39,9 +40,9 @@
 
         <div class="feature-column">
           <h3>Grow Your Skills</h3>
-              <br />
-              <p class="feature-p">Immerse yourself in in the fast-paced and vibrant start-up environment.
-              </p>
+          <br />
+          <p class="feature-p">Immerse yourself in in the fast-paced and vibrant start-up environment.
+          </p>
         </div>
         <mat-divider [vertical]="true" style="height:170px"></mat-divider>
 
@@ -54,11 +55,19 @@
       </div>
     </div>
 
-    <!-- <mat-grid-list cols="3" rowHeight="1.5:1" gutterSize="5px">
-      <mat-grid-tile colspan="2"><img src="../../assets/images/Internship.jpg" /></mat-grid-tile>
-      <mat-grid-tile><img src="../../assets/images/Learning.jpg" /></mat-grid-tile>
-      <mat-grid-tile>3</mat-grid-tile>
-      <mat-grid-tile colspan="2"><img src="../../assets/images/Rocketship.png" /></mat-grid-tile>
-    </mat-grid-list> -->
+    <hr />
+
+    <div style="text-align: center; padding-bottom: 7%;">
+      <h1 style="font-size: 35px;">Contact Us</h1>
+      <i style="text-align: center; font-size: 15px;">Drop us an email, the Perfect Match team is just a click away.</i>
+      <div style="text-align: center; padding-top: 35px;">
+        <button mat-raised-button (click)="emailEnquiries()">General enquiries</button>
+          &nbsp;&middot;&nbsp;
+          <button mat-raised-button (click)="emailBusiness()">Collaborate with us</button>
+          &nbsp;&middot;&nbsp;
+          <button mat-raised-button (click)="emailRecruit()">Join our team</button>
+      </div>
+    </div>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

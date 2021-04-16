@@ -46,8 +46,9 @@ import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
+import { ViewWorkExperienceComponent } from './work/view-work-experience/view-work-experience.component';
+import { FooterComponent } from './footer/footer.component';
 import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
-// import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,8 @@ import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewst
     ViewallapplicationsComponent,
     ViewapplicationdetailsComponent,
     ViewAllFavoritesComponent,
+    ViewWorkExperienceComponent,
+    FooterComponent,
     ViewstartupdetailsComponent,
   ],
   imports: [

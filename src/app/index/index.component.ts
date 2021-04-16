@@ -31,4 +31,16 @@ export class IndexComponent {
   setIsLogin(isLogin: boolean) {
     this.isLogin = isLogin;
   }
+
+  emailEnquiries() {
+    location.href = "mailto:perfectMatch_enquiries@gmail.com";
+  }
+
+  emailBusiness() {
+    location.href = "mailto:perfectMatch_partnerships@gmail.com";
+  }
+
+  emailRecruit() {
+    location.href = "mailto:perfectMatch_recruitment@gmail.com";
+  }
 }

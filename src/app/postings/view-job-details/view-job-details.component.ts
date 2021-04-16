@@ -75,6 +75,7 @@ export class ViewJobDetailsComponent implements OnInit {
           this.jobToView.latestStartDate = latestStart;
           this.jobToView.industry = response.industry;
           this.jobToView.requiredSkills = response.requiredSkills;
+          this.jobToView.acceptedStudentId = response.acceptedStudentId;
         },
         (error) => {
           this.retrieveJobError = true;
@@ -87,6 +88,13 @@ export class ViewJobDetailsComponent implements OnInit {
         }
       );
     }
+  }
+
+  isAvailable() : boolean {
+    if (this.jobToView.acceptedStudentId != null) {
+      return false;
+    }
+    return true;
   }
 
   apply() {
@@ -106,11 +114,8 @@ export class ViewJobDetailsComponent implements OnInit {
       },
       (error) => {
         this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail:
-            'Unable to create application. You have already applied for the job.',
-        });
+          severity: 'error', summary: "Error", detail: 'Unable to create application. An application or offer already exists.'
+        })
       }
     );
   }
