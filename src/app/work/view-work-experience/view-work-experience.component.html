@@ -1,0 +1,100 @@
+<p-toast></p-toast>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar style="background-color: rgb(43, 14, 88);">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon style="font-size: 30px; color: whitesmoke;" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
+
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+    <p-dataView #dv [value]="displayedPostings" layout="grid" [loading]="isLoading" filterBy="postingTitle">
+      <ng-template pTemplate="header">
+        <p-dropdown [options]="sortOptions" placeholder="Sort By Pay" (onChange)="onSortChange($event)"
+          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
+        <p-dropdown [options]="areaOptions" placeholder="Filter By Area" (onChange)="onAreaChange($event)"
+          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
+        <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
+          <i class="pi pi-search"></i>
+          <input type="search" pInputText placeholder="Search by Name" (input)="searchNameEvent($event)">
+        </span>&nbsp;
+        <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
+          <i class="pi pi-search"></i>
+          <input type="search" pInputText placeholder="Search by Industry" (input)="searchIndustryEvent($event)">
+        </span>&nbsp;
+        <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
+          <i class="pi pi-search"></i>
+          <input type="search" pInputText placeholder="Search by Skills" (input)="searchSkillsEvent($event)">
+        </span>
+        &nbsp;
+        <button style="display:inline-block" (click)="reset()" mat-stroked-button>
+          <mat-icon style="color: grey">refresh</mat-icon>
+          Reset
+        </button>
+      </ng-template>
+      <ng-template let-posting pTemplate="gridItem" style="display: flex; justify-content: center; align-items: center;">
+        <div class="p-col-2" style="margin: 10px 10px 10px 10px;">
+          <mat-card>
+            <mat-card-title>{{posting.title}}</mat-card-title>
+            <mat-card-subtitle>{{posting.industry}}</mat-card-subtitle>
+            <img *ngIf="posting.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
+            <img *ngIf="posting.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
+            <img *ngIf="posting.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
+            <img *ngIf="posting.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
+            <img *ngIf="posting.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="posting.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
+            <img *ngIf="posting.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
+            
+            <mat-card-content *ngIf="!posting.isProject">
+              Monthly Salary: ${{posting.pay}}
+              <div *ngIf="posting.earliestStartDate !== undefined">
+                <br>
+                Earliest start date:<br>{{posting.earliestStartDate | date: 'dd-MM-yyyy'}}
+              </div>
+              <div *ngIf="posting.latestStartDate !== undefined">
+                <br>
+                Latest start date:<br>{{posting.latestStartDate | date: 'dd-MM-yyyy'}}
+              </div>
+            </mat-card-content>
+
+            <mat-card-content *ngIf="posting.isProject">
+              Compensation: ${{posting.pay}}
+              <div *ngIf="posting.earliestStartDate !== undefined">
+                <br>
+                Earliest start date:<br>{{posting.earliestStartDate | date: 'dd-MM-yyyy'}}
+              </div>
+              <div *ngIf="posting.latestStartDate !== undefined">
+                <br>
+                Latest start date:<br>{{posting.latestStartDate | date: 'dd-MM-yyyy'}}
+              </div>
+            </mat-card-content>
+            
+            <mat-card-actions style="text-align: right;">
+              <button *ngIf="!posting.isProject" style="display:inline-block" mat-raised-button
+                routerLink="/postings/viewJobDetails/{{posting.postingId}}">
+                Details
+              </button>
+              <button *ngIf="posting.isProject" style="display:inline-block" mat-raised-button
+              routerLink="/postings/viewProjectDetails/{{posting.postingId}}">
+                Details
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+      </ng-template>
+    </p-dataView>
+  </mat-sidenav-content>
+</mat-sidenav-container>

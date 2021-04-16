@@ -82,9 +82,12 @@
       </mat-card>
     </mat-card>
     <div style="margin-bottom: 100px"></div>
-    <div style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
+    <div *ngIf="isAvailable() == true" style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
       <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="apply()">Apply
         Now</button>
+    </div>
+    <div *ngIf="isAvailable() == false" style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
+      <button style="font-size:18px;" mat-button color="disabled">Application Closed</button>
     </div>
 
   </mat-sidenav-content>
