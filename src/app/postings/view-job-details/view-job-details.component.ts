@@ -103,7 +103,7 @@ export class ViewJobDetailsComponent implements OnInit {
       },
       error => {
         this.messageService.add({
-          severity: 'error', summary: "Error", detail: 'Unable to create application. Could have already applied.'
+          severity: 'error', summary: "Error", detail: 'Unable to create application. You have already applied for the job.'
         })
       }
     );

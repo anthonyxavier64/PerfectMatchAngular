@@ -14,6 +14,7 @@ import { Application } from 'src/app/models/application';
 import { ApplicationStatus } from 'src/app/enumeration/application-status.enum';
 import { SessionService } from 'src/app/services/session.service';
 import { ApplicationService } from 'src/app/services/application.service';
+import { OfferStatus } from 'src/app/enumeration/offer-status.enum';
 
 @Component({
   selector: 'app-viewofferdetails',
@@ -109,24 +110,46 @@ export class ViewofferdetailsComponent {
     }
   }
 
-  apply() {
-    let application: Application = new Application();
-    application.offerSent = false;
-    application.applicationStatus = ApplicationStatus.PENDING;
-    application.postingId = this.posting.postingId;
-    application.studentId = this.sessionService.getCurrentStudent()?.studentId;
-    this.applicationService.createNewApplication(application).subscribe(
+  declineOffer() {
+    this.offer.offerStatus = OfferStatus.REJECTED;
+    this.offerService.updateOffer(this.offer).subscribe(
       (response) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Application sent successfully',
+          summary: 'Offer declined successfully',
         });
       },
       (error) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Unable to create application. Could have already applied.',
+          detail: 'Unable to decline offer.',
+        });
+      }
+    );
+  }
+
+  isPending(): boolean {
+    if (this.offer.offerStatus == OfferStatus.PENDING) {
+      return true;
+    }
+    return false;
+  }
+
+  acceptOffer() {
+    this.offer.offerStatus = OfferStatus.ACCEPTED;
+    this.offerService.updateOffer(this.offer).subscribe(
+      (response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Offer accepted successfully',
+        });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Unable to accept offer.',
         });
       }
     );

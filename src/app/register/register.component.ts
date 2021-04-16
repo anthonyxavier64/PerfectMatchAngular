@@ -68,6 +68,16 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  removeSkill(skillitem: String) {
+    let index: number = -1;
+    for (let i = 0; i < this.relevantSkills.length; i++) {
+      if (this.relevantSkills[i] == skillitem) {
+        index = i;
+      }
+    }
+    this.relevantSkills.splice(index, 1);
+  }
+
   create(createStudentForm: NgForm) {
     this.submitted = true;
 
