@@ -21,8 +21,8 @@
 
     <div class="p-col-6" style="vertical-align: middle; text-align: center; margin: 0 auto;">
       <mat-card style="margin: auto; float: center">
-        <mat-card-title>{{projectToView.title}}</mat-card-title>
-        <mat-card-subtitle>{{projectToView.industry}}</mat-card-subtitle>
+        <mat-card-title style="font-size: 30px;">{{projectToView.title}}</mat-card-title>
+        <mat-card-subtitle style="font-size: 15px;">{{projectToView.industry}}</mat-card-subtitle>
         <img *ngIf="projectToView.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
         <img *ngIf="projectToView.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
         <img *ngIf="projectToView.industry === 'ENGINEERING'" mat-card-image
@@ -33,6 +33,8 @@
         <img *ngIf="projectToView.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
         <img *ngIf="projectToView.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
       </mat-card>
+      <div style="margin-bottom: 10px;"></div>
+      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="viewStartupDetails()">View startup</button>
     </div>
 
     <mat-card style="background-color: #f5eff7">

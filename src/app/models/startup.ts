@@ -1,10 +1,11 @@
 import { StartupLocation } from "../enumeration/startup-location.enum";
 import { Payment } from "./payment";
 import { Posting } from "./posting";
+import { ReviewOfStartup } from "./review-of-startup";
 
 export class Startup {
     startupId: number | undefined;
-    startupRegistrationName: string | undefined;
+    startupRegistrationNum: string | undefined;
     companyName: string | undefined;
     description: string | undefined;
     email: string | undefined;
@@ -14,12 +15,13 @@ export class Startup {
     rating: string | undefined;
     postings: Posting[] | undefined;
     payments: Payment[] | undefined;
+    reviews: ReviewOfStartup[] | undefined;
 
-    constructor(startupId?: number, startupRegistrationName?: string,
+    constructor(startupId?: number, startupRegistrationNum?: string,
         companyName?: string, description?: string, email?: string, password?: string,
         industry?: string, startupLocation?: StartupLocation, rating?: string) {
             this.startupId = startupId;
-            this.startupRegistrationName = startupRegistrationName;
+            this.startupRegistrationNum = startupRegistrationNum;
             this.companyName = companyName;
             this.email = email;
             this.password = password;

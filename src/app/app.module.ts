@@ -48,7 +48,7 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import { ViewWorkExperienceComponent } from './work/view-work-experience/view-work-experience.component';
 import { FooterComponent } from './footer/footer.component';
-// import {TimelineModule} from 'primeng/timeline';
+import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +70,7 @@ import { FooterComponent } from './footer/footer.component';
     ViewAllFavoritesComponent,
     ViewWorkExperienceComponent,
     FooterComponent,
+    ViewstartupdetailsComponent,
   ],
   imports: [
     BrowserModule,

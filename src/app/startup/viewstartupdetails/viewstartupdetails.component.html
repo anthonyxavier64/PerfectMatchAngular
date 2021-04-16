@@ -3,19 +3,15 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
-
   </mat-sidenav>
-
   <mat-sidenav-content>
-
     <mat-toolbar style="background-color: rgb(43, 14, 88);">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon style="font-size: 30px; color:whitesmoke" aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <app-loginform style="margin-bottom: 30px;"></app-loginform>
       <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
-
     </mat-toolbar>
     <!-- Add Content Here -->
     <div class="p-col-6" style="vertical-align: middle; text-align: center; margin: 0 auto;">
@@ -33,7 +29,7 @@
       </mat-card>
     </div>
 
-    <mat-card style="background-color: #f5eff7;;">
+    <mat-card style="background-color: #d4ccd6;">
       <mat-card-title style="font-size: 30px;">
         Startup details
       </mat-card-title>
@@ -80,111 +76,31 @@
           {{startup.startupLocation}}
         </mat-card-content>
       </mat-card>
-      <mat-card style="width: 38%; margin: 10px 0 0 0">
-        <mat-card-title>
-          Company rating
-        </mat-card-title>
-        <mat-card-content>
+    </mat-card>
+
+    <div style="margin-bottom: 50px"></div>
+
+    <mat-card style="background-color: #d4ccd6;">
+      <mat-card-title style="font-size: 30px;">
+        Reviews
+        <mat-card-content style="margin-top: 20px;">
           <p-rating [(ngModel)]="startup.rating" [readonly]="true" [cancel]="false"></p-rating>
         </mat-card-content>
-      </mat-card>
-    </mat-card>
-
-    <div style="margin-bottom: 50px"></div>
-
-    <mat-card style="background-color: #f5eff7;">
-      <mat-card-title style="font-size: 30px; font-weight: medium;">
-        Offer details
       </mat-card-title>
-      <div style="margin-bottom: 20px"></div>
-      <mat-card style="width: 50%; float: left;">
-        <mat-card-title>
-          Offer mesage
-        </mat-card-title>
-        <mat-card-content style="font-size: 18px;">
-          {{offer.offerMessage}}
-        </mat-card-content>
-      </mat-card>
-      <mat-card style="width: 40%; float: right;">
-        <mat-card-title>
-          Offer status
-        </mat-card-title>
-        <mat-card-content style="font-size: 18px;">
-          {{offer.offerStatus}}
-        </mat-card-content>
-      </mat-card>
-      <div style="clear: both;"></div>
+      <mat-card-content *ngFor="let rev of startup.reviews">
+        <mat-card *ngIf="rev.studentWrapper !== undefined">
+          <mat-card-title>
+            {{rev.studentWrapper.name}}
+          </mat-card-title>
+          <div style='margin-top:10px'></div>
+          <mat-card-subtitle>
+            <p-rating [(ngModel)]="rev.rating" [readonly]="true" [cancel]="false"></p-rating>
+          </mat-card-subtitle>
+          <mat-card-content  style="font-size: 18px;">
+            {{rev.review}}
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
     </mat-card>
-
-    <div style="margin-bottom: 50px"></div>
-
-    <mat-card style="background-color: #f5eff7;">
-      <mat-card-title style="font-size: 30px; font-weight: medium;">
-        <div *ngIf="isProject">Project details</div>
-        <div *ngIf="!isProject">Job details</div>
-      </mat-card-title>
-      <div style="margin-bottom: 20px"></div>
-      <div *ngIf="posting !== undefined">
-        <mat-card style="width: 38%; float: left;">
-          <mat-card-title>
-            Title
-          </mat-card-title>
-          <mat-card-content style="font-size: 18px;">
-            {{posting.title}}
-          </mat-card-content>
-        </mat-card>
-        <mat-card style="width: 60%; float: right;">
-          <mat-card-title>
-            Description
-          </mat-card-title>
-          <mat-card-content style="font-size: 18px;">
-            {{posting.description}}
-          </mat-card-content>
-        </mat-card>
-        <div style="clear: both;"></div>
-        <mat-card style="width: 38%; margin: 10px 0 0 0">
-          <mat-card-title>
-            Start date
-          </mat-card-title>
-          <mat-card-content style="font-size: 18px;">
-            Earliest: {{posting.earliestStartDate | date:"dd-MM-yyyy"}} | Latest:
-            {{posting.latestStartDate | date:"dd-MM-yyyy"}}
-          </mat-card-content>
-        </mat-card>
-        <mat-card style="width: 38%; margin: 10px 0 0 0">
-          <mat-card-title>
-            Required skills
-          </mat-card-title>
-          <mat-card-content style="font-size: 18px;" *ngFor="let skill of posting.requiredSkills">
-            {{skill}}
-          </mat-card-content>
-        </mat-card>
-        <div *ngIf="isProject">
-          <mat-card style="width: 38%; margin: 10px 0 0 0">
-            <mat-card-title>
-              Specialisation
-            </mat-card-title>
-            <mat-card-content style="font-size: 18px;">
-              {{projectSpecialisation}}
-            </mat-card-content>
-          </mat-card>
-          <mat-card style="width: 38%; margin: 10px 0 0 0">
-            <mat-card-title>
-              Milestones
-            </mat-card-title>
-            <mat-card-content style="font-size: 18px;" *ngFor="let milestone of milestones">
-              {{milestone}}
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-    </mat-card>
-
-    <div style="margin-bottom: 100px"></div>
-    <div *ngIf="isPending()" style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
-      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="acceptOffer()">Accept Offer</button>
-      &nbsp;
-      <button style="font-size:18px" mat-raised-button color="basic" type="submit" (click)="declineOffer()">Decline Offer</button>
-    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
