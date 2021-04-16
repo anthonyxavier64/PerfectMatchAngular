@@ -79,8 +79,12 @@ export class ViewAllFavoritesComponent {
       }
       this.favorites.splice(index, 1);
       this.student.favorites = this.favorites;
+      
+      let newFav: Favourites = new Favourites();
+      newFav.postingId = posting.postingId;
+      newFav.studentId = this.student.studentId;
 
-      this.studentService.editStudentDetails(this.student).subscribe(
+      this.studentService.removeFavourite(newFav).subscribe(
         (response) => {
           this.sessionService.setCurrentStudent(response);
           this.messageService.add({
