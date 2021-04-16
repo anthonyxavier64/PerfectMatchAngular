@@ -24,8 +24,8 @@
         <span *ngIf="retrieveJobError == true" style="color:red;">Job ID {{postingId}} does not exist!</span>
         <span *ngIf="postingId == null" style="color:red;">Job ID {{postingId}} does not exist!</span>
 
-        <mat-card-title>{{jobToView.title}}</mat-card-title>
-        <mat-card-subtitle>{{jobToView.industry}}</mat-card-subtitle>
+        <mat-card-title style="font-size: 30px;">{{jobToView.title}}</mat-card-title>
+        <mat-card-subtitle style="font-size: 15px;">{{jobToView.industry}}</mat-card-subtitle>
         <img *ngIf="jobToView.industry === 'EDUCATION'" mat-card-image src="../../../assets/images/education.jpg">
         <img *ngIf="jobToView.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
         <img *ngIf="jobToView.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">

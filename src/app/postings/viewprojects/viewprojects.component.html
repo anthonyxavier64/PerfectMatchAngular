@@ -19,7 +19,7 @@
     </mat-toolbar>
 
     <!-- Add Content Here -->
-    <p-dataView [value]="displayedProjects" layout="grid" [loading]="isLoading" filterBy="projectTitle">
+    <p-dataView [value]="displayedProjects" layout="grid" [loading]="isLoading">
       <ng-template pTemplate="header">
         <p-dropdown [options]="sortOptions" placeholder="Sort By Compensation" (onChange)="onSortChange($event)"
           styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;

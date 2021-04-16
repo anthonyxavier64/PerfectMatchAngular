@@ -46,6 +46,7 @@ import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
+import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
 // import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
@@ -66,6 +67,7 @@ import {DialogModule} from 'primeng/dialog';
     ViewallapplicationsComponent,
     ViewapplicationdetailsComponent,
     ViewAllFavoritesComponent,
+    ViewstartupdetailsComponent,
   ],
   imports: [
     BrowserModule,

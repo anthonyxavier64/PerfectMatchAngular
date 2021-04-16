@@ -23,6 +23,7 @@ export class ProjectdetailsComponent implements OnInit {
   postingId: string | null;
   projectToView: any;
   milestones: string[] | undefined;
+  startupId: number | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -52,24 +53,28 @@ export class ProjectdetailsComponent implements OnInit {
     if (this.postingId !== null) {
       this.projectService.getProjectById(parseInt(this.postingId)).subscribe(
         (response) => {
-            let earliestStart = undefined;
-            let latestStart = undefined;
-            if (response.earliestStartDate !== undefined) {
-              earliestStart = new Date(response.earliestStartDate);
-            }
-            if (response.latestStartDate !== undefined) {
-              latestStart = new Date(response.latestStartDate);
-            }
-            this.projectToView.postingId = response.postingId;
-            this.projectToView.title = response.title;
-            this.projectToView.description = response.description;
-            this.projectToView.pay = response.pay;
-            this.projectToView.earliestStartDate = earliestStart;
-            this.projectToView.latestStartDate = latestStart;
-            this.projectToView.industry = response.industry;
-            this.projectToView.requiredSkills = response.requiredSkills;
-            this.projectToView.projectSpecialisation = response.projectSpecialisation;
-            this.projectToView.isComplete = response.isComplete;
+          let earliestStart = undefined;
+          let latestStart = undefined;
+          if (response.earliestStartDate !== undefined) {
+            earliestStart = new Date(response.earliestStartDate);
+          }
+          if (response.latestStartDate !== undefined) {
+            latestStart = new Date(response.latestStartDate);
+          }
+
+          this.startupId = response.startup?.startupId;
+
+          this.projectToView.postingId = response.postingId;
+          this.projectToView.title = response.title;
+          this.projectToView.description = response.description;
+          this.projectToView.pay = response.pay;
+          this.projectToView.earliestStartDate = earliestStart;
+          this.projectToView.latestStartDate = latestStart;
+          this.projectToView.industry = response.industry;
+          this.projectToView.requiredSkills = response.requiredSkills;
+          this.projectToView.projectSpecialisation =
+            response.projectSpecialisation;
+          this.projectToView.isComplete = response.isComplete;
         },
         (error) => {
           this.messageService.add({
@@ -89,19 +94,22 @@ export class ProjectdetailsComponent implements OnInit {
     application.postingId = this.projectToView.postingId;
     application.studentId = this.sessionService.getCurrentStudent()?.studentId;
     this.applicationService.createNewApplication(application).subscribe(
-      response => {
-
+      (response) => {
         this.childEvent.emit(true);
         this.messageService.add({
-          severity: 'success', summary: "Application sent successfully"
+          severity: 'success',
+          summary: 'Application sent successfully',
         });
       },
-      error => {
+      (error) => {
         this.messageService.add({
           severity: 'error', summary: "Error", detail: 'Unable to create application. You have already applied for the project.'
-        })
+        });
       }
     );
   }
 
+  viewStartupDetails() {
+    this.router.navigate(['/viewStartupDetails/' + this.startupId]);
+  }
 }
