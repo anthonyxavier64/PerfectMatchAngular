@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -32,7 +33,7 @@
       </mat-card>
     </div>
 
-    <mat-card style="background-color: #d4ccd6;">
+    <mat-card style="background-color: #f5eff7;">
       <mat-card-title style="font-size: 30px; font-weight: bold;">
         Startup details
       </mat-card-title>
@@ -91,7 +92,7 @@
 
     <div style="margin-bottom: 50px"></div>
 
-    <mat-card style="background-color: #d4ccd6;">
+    <mat-card style="background-color: #f5eff7;">
       <mat-card-title style="font-size: 30px; font-weight: bold;">
         Application details
       </mat-card-title>
@@ -118,7 +119,7 @@
 
     <div style="margin-bottom: 50px"></div>
 
-    <mat-card style="background-color: #d4ccd6;">
+    <mat-card style="background-color: #f5eff7;">
       <mat-card-title style="font-size: 30px; font-weight: bold;">
         <div *ngIf="isProject">Project details</div>
         <div *ngIf="!isProject">Job details</div>

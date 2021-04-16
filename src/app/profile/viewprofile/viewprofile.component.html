@@ -22,7 +22,10 @@
       </p-tabMenu>
       <br>
       <div *ngIf="activeItem.label === 'Profile' && currentStudent">
-        <p-fieldset legend={{currentStudent.name}}>
+        <div style="text-align: center;">
+          <h1 style="font-size: xxx-large;">{{currentStudent.name}}</h1>
+        </div>
+        <p-fieldset legend=Biography>
           {{currentStudent.biography}}
         </p-fieldset>
         <br>
@@ -36,7 +39,8 @@
           <p-card subheader='Information' [style]="{'width': '50rem', 'height': '20rem'}">
             <ul style="list-style-type: none; margin: 0; padding: 0;">
               <li *ngIf="currentStudent.availabilityPeriod !== undefined">
-                Availability Period: <strong>{{this.startDate | date: 'dd-MM-yyyy'}} to {{this.endDate | date: 'dd-MM-yyyy'}}</strong>
+                Availability Period: <strong>{{this.startDate | date: 'dd-MM-yyyy'}} to {{this.endDate | date:
+                  'dd-MM-yyyy'}}</strong>
               </li>
               <li>
                 Projected Graduation Date: <strong>{{this.projectedGraduationYear | date: 'dd-MM-yyyy'}}</strong>

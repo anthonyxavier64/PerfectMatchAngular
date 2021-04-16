@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -22,6 +23,8 @@
       <ng-template pTemplate="header">
         <p-dropdown [options]="sortOptions" placeholder="Sort By Compensation" (onChange)="onSortChange($event)"
           styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
+          <p-dropdown [options]="areaOptions" placeholder="Filter By Area" (onChange)="onAreaChange($event)"
+          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
           <input type="search" pInputText placeholder="Search by Name" (input)="searchNameEvent($event)">
@@ -34,6 +37,11 @@
           <i class="pi pi-search"></i>
           <input type="search" pInputText placeholder="Search by Skills" (input)="searchSkillsEvent($event)">
         </span>
+        &nbsp;
+        <button style="display:inline-block" (click)="reset()" mat-stroked-button>
+          <mat-icon style="color: grey">refresh</mat-icon>
+          Reset
+        </button>
       </ng-template>
       <ng-template let-project pTemplate="gridItem"
         style="display: flex; justify-content: center; align-items: center;">
@@ -61,6 +69,15 @@
               </div>
             </mat-card-content>
             <mat-card-actions style="text-align: right;">
+              <button *ngIf="bookmarked(project) == false" style="width:10px; display:inline-block"
+                (click)="addToFavorites(project)" mat-icon-button>
+                <mat-icon>bookmark_border</mat-icon>
+              </button>
+              <button style="width:10px; display:inline-block" *ngIf="bookmarked(project) == true"
+                (click)="removeFromFavourites(project)" mat-icon-button>
+                <mat-icon>bookmark</mat-icon>
+              </button>
+              &nbsp;
               <button mat-raised-button routerLink="/postings/viewProjectDetails/{{project.postingId}}">Details</button>
             </mat-card-actions>
           </mat-card>

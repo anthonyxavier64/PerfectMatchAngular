@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -10,7 +11,7 @@
     <mat-toolbar style="background-color: rgb(43, 14, 88);">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon style="font-size: 30px;" aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon style="font-size: 30px; color:whitesmoke" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <app-loginform style="margin-bottom: 30px;"></app-loginform>
       <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
@@ -180,9 +181,10 @@
     </mat-card>
 
     <div style="margin-bottom: 100px"></div>
-    <div style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
-      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="apply()">Apply
-        Now</button>
+    <div *ngIf="isPending()" style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
+      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="acceptOffer()">Accept Offer</button>
+      &nbsp;
+      <button style="font-size:18px" mat-raised-button color="basic" type="submit" (click)="declineOffer()">Decline Offer</button>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

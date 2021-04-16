@@ -16,6 +16,7 @@ import { Job } from 'src/app/models/job';
   styleUrls: ['./viewapplicationdetails.component.css'],
   providers: [MessageService],
 })
+
 export class ViewapplicationdetailsComponent {
   isLogin: boolean = true;
   application: Application;

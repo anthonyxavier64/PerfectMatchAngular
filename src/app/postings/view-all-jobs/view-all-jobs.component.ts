@@ -144,7 +144,7 @@ export class ViewAllJobsComponent {
           this.sessionService.setCurrentStudent(response);
           this.messageService.add({
             severity: 'success',
-            summary: 'posting added to favorites!',
+            summary: 'Job added to favorites!',
           });
         },
         (error) => {
@@ -163,7 +163,7 @@ export class ViewAllJobsComponent {
       let newFav: Favourites = new Favourites();
       newFav.postingId = job.postingId;
       newFav.studentId = this.student.studentId;
-      let index:number = -1;
+      let index: number = -1;
       for (let i = 0; i < this.bookmarkIds.length; i++) {
         if (this.bookmarkIds[i] == job.postingId) {
           index = i;
@@ -175,7 +175,7 @@ export class ViewAllJobsComponent {
           this.sessionService.setCurrentStudent(response);
           this.messageService.add({
             severity: 'success',
-            summary: 'posting removed from favorites!',
+            summary: 'Job removed from favorites!',
           });
         },
         (error) => {
@@ -187,6 +187,14 @@ export class ViewAllJobsComponent {
         }
       );
     }
+  }
+  reset() {
+    this.displayedJobs = this.jobs;
+    this.sortOrder = -1;
+    this.sortField = '';
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
   }
 
   onSortChange(event: any) {
@@ -250,9 +258,9 @@ export class ViewAllJobsComponent {
     this.displayedJobs = new Array();
     event.data === null
       ? (this.searchNameString = this.searchNameString.substring(
-          0,
-          this.searchNameString.length - 1
-        ))
+        0,
+        this.searchNameString.length - 1
+      ))
       : (this.searchNameString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.title.toLowerCase().includes(this.searchNameString)) {
@@ -265,9 +273,9 @@ export class ViewAllJobsComponent {
     this.displayedJobs = new Array();
     event.data === null
       ? (this.searchIndustryString = this.searchIndustryString.substring(
-          0,
-          this.searchIndustryString.length - 1
-        ))
+        0,
+        this.searchIndustryString.length - 1
+      ))
       : (this.searchIndustryString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.industry.toLowerCase().startsWith(this.searchIndustryString)) {
@@ -280,9 +288,9 @@ export class ViewAllJobsComponent {
     this.displayedJobs = new Array();
     event.data === null
       ? (this.searchSkillsString = this.searchSkillsString.substring(
-          0,
-          this.searchSkillsString.length - 1
-        ))
+        0,
+        this.searchSkillsString.length - 1
+      ))
       : (this.searchSkillsString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       let requiredSkills: string[] = job.requiredSkills;

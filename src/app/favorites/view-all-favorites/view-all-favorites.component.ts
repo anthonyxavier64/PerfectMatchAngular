@@ -101,7 +101,7 @@ export class ViewAllFavoritesComponent {
   }
 
   viewPostingDetails(posting: Posting) {
-    if (posting instanceof Job) {
+    if (!posting.isProject) {
       this.router.navigate(['postings/viewJobDetails/' + posting.postingId]);
     } else {
       this.router.navigate(['postings/viewProjectDetails/' + posting.postingId]);
