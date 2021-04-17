@@ -155,7 +155,7 @@ export class ViewWorkExperienceComponent {
       response => {
         let returnedReview: ReviewWrapper = response;
         this.messageService.add({
-          severity: 'success', summary: "New review with ID " + returnedReview.reviewOfStartUpId + " created successfully"
+          severity: 'success', summary: "New review created successfully"
         });
         this.displayForm = false;
       },
