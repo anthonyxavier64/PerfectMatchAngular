@@ -43,8 +43,9 @@
           Reset
         </button>
       </ng-template>
-      <ng-template let-posting pTemplate="gridItem" style="display: flex; justify-content: center; align-items: center;">
-        <div class="p-col-2" style="margin: 10px 10px 10px 10px;">
+      <ng-template let-posting pTemplate="gridItem"
+        style="display: flex; justify-content: center; align-items: center;">
+        <div class="p-col-3" style="margin: 10px 10px 10px 10px;">
           <mat-card>
             <mat-card-title>{{posting.title}}</mat-card-title>
             <mat-card-subtitle>{{posting.industry}}</mat-card-subtitle>
@@ -52,10 +53,11 @@
             <img *ngIf="posting.industry === 'FINANCE'" mat-card-image src="../../../assets/images/finance.jpg">
             <img *ngIf="posting.industry === 'ENGINEERING'" mat-card-image src="../../../assets/images/engineering.jpg">
             <img *ngIf="posting.industry === 'MARKETING'" mat-card-image src="../../../assets/images/marketing.jpg">
-            <img *ngIf="posting.industry === 'SOFTWARE_DEV'" mat-card-image src="../../../assets/images/softwaredev.jpg">
+            <img *ngIf="posting.industry === 'SOFTWARE_DEV'" mat-card-image
+              src="../../../assets/images/softwaredev.jpg">
             <img *ngIf="posting.industry === 'MEDIA'" mat-card-image src="../../../assets/images/media.jpg">
             <img *ngIf="posting.industry === 'TOURISM'" mat-card-image src="../../../assets/images/tourism.jpg">
-            
+
             <mat-card-content *ngIf="!posting.isProject">
               Monthly Salary: ${{posting.pay}}
               <div *ngIf="posting.earliestStartDate !== undefined">
@@ -79,16 +81,43 @@
                 Latest start date:<br>{{posting.latestStartDate | date: 'dd-MM-yyyy'}}
               </div>
             </mat-card-content>
-            
+
             <mat-card-actions style="text-align: right;">
+              <!-- <button *ngIf="hasReviewed(posting) == false" color="primary" style="display:inline-block" mat-raised-button
+              (onClick)="displayReviewForm()">
+                Review
+              </button> -->
+              <!-- <button *ngIf="hasReviewed() == true" color="disabled" style="display:inline-block" mat-raised-button>
+                Review
+              </button> -->
+
+              <p-button *ngIf="hasReviewed(posting) == false" (onClick)="displayReviewForm()">
+                Review
+              </p-button>
+
               <button *ngIf="!posting.isProject" style="display:inline-block" mat-raised-button
                 routerLink="/postings/viewJobDetails/{{posting.postingId}}">
                 Details
               </button>
               <button *ngIf="posting.isProject" style="display:inline-block" mat-raised-button
-              routerLink="/postings/viewProjectDetails/{{posting.postingId}}">
+                routerLink="/postings/viewProjectDetails/{{posting.postingId}}">
                 Details
               </button>
+
+              <p-dialog *ngIf="displayForm" header="Leave a Review" [(visible)]="displayForm">
+                <div style="text-align: center;">
+                  <h3 style=" font-size: large;">Company: {{posting.startup.companyName}}</h3>
+                  <p-rating [cancel]=false [(ngModel)]="stars"></p-rating>
+                  <br />
+                  <textarea rows="5" cols="30" [(ngModel)]="reviewMessage" placeholder="Leave a comment" pInputTextarea
+                    autoResize="autoResize"></textarea>
+                  <br />
+                </div>
+                <p-button type="submit" *ngIf="hasReviewed(posting) == false" (onClick)="createNewReview(posting)">
+                  Submit
+                </p-button>
+              </p-dialog>
+
             </mat-card-actions>
           </mat-card>
         </div>

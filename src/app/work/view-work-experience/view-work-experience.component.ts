@@ -14,6 +14,8 @@ import { Posting } from 'src/app/models/posting';
 import { Favourites } from 'src/app/models/favourites';
 import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import { ReviewOfStartup } from 'src/app/models/review-of-startup';
+import { ReviewWrapper } from 'src/app/models/review-wrapper';
 
 @Component({
   selector: 'app-view-work-experience',
@@ -36,6 +38,11 @@ export class ViewWorkExperienceComponent {
   searchSkillsString: string = '';
 
   student: StudentWrapper | undefined;
+  reviews: ReviewOfStartup[];
+
+  displayForm : boolean;
+  stars: number = 5;
+  reviewMessage: string = "";
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -73,11 +80,15 @@ export class ViewWorkExperienceComponent {
     this.sortOrder = -1;
     this.sortField = '';
     this.bookmarkIds = new Array();
+    this.reviews = new Array();
+
+    this.displayForm = false;
   }
 
   ngOnInit(): void {
     this.student = this.sessionService.getCurrentStudent();
     this.retrievePostings();
+    this.retrieveReviews();
     this.displayedPostings = this.postings;
   }
 
@@ -99,6 +110,61 @@ export class ViewWorkExperienceComponent {
         }
       );
     }
+  }
+
+  retrieveReviews() {
+    if (this.student != null && this.student.studentId != null) {
+      this.studentService.getReviewsByStudent(this.student.studentId).subscribe(
+        (response) => {
+          response.forEach((review) => {
+            this.reviews.push(review);
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Unable to retrieve reviews.',
+          });
+        }
+      );
+    }
+  }
+
+  hasReviewed(posting : Posting) : boolean {
+    for (let i = 0; i < this.reviews.length; i++) {
+      if (this.reviews[i].startUpBeingRated?.startupId == posting.startup?.startupId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  displayReviewForm() {
+      this.displayForm = true;
+  }
+
+  createNewReview(posting: Posting) {
+    let newReview : ReviewWrapper = new ReviewWrapper();
+    newReview.rating = this.stars;
+    newReview.review = this.reviewMessage;
+    newReview.studentId = this.student?.studentId;
+    newReview.startUpBeingRatedId = posting.startup?.startupId;
+ 
+    this.studentService.createNewReview(newReview).subscribe(
+      response => {
+        let returnedReview: ReviewWrapper = response;
+        this.messageService.add({
+          severity: 'success', summary: "New review with ID " + returnedReview.reviewOfStartUpId + " created successfully"
+        });
+        this.displayForm = false;
+      },
+      error => {
+        this.messageService.add({
+          severity: 'error', summary: "Error", detail: 'Unable to create review.'
+        })
+      }
+    );
   }
 
   reset() {

@@ -49,6 +49,7 @@ import {DialogModule} from 'primeng/dialog';
 import { ViewWorkExperienceComponent } from './work/view-work-experience/view-work-experience.component';
 import { FooterComponent } from './footer/footer.component';
 import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewst
     PanelModule,
     TableModule,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    MatDialogModule,
     // TimelineModule,
   ],
   providers: [],
