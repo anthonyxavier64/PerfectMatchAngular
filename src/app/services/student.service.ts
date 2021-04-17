@@ -13,6 +13,8 @@ import { Application } from '../models/application';
 import { Startup } from '../models/startup';
 import { Posting } from '../models/posting';
 import { Favourites } from '../models/favourites';
+import { ReviewOfStartup } from '../models/review-of-startup';
+import { ReviewWrapper } from '../models/review-wrapper';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -79,6 +81,16 @@ export class StudentService {
   getStudentWork(studentId: number): Observable<Posting[]> {
     return this.httpClient.get<Posting[]>(this.baseUrl + "/getStudentPostings/" + studentId)
       .pipe(catchError(this.handleError));
+  }
+
+  getReviewsByStudent(studentId: number): Observable<ReviewOfStartup[]> {
+    return this.httpClient.get<ReviewOfStartup[]>(this.baseUrl + "/getReviewsByStudent/" + studentId)
+      .pipe(catchError(this.handleError));
+  }
+  
+  createNewReview(reviewOfStartup: ReviewWrapper) : Observable<ReviewWrapper> {
+    return this.httpClient.put<ReviewWrapper>(this.baseUrl + "/createNewReview", reviewOfStartup, httpOptions)
+    .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
