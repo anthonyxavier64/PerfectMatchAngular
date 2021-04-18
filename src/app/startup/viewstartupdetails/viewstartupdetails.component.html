@@ -88,9 +88,9 @@
         </mat-card-content>
       </mat-card-title>
       <mat-card-content *ngFor="let rev of startup.reviews">
-        <mat-card *ngIf="rev.studentWrapper !== undefined">
+        <mat-card *ngIf="rev.student !== undefined">
           <mat-card-title>
-            {{rev.studentWrapper.name}}
+            {{rev.student.name}}
           </mat-card-title>
           <div style='margin-top:10px'></div>
           <mat-card-subtitle>

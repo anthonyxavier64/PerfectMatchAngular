@@ -88,13 +88,6 @@ export class ProjectdetailsComponent implements OnInit {
     }
   }
 
-  isAvailable() : boolean {
-    if (this.projectToView.acceptedStudentId != null) {
-      return false;
-    }
-    return true;
-  }
-
   apply() {
     let application: Application = new Application();
     application.offerSent = false;

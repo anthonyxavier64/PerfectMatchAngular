@@ -5,7 +5,7 @@ export class ReviewOfStartup {
     reviewOfStartUpId: number | undefined;
     rating: number | undefined;
     review: string | undefined;
-    studentWrapper: StudentWrapper | undefined;
+    student: StudentWrapper | undefined;
     startUpBeingRated: Startup | undefined;
 
     constructor(reviewOfStartUpId?: number, rating?: number,
