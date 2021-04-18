@@ -181,10 +181,9 @@
     </mat-card>
 
     <div style="margin-bottom: 100px"></div>
-    <div *ngIf="isPending()" style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
-      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="acceptOffer()">Accept Offer</button>
-      &nbsp;
-      <button style="font-size:18px" mat-raised-button color="basic" type="submit" (click)="declineOffer()">Decline Offer</button>
+    <div *ngIf="offer.offerStatus !== 'ACCEPTED'" style="text-align: center; position: fixed; bottom: 2%; right: 2%;">
+      <button style="font-size:18px" mat-raised-button color="primary" type="submit" (click)="apply()">Apply
+        Now</button>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -3,6 +3,7 @@ import { Favourites } from "./favourites";
 import { Offer } from "./offer";
 import { Payment } from "./payment";
 import { Posting } from "./posting";
+import { ReviewOfStudent } from "./review-of-student";
 
 export class StudentWrapper {
     studentId: number | undefined;
@@ -17,6 +18,8 @@ export class StudentWrapper {
     relevantSkills: string[] | undefined;
     availabilityPeriod: string[] | undefined;
     favorites: Favourites[];
+    reviews: ReviewOfStudent[] | undefined;
+    rating: string | undefined;
 
     constructor(studentId?: number, name?: string,
         biography?: string, email?: string, password?: string,

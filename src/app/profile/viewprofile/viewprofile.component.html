@@ -57,6 +57,27 @@
             </ul>
           </p-card>
         </div>
+        <div style="margin-top: 20px"></div>
+        <p-fieldset legend=Reviews>
+          <p-rating [(ngModel)]="currentStudent.rating" [readonly]="true" [cancel]="false"></p-rating>
+          <div *ngFor='let rev of currentStudent.reviews'>
+            <mat-card style="background-color:#f5eff7;">
+              <mat-card *ngIf="rev.startup !== undefined">
+                <mat-card-title>
+                  {{rev.startup.companyName}}
+                </mat-card-title>
+                <div style='margin-top:10px'></div>
+                <mat-card-subtitle>
+                  <p-rating [(ngModel)]="rev.rating" [readonly]="true" [cancel]="false"></p-rating>
+                </mat-card-subtitle>
+                <mat-card-content  style="font-size: 18px;">
+                  {{rev.review}}
+                </mat-card-content>
+              </mat-card>
+            </mat-card>
+            <div style="margin:15px 0 15px 0"></div>
+          </div>
+        </p-fieldset>
       </div>
       <div *ngIf="activeItem.label === 'Edit'">
         <br>

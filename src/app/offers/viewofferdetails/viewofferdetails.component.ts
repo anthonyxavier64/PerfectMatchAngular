@@ -154,4 +154,25 @@ export class ViewofferdetailsComponent {
       }
     );
   }
+
+  apply() {
+    let application: Application = new Application();
+    application.offerSent = false;
+    application.applicationStatus = ApplicationStatus.PENDING;
+    application.postingId = this.posting.postingId;
+    application.studentId = this.sessionService.getCurrentStudent()?.studentId;
+    this.applicationService.createNewApplication(application).subscribe(
+      (response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Application sent successfully',
+        });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error', summary: "Error", detail: 'Unable to create application. An application or offer already exists.'
+        });
+      }
+    );
+  }
 }
