@@ -16,7 +16,7 @@ import { ViewAllFavoritesComponent } from './favorites/view-all-favorites/view-a
 import { ViewWorkExperienceComponent } from './work/view-work-experience/view-work-experience.component';
 import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
 import { ComparePostingsComponent } from './favorites/compare-postings/compare-postings.component';
-import { PaymentComponent } from './payment/payment.component';
+import { ViewPaymentsComponent } from './payments/view-payments/view-payments.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'favorites/viewAllFavorites', component: ViewAllFavoritesComponent},
   { path: 'work/viewWorkExperience', component: ViewWorkExperienceComponent},
   { path: 'viewStartupDetails/:startupId', component: ViewstartupdetailsComponent},
-  { path: 'payment', component: PaymentComponent},
+  { path: 'payments/viewPayments', component: ViewPaymentsComponent},
   { path: 'favorites/comparePostings/:posting1Id/:posting2Id', component: ComparePostingsComponent}
 
 ];
