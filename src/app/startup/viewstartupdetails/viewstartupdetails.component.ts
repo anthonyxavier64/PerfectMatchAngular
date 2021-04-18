@@ -38,7 +38,6 @@ export class ViewstartupdetailsComponent {
     if (startupId !== null) {
       this.startupService.getStartupById(parseInt(startupId)).subscribe(
         (response) => {
-          console.log(response)
           this.startup = response;
         },
         (error) => {

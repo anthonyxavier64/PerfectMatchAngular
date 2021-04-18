@@ -40,9 +40,9 @@ export class ViewWorkExperienceComponent {
   student: StudentWrapper | undefined;
   reviews: ReviewOfStartup[];
 
-  displayForm : boolean;
+  displayForm: boolean;
   stars: number = 5;
-  reviewMessage: string = "";
+  reviewMessage: string = '';
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -126,9 +126,12 @@ export class ViewWorkExperienceComponent {
     }
   }
 
-  hasReviewed(posting : Posting) : boolean {
+  hasReviewed(posting: Posting): boolean {
     for (let i = 0; i < this.reviews.length; i++) {
-      if (this.reviews[i].startUpBeingRated?.startupId == posting.startup?.startupId) {
+      if (
+        this.reviews[i].startUpBeingRated?.startupId ==
+        posting.startup?.startupId
+      ) {
         return true;
       }
     }
@@ -136,36 +139,37 @@ export class ViewWorkExperienceComponent {
   }
 
   displayReviewForm() {
-      this.displayForm = true;
+    this.displayForm = true;
   }
 
   createNewReview(posting: Posting) {
-    let newReview : ReviewWrapper = new ReviewWrapper();
+    let newReview: ReviewWrapper = new ReviewWrapper();
     newReview.rating = this.stars;
     newReview.review = this.reviewMessage;
     newReview.studentId = this.student?.studentId;
     newReview.startUpBeingRatedId = posting.startup?.startupId;
- 
+
     this.studentService.createNewReview(newReview).subscribe(
-      response => {
+      (response) => {
         let returnedReview: ReviewWrapper = response;
         this.messageService.add({
-          severity: 'success', summary: "New review created successfully"
+          severity: 'success',
+          summary: 'New review created successfully',
         });
         this.displayForm = false;
       },
-      error => {
+      (error) => {
         this.messageService.add({
-          severity: 'error', summary: "Error", detail: 'Unable to create review.'
-        })
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Unable to create review.',
+        });
       }
     );
   }
 
   reset() {
     this.displayedPostings = this.postings;
-    this.sortOrder = -1;
-    this.sortField = '';
     this.selectSalaryOption = null;
     this.searchNameString = '';
     this.searchIndustryString = '';
@@ -175,9 +179,9 @@ export class ViewWorkExperienceComponent {
   onSortChange(event: any) {
     let value = event.value;
 
-    this.searchNameString = '';
     this.searchIndustryString = '';
     this.searchSkillsString = '';
+    this.searchNameString = '';
 
     if (value.indexOf('H') === 0) {
       this.displayedPostings.sort((a, b) => (a.pay > b.pay ? -1 : 1));
@@ -188,15 +192,11 @@ export class ViewWorkExperienceComponent {
 
   searchNameEvent(event: any) {
     this.displayedPostings = new Array();
-    this.selectSalaryOption = null;
+
     this.searchIndustryString = '';
     this.searchSkillsString = '';
-    event.data === null
-      ? (this.searchNameString = this.searchNameString.substring(
-        0,
-        this.searchNameString.length - 1
-      ))
-      : (this.searchNameString += event.data.toLowerCase());
+    this.selectSalaryOption = null;
+
     this.postings.forEach((posting) => {
       if (posting.title.toLowerCase().includes(this.searchNameString)) {
         this.displayedPostings.push(posting);
@@ -207,17 +207,14 @@ export class ViewWorkExperienceComponent {
   searchIndustryEvent(event: any) {
     this.displayedPostings = new Array();
 
-    this.selectSalaryOption = null;
     this.searchNameString = '';
     this.searchSkillsString = '';
-    event.data === null
-      ? (this.searchIndustryString = this.searchIndustryString.substring(
-        0,
-        this.searchIndustryString.length - 1
-      ))
-      : (this.searchIndustryString += event.data.toLowerCase());
+    this.selectSalaryOption = null;
+
     this.postings.forEach((posting) => {
-      if (posting.industry.toLowerCase().startsWith(this.searchIndustryString)) {
+      if (
+        posting.industry.toLowerCase().startsWith(this.searchIndustryString)
+      ) {
         this.displayedPostings.push(posting);
       }
     });
@@ -225,15 +222,11 @@ export class ViewWorkExperienceComponent {
 
   searchSkillsEvent(event: any) {
     this.displayedPostings = new Array();
-    this.selectSalaryOption = null;
+
+    this.searchIndustryString = '';
     this.searchNameString = '';
-    this.searchSkillsString = '';
-    event.data === null
-      ? (this.searchSkillsString = this.searchSkillsString.substring(
-        0,
-        this.searchSkillsString.length - 1
-      ))
-      : (this.searchSkillsString += event.data.toLowerCase());
+    this.selectSalaryOption = null;
+
     this.postings.forEach((posting) => {
       let requiredSkills: string[] = posting.requiredSkills;
 
@@ -253,12 +246,5 @@ export class ViewWorkExperienceComponent {
       return 1;
     }
     return 0;
-  }
-
-  reloadCurrentRoute() {
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
   }
 }

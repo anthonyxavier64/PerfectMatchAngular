@@ -20,16 +20,16 @@
     <!-- Add Content Here -->
     <p-dataView #dv [value]="displayedApplications" layout="grid" [loading]="isLoading">
       <ng-template pTemplate="header">
-        <p-dropdown [options]="sortOptions" placeholder="Filter by Type" (onChange)="onSortChange($event)"
+        <p-dropdown [options]="sortOptions" [(ngModel)]='typeOption' placeholder="Filter by Type" (onChange)="onSortChange($event)"
           styleClass="p-mb-2 p-mb-md-0">
         </p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Name" (input)="searchApplicationName($event)">
+          <input type="search" pInputText [(ngModel)]='searchNameString' placeholder="Search by Name" (input)="searchApplicationName($event)">
         </span>&nbsp;
-        <p-dropdown [options]="statusOptions" placeholder="Filter by Status" (onChange)="onStatusChange($event)"
+        <p-dropdown [options]="statusOptions" [(ngModel)]='statusSelectOption' placeholder="Filter by Status" (onChange)="onStatusChange($event)"
           styleClass="p-mb-2 p-mb-md-0">
-        </p-dropdown>
+        </p-dropdown>&nbsp;
         <button style="display:inline-block" (click)="reset()" mat-stroked-button>
           <mat-icon style="color: grey">refresh</mat-icon>
           Reset

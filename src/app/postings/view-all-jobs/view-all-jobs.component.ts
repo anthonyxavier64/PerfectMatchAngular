@@ -278,12 +278,7 @@ export class ViewAllJobsComponent {
     this.searchIndustryString = '';
     this.searchSkillsString = '';
 
-    event.data === null
-      ? (this.searchNameString = this.searchNameString.substring(
-          0,
-          this.searchNameString.length - 1
-        ))
-      : (this.searchNameString += event.data.toLowerCase());
+
     this.jobs.forEach((job) => {
       if (job.title.toLowerCase().includes(this.searchNameString)) {
         this.displayedJobs.push(job);
@@ -299,12 +294,6 @@ export class ViewAllJobsComponent {
     this.searchNameString = '';
     this.searchSkillsString = '';
 
-    event.data === null
-      ? (this.searchIndustryString = this.searchIndustryString.substring(
-          0,
-          this.searchIndustryString.length - 1
-        ))
-      : (this.searchIndustryString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       if (job.industry.toLowerCase().startsWith(this.searchIndustryString)) {
         this.displayedJobs.push(job);
@@ -320,12 +309,6 @@ export class ViewAllJobsComponent {
     this.searchNameString = '';
     this.searchIndustryString = '';
 
-    event.data === null
-      ? (this.searchSkillsString = this.searchSkillsString.substring(
-          0,
-          this.searchSkillsString.length - 1
-        ))
-      : (this.searchSkillsString += event.data.toLowerCase());
     this.jobs.forEach((job) => {
       let requiredSkills: string[] = job.requiredSkills;
 

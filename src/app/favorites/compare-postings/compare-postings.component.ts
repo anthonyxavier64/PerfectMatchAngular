@@ -54,7 +54,6 @@ export class ComparePostingsComponent {
     if (this.posting1Id !== null) {
       this.postingService.getPostingById(parseInt(this.posting1Id)).subscribe(
         (response) => {
-          console.log(response)
           let earliestStart = undefined;
           let latestStart = undefined;
           if (response.earliestStartDate !== undefined) {
@@ -79,7 +78,6 @@ export class ComparePostingsComponent {
     if (this.posting2Id !== null) {
       this.postingService.getPostingById(parseInt(this.posting2Id)).subscribe(
         (response) => {
-          console.log(response)
           let earliestStart = undefined;
           let latestStart = undefined;
           if (response.earliestStartDate !== undefined) {
