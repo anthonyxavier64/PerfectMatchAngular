@@ -15,6 +15,7 @@ import { Posting } from '../models/posting';
 import { Favourites } from '../models/favourites';
 import { ReviewOfStartup } from '../models/review-of-startup';
 import { ReviewWrapper } from '../models/review-wrapper';
+import { Payment } from '../models/payment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -55,6 +56,11 @@ export class StudentService {
 
   getStudentOffers(studentId: number): Observable<Offer[]> {
     return this.httpClient.get<Offer[]>(this.baseUrl + "/getStudentOffers/" + studentId)
+      .pipe(catchError(this.handleError));
+  }
+
+  getStudentPayments(studentId: number): Observable<Payment[]> {
+    return this.httpClient.get<Payment[]>(this.baseUrl + "/getStudentPayments/" + studentId)
       .pipe(catchError(this.handleError));
   }
 

@@ -15,6 +15,8 @@ import { ViewapplicationdetailsComponent } from './applications/viewapplicationd
 import { ViewAllFavoritesComponent } from './favorites/view-all-favorites/view-all-favorites.component';
 import { ViewWorkExperienceComponent } from './work/view-work-experience/view-work-experience.component';
 import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
+import { ComparePostingsComponent } from './favorites/compare-postings/compare-postings.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -33,7 +35,9 @@ const routes: Routes = [
   { path: 'applications/viewapplicationdetails/:applicationId', component: ViewapplicationdetailsComponent},
   { path: 'favorites/viewAllFavorites', component: ViewAllFavoritesComponent},
   { path: 'work/viewWorkExperience', component: ViewWorkExperienceComponent},
-  { path: 'viewStartupDetails/:startupId', component: ViewstartupdetailsComponent}
+  { path: 'viewStartupDetails/:startupId', component: ViewstartupdetailsComponent},
+  { path: 'payment', component: PaymentComponent},
+  { path: 'favorites/comparePostings/:posting1Id/:posting2Id', component: ComparePostingsComponent}
 
 ];
 @NgModule({

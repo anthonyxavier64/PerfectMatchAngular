@@ -1,0 +1,97 @@
+<p-toast></p-toast>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar style="background-color: rgb(43, 14, 88);">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon style="font-size: 30px; color:whitesmoke;" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
+
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div>
+      <p-table>
+        <ng-template pTemplate="header">
+          <tr>
+            {{posting1.title}}
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body">
+          <tr>
+            <td>Type</td>
+            <td>
+              <span *ngIf="isProject(posting1) == true">Project</span>
+              <span *ngIf="isProject(posting1) == false">Job</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>
+              {{posting1.description}}
+            </td>
+          </tr>
+          <tr>
+            <td>Pay</td>
+            <td>
+              {{posting1.pay}}
+            </td>
+          </tr>
+          <tr>
+            <td>Industry</td>
+            <td>
+              {{posting1.industry}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <mat-divider [vertical]="true" style="height:170px"></mat-divider>
+
+    <div>
+      <p-table>
+        <ng-template pTemplate="header">
+          <tr>
+            {{posting2.title}}
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body">
+          <tr>
+            <td>Type</td>
+            <td>
+              <span *ngIf="isProject(posting2) == true">Project</span>
+              <span *ngIf="isProject(posting2) == false">Job</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>
+              {{posting2.description}}
+            </td>
+          </tr>
+          <tr>
+            <td>Pay</td>
+            <td>
+              {{posting2.pay}}
+            </td>
+          </tr>
+          <tr>
+            <td>Industry</td>
+            <td>
+              {{posting2.industry}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

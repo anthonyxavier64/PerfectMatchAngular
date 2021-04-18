@@ -20,6 +20,14 @@
     <!-- Add Content Here -->
 
     <p-panel header="Favorites">
+      <div style="text-align: right;">
+        <button mat-flat-button color="primary" [matBadge]="countCompare" matBadgePosition="before" matBadgeColor="accent" (click)="comparePostings()">
+          Compare Postings &nbsp;
+          <mat-icon style="font-size: 25px;">compare_arrows</mat-icon>
+        </button>  
+      </div>
+      <br/>
+
       <p-table [value]="favorites">
         <ng-template pTemplate="header">
           <tr>
@@ -44,12 +52,17 @@
             <td>{{fave.post.pay}}</td>
             <td>{{fave.post.industry}}</td>
             <td>
-              <button mat-icon-button (click)="removePostingFromFavorites(fave.post)">
-                <mat-icon style="font-size: 30px;">delete</mat-icon>
+              
+              <button mat-icon-button (click)="viewPostingDetails(fave.post)">
+                <mat-icon style="font-size: 25px;">launch</mat-icon>
               </button>
               &nbsp;
-              <button mat-icon-button (click)="viewPostingDetails(fave.post)">
-                <mat-icon style="font-size: 30px;">launch</mat-icon>
+              <button mat-icon-button (click)="addToCompare(fave.post)">
+                <mat-icon style="font-size: 25px;">compare_arrows</mat-icon>
+              </button>
+              &nbsp;
+              <button mat-icon-button (click)="removePostingFromFavorites(fave.post)">
+                <mat-icon style="font-size: 25px;">delete_outline</mat-icon>
               </button>
             </td>
           </tr>
