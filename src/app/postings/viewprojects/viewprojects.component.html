@@ -27,15 +27,15 @@
           styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Name" [ngModel]='searchNameString' (input)="searchNameEvent($event)">
+          <input type="search" pInputText placeholder="Search by Name" [(ngModel)]='searchNameString' (input)="searchNameEvent($event)">
         </span>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Industry" [ngModel]='searchIndustryString' (input)="searchIndustryEvent($event)">
+          <input type="search" pInputText placeholder="Search by Industry" [(ngModel)]='searchIndustryString' (input)="searchIndustryEvent($event)">
         </span>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Skills" [ngModel]='searchSkillsString' (input)="searchSkillsEvent($event)">
+          <input type="search" pInputText placeholder="Search by Skills" [(ngModel)]='searchSkillsString' (input)="searchSkillsEvent($event)">
         </span>
         &nbsp;
         <button style="display:inline-block" (click)="reset()" mat-stroked-button>

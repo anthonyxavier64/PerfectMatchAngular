@@ -21,19 +21,22 @@
     <!-- Add Content Here -->
     <p-dataView #dv [value]="displayedPostings" layout="grid" [loading]="isLoading" filterBy="postingTitle">
       <ng-template pTemplate="header">
-        <p-dropdown [options]="sortOptions" placeholder="Sort By Pay" (onChange)="onSortChange($event)"
-          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
+        <p-dropdown [options]="sortOptions" [(ngModel)]='selectSalaryOption' placeholder="Sort By Pay"
+          (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Name" (input)="searchNameEvent($event)">
+          <input type="search" [(ngModel)]='searchNameString' pInputText placeholder="Search by Name"
+            (input)="searchNameEvent($event)">
         </span>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Industry" (input)="searchIndustryEvent($event)">
+          <input type="search" [(ngModel)]='searchIndustryString' pInputText placeholder="Search by Industry"
+            (input)="searchIndustryEvent($event)">
         </span>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
-          <input type="search" pInputText placeholder="Search by Skills" (input)="searchSkillsEvent($event)">
+          <input type="search" [(ngModel)]='searchSkillsString' pInputText placeholder="Search by Skills"
+            (input)="searchSkillsEvent($event)">
         </span>
         &nbsp;
         <button style="display:inline-block" (click)="reset()" mat-stroked-button>

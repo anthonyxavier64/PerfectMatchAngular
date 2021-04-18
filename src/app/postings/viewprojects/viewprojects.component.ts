@@ -155,12 +155,7 @@ export class ViewprojectsComponent implements OnInit {
     this.searchSkillsString = '';
 
     this.displayedProjects = new Array();
-    event.data === null
-      ? (this.searchNameString = this.searchNameString.substring(
-          0,
-          this.searchNameString.length - 1
-        ))
-      : (this.searchNameString += event.data.toLowerCase());
+    
     this.projects.forEach((project) => {
       if (project.title.toLowerCase().includes(this.searchNameString)) {
         this.displayedProjects.push(project);
@@ -218,12 +213,7 @@ export class ViewprojectsComponent implements OnInit {
     this.searchSkillsString = '';
 
     this.displayedProjects = new Array();
-    event.data === null
-      ? (this.searchIndustryString = this.searchIndustryString.substring(
-          0,
-          this.searchIndustryString.length - 1
-        ))
-      : (this.searchIndustryString += event.data.toLowerCase());
+    
     this.projects.forEach((project) => {
       if (
         project.industry.toLowerCase().startsWith(this.searchIndustryString)
@@ -240,12 +230,7 @@ export class ViewprojectsComponent implements OnInit {
     this.searchIndustryString = '';
 
     this.displayedProjects = new Array();
-    event.data === null
-      ? (this.searchSkillsString = this.searchSkillsString.substring(
-          0,
-          this.searchSkillsString.length - 1
-        ))
-      : (this.searchSkillsString += event.data.toLowerCase());
+    
     this.projects.forEach((project) => {
       let requiredSkills: string[] = project.requiredSkills;
 

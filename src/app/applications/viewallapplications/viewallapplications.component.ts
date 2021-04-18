@@ -21,6 +21,8 @@ export class ViewallapplicationsComponent {
   statusOptions: [{}, {}, {}];
   displayedApplications: Application[];
   searchNameString: string = '';
+  statusSelectOption: string | null;
+  typeOption: string | null;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -35,8 +37,10 @@ export class ViewallapplicationsComponent {
     private sessionService: SessionService,
     private messageService: MessageService
   ) {
+    this.statusSelectOption = null;
     this.applications = new Array();
     this.displayedApplications = new Array();
+    this.typeOption = null;
     this.sortOptions = [
       { label: 'Projects', value: 'Projects' },
       { label: 'Jobs', value: 'Job' },
@@ -73,6 +77,9 @@ export class ViewallapplicationsComponent {
   onSortChange(event: any) {
     let value = event.value;
 
+    this.searchNameString = '';
+    this.statusSelectOption = null;
+
     this.displayedApplications = new Array();
 
     if (value.indexOf('P') === 0) {
@@ -93,10 +100,15 @@ export class ViewallapplicationsComponent {
   reset() {
     this.displayedApplications = this.applications;
     this.searchNameString = '';
+    this.statusSelectOption = null;
+    this.typeOption = null;
   }
 
   onStatusChange(event: any) {
     let value = event.value;
+
+    this.typeOption = null;
+    this.searchNameString = '';
 
     this.displayedApplications = new Array();
 
@@ -123,12 +135,10 @@ export class ViewallapplicationsComponent {
 
   searchApplicationName(event: any) {
     this.displayedApplications = new Array();
-    event.data === null
-      ? (this.searchNameString = this.searchNameString.substring(
-          0,
-          this.searchNameString.length - 1
-        ))
-      : (this.searchNameString += event.data.toLowerCase());
+
+    this.typeOption = null;
+    this.statusSelectOption = null;
+
     this.applications.forEach((app) => {
       if (app.posting.title.toLowerCase().includes(this.searchNameString)) {
         this.displayedApplications.push(app);

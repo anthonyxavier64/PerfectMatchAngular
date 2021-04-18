@@ -38,7 +38,6 @@ export class ViewprofileComponent {
   }
 
   ngOnInit() {
-    console.log(this.currentStudent)
     if (this.currentStudent) {
       if (this.currentStudent.availabilityPeriod !== undefined) {
         this.startDate = new Date(this.currentStudent.availabilityPeriod[0]);
