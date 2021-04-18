@@ -44,8 +44,8 @@
             <td>{{fave.post.title}}</td>
 
             <td>
-              <span *ngIf="isProject(fave.post) == true">Project</span>
-              <span *ngIf="isProject(fave.post) == false">Job</span>
+              <span *ngIf="fave.post.isProject">Project</span>
+              <span *ngIf="!fave.post.isProject">Job</span>
             </td>
 
             <td>{{fave.post.description}}</td>

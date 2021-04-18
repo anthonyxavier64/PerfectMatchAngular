@@ -28,6 +28,8 @@ export class RegisterComponent implements OnInit {
   projectedGraduationYear: Date | undefined;
 
   newSkill: string | undefined;
+  educationInstituteOptions: [] | null;
+  currentYearOfStudy: [] | null;
 
   resultSuccess: boolean;
   resultError: boolean;
@@ -46,6 +48,8 @@ export class RegisterComponent implements OnInit {
     this.submitted = false;
     this.newStudent = new StudentWrapper();
     this.relevantSkills = new Array();
+    this.educationInstituteOptions = null;
+    this.currentYearOfStudy = null;
 
     this.resultSuccess = false;
     this.resultError = false;
