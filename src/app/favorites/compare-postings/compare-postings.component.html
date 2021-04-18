@@ -18,79 +18,119 @@
 
     </mat-toolbar>
     <!-- Add Content Here -->
-    <div>
-      <p-table>
-        <ng-template pTemplate="header">
-          <tr>
+    <div style="display: flex; justify-content: space-evenly; padding: 30px 30px 30px 30px;">
+      <div *ngIf='posting1 !== undefined' style="width: 40%;">
+        <mat-card style="background-color: #f5eff7">
+          <mat-card-title style="text-align: center; font-size: 30px;">
             {{posting1.title}}
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body">
-          <tr>
-            <td>Type</td>
-            <td>
-              <span *ngIf="isProject(posting1) == true">Project</span>
-              <span *ngIf="isProject(posting1) == false">Job</span>
-            </td>
-          </tr>
-          <tr>
-            <td>Description</td>
-            <td>
-              {{posting1.description}}
-            </td>
-          </tr>
-          <tr>
-            <td>Pay</td>
-            <td>
-              {{posting1.pay}}
-            </td>
-          </tr>
-          <tr>
-            <td>Industry</td>
-            <td>
-              {{posting1.industry}}
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-    <mat-divider [vertical]="true" style="height:170px"></mat-divider>
+          </mat-card-title>
+          <div style='margin-bottom: 15px'></div>
+          <mat-card-content>
+            <mat-card>
+              <mat-card-title>
+                Start date
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                Earliest: {{posting1.earliestStartDate | date:'dd-MM-yyyy'}}
+                | Latest: {{posting1.latestStartDate | date:'dd-MM-yyyy'}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Description
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                {{posting1.description}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Required Skills
+              </mat-card-title>
+              <mat-card-content *ngFor="let skill of posting1.requiredSkills" style="font-size: 18px;">
+                {{skill}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Project Specialisation
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                {{posting1.projectSpecialisation}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Compensation
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                ${{posting1.pay}}
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-    <div>
-      <p-table>
-        <ng-template pTemplate="header">
-          <tr>
+
+      <div *ngIf='posting2 !== undefined' style="width: 40%;">
+        <mat-card style="background-color: #f5eff7">
+          <mat-card-title style="text-align: center; font-size: 30px;">
             {{posting2.title}}
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body">
-          <tr>
-            <td>Type</td>
-            <td>
-              <span *ngIf="isProject(posting2) == true">Project</span>
-              <span *ngIf="isProject(posting2) == false">Job</span>
-            </td>
-          </tr>
-          <tr>
-            <td>Description</td>
-            <td>
-              {{posting2.description}}
-            </td>
-          </tr>
-          <tr>
-            <td>Pay</td>
-            <td>
-              {{posting2.pay}}
-            </td>
-          </tr>
-          <tr>
-            <td>Industry</td>
-            <td>
-              {{posting2.industry}}
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+          </mat-card-title>
+          <div style='margin-bottom: 15px'></div>
+          <mat-card-content>
+            <mat-card>
+              <mat-card-title>
+                Start date
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                Earliest: {{posting2.earliestStartDate | date:'dd-MM-yyyy'}}
+                | Latest: {{posting2.latestStartDate | date:'dd-MM-yyyy'}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Description
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                {{posting2.description}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Required Skills
+              </mat-card-title>
+              <mat-card-content *ngFor="let skill of posting2.requiredSkills" style="font-size: 18px;">
+                {{skill}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Project Specialisation
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                {{posting2.projectSpecialisation}}
+              </mat-card-content>
+            </mat-card>
+            <div style='margin-bottom: 15px'></div>
+            <mat-card>
+              <mat-card-title>
+                Compensation
+              </mat-card-title>
+              <mat-card-content style="font-size: 18px;">
+                ${{posting2.pay}}
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
 
   </mat-sidenav-content>
