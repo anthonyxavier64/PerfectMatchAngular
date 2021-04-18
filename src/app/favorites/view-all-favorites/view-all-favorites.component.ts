@@ -26,6 +26,8 @@ export class ViewAllFavoritesComponent {
   isLogin: boolean = true;
   student: any | undefined;
   favorites: Favourites[];
+  compare: [{}, {}];
+  countCompare : string = "0";
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -43,6 +45,8 @@ export class ViewAllFavoritesComponent {
     private router: Router) {
     this.student = this.sessionService.getCurrentStudent();
     this.favorites = new Array();
+
+    this.compare = [-1, -1];
   }
 
   ngOnInit(): void {
@@ -62,7 +66,7 @@ export class ViewAllFavoritesComponent {
       );
   }
 
-  isProject(posting: Posting) : boolean {
+  isProject(posting: Posting): boolean {
     if (posting instanceof Project) {
       return true;
     }
@@ -79,7 +83,7 @@ export class ViewAllFavoritesComponent {
       }
       this.favorites.splice(index, 1);
       this.student.favorites = this.favorites;
-      
+
       let newFav: Favourites = new Favourites();
       newFav.postingId = posting.postingId;
       newFav.studentId = this.student.studentId;
@@ -111,4 +115,34 @@ export class ViewAllFavoritesComponent {
       this.router.navigate(['postings/viewProjectDetails/' + posting.postingId]);
     }
   }
+
+  addToCompare(posting: Posting) {
+    if (posting != null && posting.postingId != null) {
+
+      if (this.compare[0] == -1) {
+        this.countCompare = "1";
+        this.compare[0] = posting.postingId;
+      } else if (this.compare[1] == -1) {
+        this.countCompare = "2";
+        this.compare[1] = posting.postingId;
+        // Adding an additional posting to a full list will push out the earliest posting to be compared
+      } else {
+        this.compare[0] = this.compare[1];
+        this.compare[1] = posting.postingId;
+      }
+    }
+  }
+
+  comparePostings() {
+    if (this.compare[1] != -1) {
+      this.router.navigate(["/favorites/comparePostings/", this.compare[0], this.compare[1]]);
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Select 2 postings to compare!',
+      });
+    }
+  }
+
 }

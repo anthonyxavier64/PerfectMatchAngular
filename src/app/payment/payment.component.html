@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <app-mainmenu [isLogin]="isLogin"></app-mainmenu>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar style="background-color: rgb(43, 14, 88);">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon style="font-size: 30px; color:whitesmoke;" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <app-loginform style="margin-bottom: 30px;"></app-loginform>
+      <span style="padding:20px; color:whitesmoke;">Perfect Match</span>
+
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+
+    <p-panel header="Payments">
+      <p-table [value]="payments">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Project Title</th>
+            <th>Company Name</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-payment>
+          <tr>
+            <td>{{payment.paymentAmount}}</td>
+            <td>{{payment.description}}</td>
+            <td>{{payment.dateOfTransaction}}</td>
+            <td>{{payment.project.title}}</td>
+            <td>{{payment.startup.companyName}}</td>
+            <td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

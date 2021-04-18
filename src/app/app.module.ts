@@ -50,6 +50,9 @@ import { ViewWorkExperienceComponent } from './work/view-work-experience/view-wo
 import { FooterComponent } from './footer/footer.component';
 import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewstartupdetails.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ComparePostingsComponent } from './favorites/compare-postings/compare-postings.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     ViewWorkExperienceComponent,
     FooterComponent,
     ViewstartupdetailsComponent,
+    ComparePostingsComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +110,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ButtonModule,
     DialogModule,
     MatDialogModule,
+    MatBadgeModule,
     // TimelineModule,
   ],
   providers: [],
