@@ -29,13 +29,13 @@ export class ViewWorkExperienceComponent {
   isLogin: boolean = true;
   isLoading: boolean = true;
   sortOptions: [{}, {}];
-  areaOptions: [{}, {}, {}, {}, {}];
   bookmarkIds: number[];
   sortOrder: number;
   sortField: string;
   searchNameString: string = '';
   searchIndustryString: string = '';
   searchSkillsString: string = '';
+  selectSalaryOption: string | null;
 
   student: StudentWrapper | undefined;
   reviews: ReviewOfStartup[];
@@ -70,17 +70,12 @@ export class ViewWorkExperienceComponent {
       { label: 'High to Low', value: 'HighToLow' },
       { label: 'Low to High', value: 'LowToHigh' },
     ];
-    this.areaOptions = [
-      { label: 'North', value: 'NORTH' },
-      { label: 'East', value: 'EAST' },
-      { label: 'South', value: 'SOUTH' },
-      { label: 'West', value: 'WEST' },
-      { label: 'Central', value: 'CENTRAL' },
-    ];
+
     this.sortOrder = -1;
     this.sortField = '';
     this.bookmarkIds = new Array();
     this.reviews = new Array();
+    this.selectSalaryOption = null;
 
     this.displayForm = false;
   }
@@ -171,6 +166,7 @@ export class ViewWorkExperienceComponent {
     this.displayedPostings = this.postings;
     this.sortOrder = -1;
     this.sortField = '';
+    this.selectSalaryOption = null;
     this.searchNameString = '';
     this.searchIndustryString = '';
     this.searchSkillsString = '';
@@ -179,6 +175,10 @@ export class ViewWorkExperienceComponent {
   onSortChange(event: any) {
     let value = event.value;
 
+    this.searchNameString = '';
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
+
     if (value.indexOf('H') === 0) {
       this.displayedPostings.sort((a, b) => (a.pay > b.pay ? -1 : 1));
     } else {
@@ -186,46 +186,11 @@ export class ViewWorkExperienceComponent {
     }
   }
 
-  onAreaChange(event: any) {
-    let value = event.value;
-
-    this.displayedPostings = new Array();
-
-    if (value.indexOf('N') == 0) {
-      this.postings.forEach((posting) => {
-        if (posting.startup.startupLocation === 'NORTH') {
-          this.displayedPostings.push(posting);
-        }
-      });
-    } else if (value.indexOf('E') == 0) {
-      this.postings.forEach((posting) => {
-        if (posting.startup.startupLocation === 'EAST') {
-          this.displayedPostings.push(posting);
-        }
-      });
-    } else if (value.indexOf('S') == 0) {
-      this.postings.forEach((posting) => {
-        if (posting.startup.startupLocation === 'SOUTH') {
-          this.displayedPostings.push(posting);
-        }
-      });
-    } else if (value.indexOf('C') == 0) {
-      this.postings.forEach((posting) => {
-        if (posting.startup.startupLocation === 'CENTRAL') {
-          this.displayedPostings.push(posting);
-        }
-      });
-    } else {
-      this.postings.forEach((posting) => {
-        if (posting.startup.startupLocation === 'WEST') {
-          this.displayedPostings.push(posting);
-        }
-      });
-    }
-  }
-
   searchNameEvent(event: any) {
     this.displayedPostings = new Array();
+    this.selectSalaryOption = null;
+    this.searchIndustryString = '';
+    this.searchSkillsString = '';
     event.data === null
       ? (this.searchNameString = this.searchNameString.substring(
         0,
@@ -241,6 +206,10 @@ export class ViewWorkExperienceComponent {
 
   searchIndustryEvent(event: any) {
     this.displayedPostings = new Array();
+
+    this.selectSalaryOption = null;
+    this.searchNameString = '';
+    this.searchSkillsString = '';
     event.data === null
       ? (this.searchIndustryString = this.searchIndustryString.substring(
         0,
@@ -256,6 +225,9 @@ export class ViewWorkExperienceComponent {
 
   searchSkillsEvent(event: any) {
     this.displayedPostings = new Array();
+    this.selectSalaryOption = null;
+    this.searchNameString = '';
+    this.searchSkillsString = '';
     event.data === null
       ? (this.searchSkillsString = this.searchSkillsString.substring(
         0,

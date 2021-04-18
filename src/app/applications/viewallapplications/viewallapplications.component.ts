@@ -90,6 +90,11 @@ export class ViewallapplicationsComponent {
     }
   }
 
+  reset() {
+    this.displayedApplications = this.applications;
+    this.searchNameString = '';
+  }
+
   onStatusChange(event: any) {
     let value = event.value;
 

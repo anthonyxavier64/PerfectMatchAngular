@@ -23,8 +23,6 @@
       <ng-template pTemplate="header">
         <p-dropdown [options]="sortOptions" placeholder="Sort By Pay" (onChange)="onSortChange($event)"
           styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
-        <p-dropdown [options]="areaOptions" placeholder="Filter By Area" (onChange)="onAreaChange($event)"
-          styleClass="p-mb-2 p-mb-md-0"></p-dropdown>&nbsp;
         <span class="p-input-icon-left p-mb-2 p-mb-md-0" style="margin-top: 10px;">
           <i class="pi pi-search"></i>
           <input type="search" pInputText placeholder="Search by Name" (input)="searchNameEvent($event)">

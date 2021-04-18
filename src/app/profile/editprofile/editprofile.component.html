@@ -45,7 +45,7 @@
       pInputText>
 
     <br /><br />
-    <label for="skills">Skills</label>
+    <!-- <label for="skills">Skills</label>
     <br />
     <input id="skills" name="skills" [(ngModel)]="newSkill" class="form-control" pInputText>
     <button mat-raised-button (click)="addSkill()">Add</button>
@@ -53,7 +53,29 @@
       <li *ngFor="let skill of relevantSkills">
         {{skill}}
       </li>
-    </ul>
+    </ul> -->
+    <p-panel header="Relevant Skills">
+      <input style="width:80%;" placeholder="Add Skill" id="skills" name="skills" #skills="ngModel" [(ngModel)]="newSkill"
+        class="form-control" pInputText>
+      <button mat-icon-button (click)="addSkill()">
+        <mat-icon>playlist_add</mat-icon>
+      </button>
+
+      <p-table [value]="relevantSkills">
+        <ng-template pTemplate="body" let-skillitem>
+          <tr>
+            <td style="font-size:15px;">
+              {{skillitem}}
+            </td>
+            <td style="width:30%; text-align:center">
+              <button mat-icon-button (click)="removeSkill(skillitem)">
+                <mat-icon style="font-size:20px">delete_outline</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
   </div>
 
   <div style="width: 30%; float: left;">

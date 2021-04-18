@@ -98,4 +98,13 @@ export class EditprofileComponent implements OnInit {
       this.newSkill = undefined;
     }
   }
+  removeSkill(skillitem: String) {
+    let index: number = -1;
+    for (let i = 0; i < this.relevantSkills.length; i++) {
+      if (this.relevantSkills[i] == skillitem) {
+        index = i;
+      }
+    }
+    this.relevantSkills.splice(index, 1);
+  }
 }
