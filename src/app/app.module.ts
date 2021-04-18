@@ -52,7 +52,7 @@ import { ViewstartupdetailsComponent } from './startup/viewstartupdetails/viewst
 import {MatDialogModule} from '@angular/material/dialog';
 import { ComparePostingsComponent } from './favorites/compare-postings/compare-postings.component';
 import {MatBadgeModule} from '@angular/material/badge';
-import { PaymentComponent } from './payment/payment.component';
+import { ViewPaymentsComponent } from './payments/view-payments/view-payments.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +76,7 @@ import { PaymentComponent } from './payment/payment.component';
     FooterComponent,
     ViewstartupdetailsComponent,
     ComparePostingsComponent,
-    PaymentComponent,
+    ViewPaymentsComponent,
   ],
   imports: [
     BrowserModule,

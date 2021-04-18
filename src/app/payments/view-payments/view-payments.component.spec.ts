@@ -7,15 +7,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { PaymentComponent } from './payment.component';
+import { ViewPaymentsComponent } from './view-payments.component';
 
-describe('PaymentComponent', () => {
-  let component: PaymentComponent;
-  let fixture: ComponentFixture<PaymentComponent>;
+describe('ViewPaymentsComponent', () => {
+  let component: ViewPaymentsComponent;
+  let fixture: ComponentFixture<ViewPaymentsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PaymentComponent],
+      declarations: [ViewPaymentsComponent],
       imports: [
         NoopAnimationsModule,
         LayoutModule,
@@ -29,7 +29,7 @@ describe('PaymentComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaymentComponent);
+    fixture = TestBed.createComponent(ViewPaymentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

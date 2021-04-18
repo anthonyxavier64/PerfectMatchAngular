@@ -4,19 +4,20 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Payment } from 'src/app/models/payment';
 import { StudentWrapper } from 'src/app/models/student-wrapper';
 import { SessionService } from 'src/app/services/session.service';
 import { StudentService } from 'src/app/services/student.service';
-import { Payment } from '../models/payment';
 
 
 @Component({
   selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css'],
+  templateUrl: './view-payments.component.html',
+  styleUrls: ['./view-payments.component.css'],
   providers: [MessageService],
 })
-export class PaymentComponent {
+
+export class ViewPaymentsComponent {
   isLogin: boolean = true;
 
   payments: Payment[];
@@ -44,10 +45,6 @@ export class PaymentComponent {
       this.studentService.getStudentPayments(this.student.studentId).subscribe(
         (response) => {
           response.forEach((payment) => {
-            let dateOfTransaction = undefined;
-            if (payment.dateOfTransaction !== undefined) {
-              dateOfTransaction = new Date(payment.dateOfTransaction);
-            }
             this.payments.push(payment);
           });
         },
